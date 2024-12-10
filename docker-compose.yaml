@@ -1,0 +1,16 @@
+services:
+  server:
+    build: .
+    restart: on-failure:5
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+      - "8082:8082"
+      - "8083:8083"
+    environment:
+      - KS_HTTP_PORT=${KS_HTTP_PORT}
+      - KS_DB_HOST=${KS_DB_HOST}
+      - KS_DB_PORT=${KS_DB_PORT}
+      - KS_DB_USER=${KS_DB_USER}
+      - KS_DB_PASSWORD=${KS_DB_PASSWORD}
+      - KS_DB_NAME=${KS_DB_NAME}

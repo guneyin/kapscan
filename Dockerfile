@@ -8,8 +8,8 @@ RUN go mod download
 COPY . ./
 
 RUN go install github.com/swaggo/swag/cmd/swag@latest
-RUN swag init -g cmd/app/main.go
-RUN go build -v -o server cmd/app/main.go
+RUN swag init
+RUN go build -v -o server .
 
 FROM debian:bookworm-slim
 RUN set -x && apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \

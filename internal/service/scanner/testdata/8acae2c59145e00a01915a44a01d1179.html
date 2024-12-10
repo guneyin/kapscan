@@ -1,0 +1,2729 @@
+
+
+
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <meta charset="utf-8">
+    <meta name="google" content="notranslate">
+    <title>KAP</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <base href="https://www.kap.org.tr" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href='/assets/images/kap-favico.png'>
+    <link rel="apple-touch-icon" href='/assets/images/kap-favico-L.png'>
+    <meta name="format-detection" content="telephone=no">
+    <link rel="alternate" hreflang="tr" href="/tr/" />
+    <link rel="alternate" hreflang="en" href="/en/" />
+    <link rel="alternate" href="/" hreflang="x-default" />
+
+    <link rel="stylesheet" type="text/css" href='/assets/stylesheets/bundle.min.css?b=2068' >
+    <script src='/assets/javascripts/thirdparty.min.js?b=2068'></script>
+    <script type="text/javascript">
+        $(window).load(function() {
+            $(".loader222").fadeOut("slow");
+        });
+
+        var currentLanguageCode = "tr";
+        var atLeast3CharactersRequired = "En az 3 karakter giriniz!";
+        function PrintPage ( ) {
+            jQuery ( '#disclosureContent' ).printArea ('disclosure') ;
+        }
+
+        function PrintGeneral (purposeString) {
+            jQuery ('#printAreaDiv').printArea(purposeString);
+        }
+
+        function openSubMenu() {
+            return false;
+        }
+    </script>
+    <!--[if lt IE 9]>
+    <script src='/assets/javascripts/html5.js?b=2068' type="text/javascript"></script>
+    <![endif]-->
+    <!--[if lte IE 8]>
+    <script type="text/javascript">
+        document.createElement('ng-include');
+        document.createElement('ng-pluralize');
+        document.createElement('ng-view');
+        document.createElement('ng:include');
+        document.createElement('ng:pluralize');
+        document.createElement('ng:view');
+    </script>
+    <![endif]-->
+</head>
+<body ng-cloak>
+<div class="loader222"></div>
+
+
+<div style="expand-view-container">
+    <div class="expand-view">
+        <div class="panner-container">
+            <div class="panner panLeft" data-scroll-modifier='-1'><img src="/assets/images/view_pan_left.png"></div>
+            <div class="panner expand-point"><img class="expand-point-img" src="/assets/images/view_expand.png"></div>
+            <div class="panner panRight" data-scroll-modifier='1'><img src="/assets/images/view_pan_right.png"></div>
+        </div>
+    </div>
+</div>
+
+<div class="smartbanner" id="mobile-smartbanner" style="display: none;background-color: #d9d9dd;">
+    <div class="smartbanner-container">
+        <a href="#" id="smb-close" class="smartbanner-close">&times;</a>
+        <img class="smartbanner-icon" src='/assets/images/kap-mobil-icon_1.png'/>
+        <div class="smartbanner-info">
+            <div class="smartbanner-title">KAP Mobil</div>
+            <div id="smartbanner-title_android" style="display: none;">Android Uygulaması</div>
+            <div id="smartbanner-title_ios" style="display: none;">IOS Uygulaması</div>
+            <div id="smartbanner-title_chrome" style="display: none;">Test Chrome Uygulaması</div>
+        </div>
+        <a id="redirect-store" href="https://play.google.com/" target="_blank" class="smartbanner-button">
+            <span class="smartbanner-button-text">Görüntüle</span>
+        </a>
+    </div>
+</div>
+
+<div class="w-section header-section">
+    <div class="rightmenu">
+        <a class="w-inline-block rightmenu-image" href="javascript:void(0);">
+            <img src='/assets/images/RightMenu.png' width="27">
+        </a>
+        <div class="rightmenu-subblock">
+            <a class="rightmenu-item" href="http://egk.mkk.com.tr" id="rightMenueGenelKurul">e-Genel Kurul</a>
+            <a class="rightmenu-item" href="http://e-sirket.mkk.com.tr" id="rightMenueSirket">e-Şirket</a>
+            <a class="rightmenu-item" href="http://www.mkk.com.tr" id="rightMenuMkk">Merkezi Kayıt Kuruluşu</a>
+
+            <a class="rightmenu-item" href="https://eyatirimci.mkk.com.tr/auth/login" id="rightMenuCapital">Sermaye Piyasası Aracı Alım Satım Bildirimi</a>
+        </div>
+    </div>
+    <div class="w-container">
+        <div class="header-menu-section">
+            <a class="bi-black header-toplinks type-small-en" href='/en/'>English</a>
+        </div>
+    </div>
+
+    <div class="w-nav header-navbar" data-collapse="medium" data-animation="default" data-duration="400" data-contain="1">
+        <div class="w-container header-container">
+            <a class="w-nav-brand w-clearfix a-kap-logo" href="/tr/">
+
+                <img class="header-logo img-kap-logo" src='/assets/images/kap-logo.png' width="141">
+
+            </a>
+            <div class="w-nav-button header-menubutton">
+                <div class="w-icon-nav-menu"></div>
+            </div>
+            <div class="middle-header-elements">
+                <nav class="w-nav-menu w-clearfix header-menu on" role="navigation">
+
+
+
+
+                    <div class="menuitem"><a class="w-nav-link type-small bi-dim-gray header-divider header-menuitem" href="javascript:void(0);" onclick="openSubMenu();"  id="menu0">Bildirim Sorguları</a>
+                        <div class="submenu-block">
+
+
+
+
+                            <a class="submenu-item" href="/tr/today" id="submenu02010">Bugün Gelen Bildirimler</a>
+
+
+
+
+
+                            <a class="submenu-item" href="/tr/beklenen-bildirim-sorgu" id="submenu02120">Beklenen Bildirimler</a>
+
+
+
+
+
+                            <a class="submenu-item" href="/tr/bildirim-sorgu" id="submenu02230">Detaylı Sorgulama</a>
+
+
+
+
+
+                            <a class="submenu-item" href="/tr/kalem-karsilastirma" id="submenu02340">Finansal Tablo Kalem Sorgulama</a>
+
+
+
+
+                        </div>
+                    </div>
+
+
+
+
+
+                    <div class="menuitem"><a class="w-nav-link type-small bi-dim-gray header-divider header-menuitem" href="javascript:void(0);" onclick="openSubMenu();"  id="menu1">Şirketler</a>
+                        <div class="submenu-block">
+
+
+
+
+                            <a class="submenu-item" href="/tr/bist-sirketler" id="submenu0201">BIST Şirketleri</a>
+
+
+
+
+
+                            <a class="submenu-item" href="/tr/sirketler/YK" id="submenu0212">Yatırım Kuruluşları</a>
+
+
+
+
+
+                            <a class="submenu-item" href="/tr/sirketler/PYS" id="submenu0223">Portföy Yönetim Şirketleri</a>
+
+
+
+
+
+                            <a class="submenu-item" href="/tr/sirketler/BDK" id="submenu0234">Bağımsız Denetim Kuruluşları</a>
+
+
+
+
+
+                            <a class="submenu-item" href="/tr/sirketler/DCS" id="submenu0245">Derecelendirme Şirketleri</a>
+
+
+
+
+
+                            <a class="submenu-item" href="/tr/sirketler/DS" id="submenu0256">Değerleme Şirketleri</a>
+
+
+
+
+
+                            <a class="submenu-item" href="/tr/sirketler/DK" id="submenu0267">Diğer KAP Üyeleri ve İşlem Görmeyen Şirketler</a>
+
+
+
+
+
+                            <a class="submenu-item" href="/tr/sirketler/KSE" id="submenu0278">KAP Üyeliği Sona Eren Şirketler</a>
+
+
+
+
+                        </div>
+                    </div>
+
+
+
+
+
+                    <div class="menuitem"><a class="w-nav-link type-small bi-dim-gray header-divider header-menuitem" href="javascript:void(0);" onclick="openSubMenu();"  id="menu2">Fonlar</a>
+                        <div class="submenu-block">
+
+
+
+
+                            <a class="submenu-item" href="/tr/YatirimFonlari/BYF" id="submenu02010">Borsa Yatırım Fonları</a>
+
+
+
+
+
+                            <a class="submenu-item" href="/tr/YatirimFonlari/YF" id="submenu02120">Yatırım Fonları</a>
+
+
+
+
+
+                            <a class="submenu-item" href="/tr/YatirimFonlari/EYF" id="submenu02230">Emeklilik Yatırım Fonları</a>
+
+
+
+
+
+                            <a class="submenu-item" href="/tr/YatirimFonlari/OKS" id="submenu02335">OKS Emeklilik Yatırım Fonları</a>
+
+
+
+
+
+                            <a class="submenu-item" href="/tr/YatirimFonlari/YYF" id="submenu02440">Yabancı Yatırım Fonları</a>
+
+
+
+
+
+                            <a class="submenu-item" href="/tr/YatirimFonlari/VFF" id="submenu02550">Varlık Finansman Fonları</a>
+
+
+
+
+
+                            <a class="submenu-item" href="/tr/YatirimFonlari/KFF" id="submenu02660">Konut Finansman Fonları</a>
+
+
+
+
+
+                            <a class="submenu-item" href="/tr/YatirimFonlari/GMF" id="submenu02770">Gayrimenkul Yatırım Fonları</a>
+
+
+
+
+
+                            <a class="submenu-item" href="/tr/YatirimFonlari/GSF" id="submenu02880">Girişim Sermayesi Yatırım Fonları</a>
+
+
+
+
+
+                            <a class="submenu-item" href="/tr/YatirimFonlari/PFF" id="submenu02985">Proje Finansman Fonları</a>
+
+
+
+
+
+                            <a class="submenu-item" href="/tr/YatirimFonlari/TEYF" id="submenu021090">Tasfiye Olmuş Fonlar</a>
+
+
+
+
+                        </div>
+                    </div>
+
+
+
+
+
+                    <div class="menuitem"><a class="w-nav-link type-small bi-dim-gray header-menuitem" href="javascript:void(0);" onclick="openSubMenu();" id="menu-block3">KAP Hakkında</a>
+                        <div class="submenu-block">
+
+
+
+
+                            <a class="submenu-item" href="/tr/menu-icerik/KAP-Hakkinda/Mevzuat-Duyurular-ve-Kilavuzlar" id="submenu01">Mevzuat, Duyurular ve Kılavuzlar</a>
+
+
+
+
+
+                            <a class="submenu-item" href="/tr/menu-icerik/KAP-Hakkinda/Sertifika-Islemleri" id="submenu120">Sertifika İşlemleri</a>
+
+
+
+
+
+                            <a class="submenu-item" href="/tr/menu-icerik/KAP-Hakkinda/Genel-Bilgi" id="submenu230">Genel Bilgi</a>
+
+
+
+
+
+                            <a class="submenu-item" href="/tr/menu-icerik/KAP-Hakkinda/Ilgili-Linkler" id="submenu360">İlgili Linkler</a>
+
+
+
+
+
+                            <a class="submenu-item" href="https://eyatirimci.mkk.com.tr/auth/login" id="submenu470">Sermaye Piyasası Aracı Alım Satım Bildirimi</a>
+
+
+
+
+
+                            <a class="submenu-item" href="/tr/menu-icerik/KAP-Hakkinda/KVKK-Kapsaminda-Duzeltilmis-Bildirimler" id="submenu580">KVKK Kapsamında Düzeltilmiş Bildirimler</a>
+
+
+
+
+                        </div>
+                    </div>
+
+
+
+
+                </nav>
+            </div>
+
+            <a href="https://www.mkk.com.tr" target="_blank">
+                <img class="img-mkk-logo" src='/assets/images/merkezi-kayit-istanbul-logo.png'>
+            </a>
+
+        </div>
+    </div>
+</div>
+
+<div id="search-container" class="w-container" style="position:relative">
+    <form class="w-section searchbar-section" onsubmit="startSearch(keywords.value, categories.value,30)" style="margin-bottom: 0px !important;">
+        <select class="filter-multi2" name="categories" id="categories">
+            <option value="ALL">Tüm Kategoriler</option>
+            <option value="ODA">Özel Durum Açıklaması</option>
+            <option value="FR">Finansal Rapor</option>
+
+            <option value="DG">Diğer Bildirimler</option>
+            <option value="FON">Fon Bildirimleri</option>
+        </select>
+        <input id="searchInput" name="keywords" class="filter-inputbox w-input" placeholder="Arama Yapınız..." style="margin-bottom: 0px !important; padding: 10px;" />
+        <div type="submit" class="search-button" onclick="startSearch(document.getElementById('searchInput').value, document.getElementById('categories').value,30)">
+            <img src="/assets/images/Header_Search.png" />
+        </div>
+        <input type="hidden" name="as_fid" value="b2abc50440edbd54b50f80ec0f06d3a3de961eee" autocomplete="off">
+        <input type="hidden" name="as_fid" value="210d679ea63b17cd734cbdd312a96d39d253eafd" /></form>
+    <div id="searchDivId" class="header-search-div" style="opacity: 0">
+    </div>
+</div>
+
+<div class="w-section banner-section">
+    <div class="w-slider banner-slider" data-autoplay="-1" data-animation="cross" data-delay="7777" data-duration="500" data-infinite="1" data-easing="ease-in-out">
+        <div class="w-slider-mask banner-mask" data-step="1"  data-intro="Kamu Aydınlatma Platformu Yeni haliyle karşınızda">
+
+
+            <div class="w-slide banner-slide" style="cursor: pointer; background-size: cover;background-position: 50% 50%;background-image: url('/tr/file/Banner/Banner-5')" onclick="window.open('https://www.vap.org.tr/donemsel-finansal-oranlar','new_window');" >
+
+                <div class="w-container">
+                    <div class="banner-title"></div>
+                    <h1 class="banner-header"></h1>
+                </div>
+            </div>
+
+
+            <div class="w-slide banner-slide" style="cursor: pointer; background-size: cover;background-position: 50% 50%;background-image: url('/tr/file/Banner/Banner-1')" onclick="window.open('https://www.vap.org.tr/','new_window');" >
+
+                <div class="w-container">
+                    <div class="banner-title"></div>
+                    <h1 class="banner-header"></h1>
+                </div>
+            </div>
+
+
+            <div class="w-slide banner-slide" style="cursor: pointer; background-size: cover;background-position: 50% 50%;background-image: url('/tr/file/Banner/Banner-2')" onclick="window.open('https://eyatirimci.mkk.com.tr/auth/login','new_window');" >
+
+                <div class="w-container">
+                    <div class="banner-title"></div>
+                    <h1 class="banner-header"></h1>
+                </div>
+            </div>
+
+
+            <div class="w-slide banner-slide" style="cursor: pointer; background-size: cover;background-position: 50% 50%;background-image: url('/tr/file/Banner/Banner-3')" onclick="window.open('https://www.vap.org.tr/','new_window');" >
+
+                <div class="w-container">
+                    <div class="banner-title"></div>
+                    <h1 class="banner-header"></h1>
+                </div>
+            </div>
+
+
+            <div class="w-slide banner-slide" style="background-size: cover;background-position: 50% 50%;background-image: url('/tr/file/Banner/Banner-4')">
+
+                <div class="w-container">
+                    <div class="banner-title"></div>
+                    <h1 class="banner-header"></h1>
+                </div>
+            </div>
+
+            <div class="w-clearfix banner-minimize-box banner-minimize-forClick">
+                <a class="w-inline-block banner-minimize" href="#">
+                    <img src="/assets/images/Banner_Minimize.png" width="35">
+                </a>
+                <a class="w-inline-block banner-maximize" href="#">
+                    <img src="/assets/images/Banner_Maximize.png" width="35">
+                </a>
+            </div>
+        </div>
+        <div class="w-slider-arrow-left banner-left">
+            <div class="w-icon-slider-left banner-left-icon"></div>
+        </div>
+        <div class="w-slider-arrow-right banner-right">
+            <div class="w-icon-slider-right banner-right-icon"></div>
+        </div>
+        <div class="w-slider-nav banner-nav">
+            <div class="w-slider-dot w-active" data-wf-ignore=""></div>
+            <div class="w-slider-dot" data-wf-ignore=""></div>
+        </div>
+    </div>
+</div>
+<div class="w-section middle-section">
+    <div class="w-container middle-container">
+
+        <script>
+            $(document).ready(function(){
+                try{
+                    var elems = $(".numberField");
+                    elems.autoNumeric('init', {
+                        aSep: '.',
+                        aDec: ',',
+                        vMax: '99999999999999999999.9999999999',
+                        vMin: '-99999999999999999999.9999999999',
+                        aPad : false
+                    });
+                } catch(err){
+                    console.log(err.message);
+                }
+            });
+        </script>
+        <script>
+            window.onclick = function( event ) {
+                if(event.srcElement.id != 'tooltipId2'){
+                    $('#tooltipId2').removeClass('makeVisibleDocument');
+                    $('#textId2').removeClass('makeVisibleDocument');
+                }else{
+                    $('#tooltipId2').toggleClass('makeVisibleDocument');
+                    $('#textId2').toggleClass('makeVisibleDocument');
+                }
+                if(event.srcElement.id != 'tooltipId3'){
+                    $('#tooltipId3').removeClass('makeVisibleDocument');
+                    $('#textId3').removeClass('makeVisibleDocument');
+                }else{
+                    $('#tooltipId3').toggleClass('makeVisibleDocument');
+                    $('#textId3').toggleClass('makeVisibleDocument');
+                }
+                if(event.srcElement.id != 'tooltipId4'){
+                    $('#tooltipId4').removeClass('makeVisibleDocument');
+                    $('#textId4').removeClass('makeVisibleDocument');
+                }else{
+                    $('#tooltipId4').toggleClass('makeVisibleDocument');
+                    $('#textId4').toggleClass('makeVisibleDocument');
+                }
+            }
+        </script>
+
+
+
+        <div class="w-section middle-section" ng-controller="CompanyCtrl">
+            <!-- Common Company Info and Tabs -->
+            <div class="w-container sub-container">
+                <div>
+                    <table>
+                        <tr>
+                            <td><img class="comp-logo" src='/SirketLogo/8acae2c59145e00a01915a44a01d1179' width="75px" onerror="this.src='/assets/images/no_logo.png'" /></td>
+                            <td>
+                                <h1 style="" id="companyOrFundNameArea">AHES GAYRİMENKUL YATIRIM ORTAKLIĞI A.Ş.</h1>
+                                <h6> AHSGY </h6>
+
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="w-clearfix tab-block">
+                    <a class="w-inline-block tab-subpage _01" href="/tr/sirket-bilgileri/ozet/8acae2c59145e00a01915a44a01d1179" ng-class="{'active': 'genel'=='ozet'}">
+                        <div>Özet Bilgiler</div>
+                    </a>
+
+                    <a class="w-inline-block tab-subpage _01" href="/tr/sirket-bilgileri/genel/8acae2c59145e00a01915a44a01d1179" ng-class="{'active': 'genel'=='genel'}">
+                        <div>Genel Bilgiler</div>
+                    </a>
+
+
+                    <a class="w-inline-block tab-subpage _01" href="/tr/cgif/8acae2c59145e00a01915a44a01d1179">
+                        <div>Kurumsal Yönetim</div>
+                    </a>
+                    <a class="w-inline-block tab-subpage _01" href="/tr/kfif/8acae2c59145e00a01915a44a01d1179">
+                        <div>Katılım Finans</div>
+                    </a>
+
+
+                    <a class="w-inline-block tab-subpage _01" href="/tr/sirket-finansal-bilgileri/8acae2c59145e00a01915a44a01d1179">
+                        <div>Finansal Bilgiler</div>
+                    </a>
+
+
+
+                    <a class="w-inline-block tab-subpage3 not3 showAllAccordion" href="#" title="Tümünü Göster" style="padding-left: inherit;"><div class="showAllButtonImage"></div></a>
+                    <a class="w-inline-block tab-subpage3 not3 hideAllAccordion" href="#" title="Tümünü Gizle"><div class="hideAllButtonImage"></div></a>
+
+                </div>
+            </div>
+
+            <!-- Şirket diğer bilgileri -->
+
+
+
+            <div id="printAreaDiv">
+                <h1 class="sub-title-hidden" style="display: none;">
+                    AHES GAYRİMENKUL YATIRIM ORTAKLIĞI A.Ş.
+                </h1>
+
+                <div class="column-type4 alignTextToLeft vtable overflow-all-auto button-collapse-acc">
+                    <a class="w-inline-block button-collapse close" href="javascript:void(0);"></a>
+                    <div class="vcell">İLETİŞİM BİLGİLERİ</div>
+                </div>
+                <div class="sub-collapseblock" style="display : none ; margin-top : - 75 px ;">
+
+
+
+                    <div class="column-type1 vtable alignTextToLeft overflow-all-auto" style="width: 100%;">
+                        <div class="type-normal vcell exportTitle"> Merkez Adresi </div>
+
+                        <div class="w-clearfix tooltip-box on">
+                            <a class="w-inline-block tooltip-button" href="#"></a>
+
+
+                            <a class="w-inline-block wtooltip-subinfo _01 wtooltip" wdata-tooltip="04/09/2024 12:21:42" href="#"></a>
+
+                            <a class="w-inline-block wtooltip-subinfo _02 wtooltip" wdata-tooltip="Bu maddeye ait önceki bildirimler için (10.06.2016 tarihinden sonra gönderilmiş) tıklayınız." ng-click="openHistoryModal('tr','kpy41_acc1_merkez_adresi','8acae2c59145e00a01915a44a01d1179')" href="#"></a>
+
+                            <a class="w-inline-block wtooltip-subinfo _02 wtooltip" wdata-tooltip="Bu maddeye ait önceki bildirimler için (11.06.2016 tarihinden önce gönderilmiş) tıklayınız." ng-click="openOldHistoryModal('tr','kpy41_acc1_merkez_adresi','8acae2c59145e00a01915a44a01d1179',true)" href="#"></a>
+
+
+
+                            <a class="w-inline-block wtooltip-subinfo _03 wtooltip" wdata-tooltip="Tüm şirketlerin bu maddeye ilişkin bilgilerini raporlamak için tıklayınız." href="/tr/tumKalemler/kpy41_acc1_merkez_adresi"></a>
+
+                        </div>
+
+                    </div>
+
+                    <div class="column-type3 exportDiv" style="margin-bottom: 35px;">
+
+
+
+
+                        <p >Kısıklı Mah. Alemdağ Cad. AHES İş Merkezi D Blok No:53 Kat:2 Üsküdar / İstanbul</p>
+
+
+
+
+                    </div>
+
+
+
+
+
+                    <div class="column-type1 vtable alignTextToLeft overflow-all-auto" style="width: 100%;">
+                        <div class="type-normal vcell exportTitle">İletişim Adresi, Telefon ve Faks Bilgileri</div>
+                        <div class="w-clearfix tooltip-box on">
+                            <a class="w-inline-block tooltip-button" href="#"></a>
+
+
+                            <a class="w-inline-block wtooltip-subinfo _01 wtooltip" wdata-tooltip="04/09/2024 12:21:42" href="#"></a>
+
+                            <a class="w-inline-block wtooltip-subinfo _02 wtooltip" wdata-tooltip="Bu maddeye ait önceki bildirimler için (10.06.2016 tarihinden sonra gönderilmiş) tıklayınız." ng-click="openHistoryModal('tr','kpy41_acc1_ilet_adres_tel_fax','8acae2c59145e00a01915a44a01d1179')" href="#"></a>
+
+                            <a class="w-inline-block wtooltip-subinfo _02 wtooltip" wdata-tooltip="Bu maddeye ait önceki bildirimler için (11.06.2016 tarihinden önce gönderilmiş) tıklayınız." ng-click="openOldHistoryModal('tr','kpy41_acc1_ilet_adres_tel_fax','8acae2c59145e00a01915a44a01d1179',true)" href="#"></a>
+
+
+
+                            <a class="w-inline-block wtooltip-subinfo _03 wtooltip" wdata-tooltip="Tüm şirketlerin bu maddeye ilişkin bilgilerini raporlamak için tıklayınız." href="/tr/tumKalemler/kpy41_acc1_ilet_adres_tel_fax"></a>
+
+                        </div>
+                    </div>
+
+
+                    <div class="exportDiv" style="width: 100%;overflow: auto;margin-bottom: 35px;">
+                        <div class="exportClass">
+                            <div class="w-clearfix w-inline-block a-table-row infoRow" style="font-weight: 600;font-size:12px;">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 1100px;">
+                                    Adres
+                                </div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 25%;">
+                                    Telefon
+                                </div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 25%;">
+                                    Faks
+                                </div>
+
+
+
+                            </div>
+
+                            <div class="w-clearfix w-inline-block a-table-row infoRow">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                <div class="comp-cell-row-div vtable infoColumn" style="width:1100px;">Kısıklı Mah. Alemdağ Cad. AHES İş Merkezi D Blok No:53 Kat:2 Üsküdar/İstanbul</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width:25%;">0216 545 30 81</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width:25%;">0216 545 30 82</div>
+
+
+
+
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="column-type1 vtable alignTextToLeft overflow-all-auto" style="width: 100%;">
+                        <div class="type-normal vcell exportTitle"> Üretim Tesislerinin Bulunduğu Adresler </div>
+
+                        <div class="w-clearfix tooltip-box on">
+                            <a class="w-inline-block tooltip-button" href="#"></a>
+
+
+                            <a class="w-inline-block wtooltip-subinfo _01" href="#"></a>
+
+                            <a class="w-inline-block wtooltip-subinfo _02 wtooltip" wdata-tooltip="Bu maddeye ait önceki bildirimler için (10.06.2016 tarihinden sonra gönderilmiş) tıklayınız." ng-click="openHistoryModal('tr','kpy41_acc1_uretim_adres','8acae2c59145e00a01915a44a01d1179')" href="#"></a>
+
+                            <a class="w-inline-block wtooltip-subinfo _02 wtooltip" wdata-tooltip="Bu maddeye ait önceki bildirimler için (11.06.2016 tarihinden önce gönderilmiş) tıklayınız." ng-click="openOldHistoryModal('tr','kpy41_acc1_uretim_adres','8acae2c59145e00a01915a44a01d1179',true)" href="#"></a>
+
+
+
+                            <a class="w-inline-block wtooltip-subinfo _03 wtooltip" wdata-tooltip="Tüm şirketlerin bu maddeye ilişkin bilgilerini raporlamak için tıklayınız." href="/tr/tumKalemler/kpy41_acc1_uretim_adres"></a>
+
+                        </div>
+
+                    </div>
+
+                    <div class="column-type3 exportDiv" style="margin-bottom: 35px;">
+                        <p>Bilgi Mevcut Değil</p>
+                    </div>
+
+
+
+
+
+                    <div class="column-type1 vtable alignTextToLeft overflow-all-auto" style="width: 100%;">
+                        <div class="type-normal vcell exportTitle">Elektronik Posta Adresi</div>
+                        <div class="w-clearfix tooltip-box on">
+                            <a class="w-inline-block tooltip-button" href="#"></a>
+
+
+                            <a class="w-inline-block wtooltip-subinfo _01 wtooltip" wdata-tooltip="04/09/2024 12:21:42" href="#"></a>
+
+                            <a class="w-inline-block wtooltip-subinfo _02 wtooltip" wdata-tooltip="Bu maddeye ait önceki bildirimler için (10.06.2016 tarihinden sonra gönderilmiş) tıklayınız." ng-click="openHistoryModal('tr','kpy41_acc1_ilet_email','8acae2c59145e00a01915a44a01d1179')" href="#"></a>
+
+                            <a class="w-inline-block wtooltip-subinfo _02 wtooltip" wdata-tooltip="Bu maddeye ait önceki bildirimler için (11.06.2016 tarihinden önce gönderilmiş) tıklayınız." ng-click="openOldHistoryModal('tr','kpy41_acc1_ilet_email','8acae2c59145e00a01915a44a01d1179',true)" href="#"></a>
+
+
+
+                            <a class="w-inline-block wtooltip-subinfo _03 wtooltip" wdata-tooltip="Tüm şirketlerin bu maddeye ilişkin bilgilerini raporlamak için tıklayınız." href="/tr/tumKalemler/kpy41_acc1_ilet_email"></a>
+
+                        </div>
+                    </div>
+
+
+                    <div class="exportDiv" style="width: 100%;overflow: auto;margin-bottom: 35px;">
+                        <div class="exportClass">
+
+                            <div class="w-clearfix w-inline-block a-table-row infoRow">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 1100px;text-align: left;padding-left: 15px;">info@ahesgyo.com</div>
+
+
+
+
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="column-type1 vtable alignTextToLeft overflow-all-auto" style="width: 100%;">
+                        <div class="type-normal vcell exportTitle"> İnternet Adresi </div>
+
+                        <div class="w-clearfix tooltip-box on">
+                            <a class="w-inline-block tooltip-button" href="#"></a>
+
+
+                            <a class="w-inline-block wtooltip-subinfo _01 wtooltip" wdata-tooltip="04/09/2024 12:21:42" href="#"></a>
+
+                            <a class="w-inline-block wtooltip-subinfo _02 wtooltip" wdata-tooltip="Bu maddeye ait önceki bildirimler için (10.06.2016 tarihinden sonra gönderilmiş) tıklayınız." ng-click="openHistoryModal('tr','kpy41_acc1_int_addres','8acae2c59145e00a01915a44a01d1179')" href="#"></a>
+
+                            <a class="w-inline-block wtooltip-subinfo _02 wtooltip" wdata-tooltip="Bu maddeye ait önceki bildirimler için (11.06.2016 tarihinden önce gönderilmiş) tıklayınız." ng-click="openOldHistoryModal('tr','kpy41_acc1_int_addres','8acae2c59145e00a01915a44a01d1179',true)" href="#"></a>
+
+
+
+                            <a class="w-inline-block wtooltip-subinfo _03 wtooltip" wdata-tooltip="Tüm şirketlerin bu maddeye ilişkin bilgilerini raporlamak için tıklayınız." href="/tr/tumKalemler/kpy41_acc1_int_addres"></a>
+
+                        </div>
+
+                    </div>
+
+                    <div class="column-type3 exportDiv" style="margin-bottom: 35px;">
+
+
+
+
+                        <p >https://ahesgyo.com/</p>
+
+
+
+
+                    </div>
+
+
+
+
+
+
+                    <div class="column-type1 vtable alignTextToLeft overflow-all-auto" style="width: 100%;">
+                        <div class="type-normal vcell exportTitle">Yatırımcı İlişkileri Bölümü veya Bağlantı Kurulacak Şirket Yetkilileri</div>
+                        <div class="w-clearfix tooltip-box on">
+                            <a class="w-inline-block tooltip-button" href="#"></a>
+
+
+                            <a class="w-inline-block wtooltip-subinfo _01 wtooltip" wdata-tooltip="04/09/2024 12:21:42" href="#"></a>
+
+                            <a class="w-inline-block wtooltip-subinfo _02 wtooltip" wdata-tooltip="Bu maddeye ait önceki bildirimler için (10.06.2016 tarihinden sonra gönderilmiş) tıklayınız." ng-click="openHistoryModal('tr','kpy41_acc1_yatirimci_iliskileri','8acae2c59145e00a01915a44a01d1179')" href="#"></a>
+
+                            <a class="w-inline-block wtooltip-subinfo _02 wtooltip" wdata-tooltip="Bu maddeye ait önceki bildirimler için (11.06.2016 tarihinden önce gönderilmiş) tıklayınız." ng-click="openOldHistoryModal('tr','kpy41_acc1_yatirimci_iliskileri','8acae2c59145e00a01915a44a01d1179',true)" href="#"></a>
+
+
+
+                            <a class="w-inline-block wtooltip-subinfo _03 wtooltip" wdata-tooltip="Tüm şirketlerin bu maddeye ilişkin bilgilerini raporlamak için tıklayınız." href="/tr/tumKalemler/kpy41_acc1_yatirimci_iliskileri"></a>
+
+                        </div>
+                    </div>
+
+
+                    <div class="exportDiv" style="width: 100%;overflow: auto;margin-bottom: 35px;">
+                        <div class="exportClass" style="width: 1100px;">
+                            <div class="w-clearfix w-inline-block a-table-row infoRow" style="font-weight: 600;font-size:12px;">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 1100px;">
+                                    Ad-Soyad
+                                </div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 15%;">
+                                    Görevi
+                                </div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 15%;">
+                                    Görevlendirme Tarihi
+                                </div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 15%;">
+                                    Telefon
+                                </div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 15%;">
+                                    E-posta
+                                </div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 15%;">
+                                    Lisans Belgesi Türü
+                                </div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 15%;">
+                                    Lisans Belge No
+                                </div>
+
+
+
+                            </div>
+
+                            <div class="w-clearfix w-inline-block a-table-row infoRow">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 1100px;"></div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 15%;"></div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 15%;"></div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 15%;"></div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 10%;"></div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 15%;"></div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 15%;"></div>
+
+
+
+
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+
+                <div class="column-type4 alignTextToLeft vtable overflow-all-auto button-collapse-acc">
+                    <a class="w-inline-block button-collapse close" href="javascript:void(0);"></a>
+                    <div class="vcell">FAALİYET ALANI VE BAĞIMSIZ DENETİM KURULUŞU BİLGİLERİ</div>
+                </div>
+                <div class="sub-collapseblock" style="display : none ; margin-top : -75 px ;">
+
+
+                    <div class="column-type1 vtable alignTextToLeft overflow-all-auto" style="width: 100%;">
+                        <div class="type-normal vcell exportTitle"> Şirketin Faaliyet Konusu </div>
+
+                        <div class="w-clearfix tooltip-box on">
+                            <a class="w-inline-block tooltip-button" href="#"></a>
+
+
+                            <a class="w-inline-block wtooltip-subinfo _01 wtooltip" wdata-tooltip="04/09/2024 12:21:42" href="#"></a>
+
+                            <a class="w-inline-block wtooltip-subinfo _02 wtooltip" wdata-tooltip="Bu maddeye ait önceki bildirimler için (10.06.2016 tarihinden sonra gönderilmiş) tıklayınız." ng-click="openHistoryModal('tr','kpy41_acc2_faaliyet_konu','8acae2c59145e00a01915a44a01d1179')" href="#"></a>
+
+                            <a class="w-inline-block wtooltip-subinfo _02 wtooltip" wdata-tooltip="Bu maddeye ait önceki bildirimler için (11.06.2016 tarihinden önce gönderilmiş) tıklayınız." ng-click="openOldHistoryModal('tr','kpy41_acc2_faaliyet_konu','8acae2c59145e00a01915a44a01d1179',true)" href="#"></a>
+
+
+
+                            <a class="w-inline-block wtooltip-subinfo _03 wtooltip" wdata-tooltip="Tüm şirketlerin bu maddeye ilişkin bilgilerini raporlamak için tıklayınız." href="/tr/tumKalemler/kpy41_acc2_faaliyet_konu"></a>
+
+                        </div>
+
+                    </div>
+
+                    <div class="column-type3 exportDiv" style="margin-bottom: 35px;">
+
+
+
+
+                        <p ><p><span lang="EN-US" style="fontsize:12.0pt;fontfamily: &quot;Arial&quot;,sans-serif;mso-fareast-fontfamily:&quot;Arial Unicode MS&quot;;mso-ansi-language: EN-US;mso-fareast-language:EN-US;mso-bidi-language:AR-SA;mso-bidi-font-weight: bold">Şirket, gayrimenkuller, gayrimenkul projeleri, gayrimenkule dayalı haklar, sermaye piyasası araçları ve Sermaye Piyasası Kurulunca belirlenecek diğer varlık ve haklardan oluşan portföyü işletmek amacıyla paylarını ihraç etmek üzere kurulan ve sermaye piyasası mevzuatında izin verilen diğer faaliyetlerde bulunabilen sermaye piyasası kurumu niteliğinde kayıtlı sermayeli halka açık anonim ortaklıktır.</span><br/> </p></p>
+
+
+
+
+                    </div>
+
+
+
+
+
+                    <div class="column-type1 vtable alignTextToLeft overflow-all-auto" style="width: 100%;">
+                        <div class="type-normal vcell exportTitle"> Şirketin Süresi </div>
+
+                        <div class="w-clearfix tooltip-box on">
+                            <a class="w-inline-block tooltip-button" href="#"></a>
+
+
+                            <a class="w-inline-block wtooltip-subinfo _01 wtooltip" wdata-tooltip="04/09/2024 12:21:42" href="#"></a>
+
+                            <a class="w-inline-block wtooltip-subinfo _02 wtooltip" wdata-tooltip="Bu maddeye ait önceki bildirimler için (10.06.2016 tarihinden sonra gönderilmiş) tıklayınız." ng-click="openHistoryModal('tr','kpy41_acc2_sure','8acae2c59145e00a01915a44a01d1179')" href="#"></a>
+
+                            <a class="w-inline-block wtooltip-subinfo _02 wtooltip" wdata-tooltip="Bu maddeye ait önceki bildirimler için (11.06.2016 tarihinden önce gönderilmiş) tıklayınız." ng-click="openOldHistoryModal('tr','kpy41_acc2_sure','8acae2c59145e00a01915a44a01d1179',true)" href="#"></a>
+
+
+
+                            <a class="w-inline-block wtooltip-subinfo _03 wtooltip" wdata-tooltip="Tüm şirketlerin bu maddeye ilişkin bilgilerini raporlamak için tıklayınız." href="/tr/tumKalemler/kpy41_acc2_sure"></a>
+
+                        </div>
+
+                    </div>
+
+                    <div class="column-type3 exportDiv" style="margin-bottom: 35px;">
+
+
+
+
+                        <p >Şirket?in hukuki varlığı herhangi bir süre ile kısıtlanmamıştır.</p>
+
+
+
+
+                    </div>
+
+
+
+
+
+                    <div class="column-type1 vtable alignTextToLeft overflow-all-auto" style="width: 100%;">
+                        <div class="type-normal vcell exportTitle"> Bağımsız Denetim Kuruluşu </div>
+
+                        <div class="w-clearfix tooltip-box on">
+                            <a class="w-inline-block tooltip-button" href="#"></a>
+
+
+                            <a class="w-inline-block wtooltip-subinfo _03 wtooltip" wdata-tooltip="Tüm şirketlerin bu maddeye ilişkin bilgilerini raporlamak için tıklayınız." href="/tr/tumKalemler/kpy41_acc2_bdk"></a>
+
+                        </div>
+
+                    </div>
+
+                    <div class="column-type3 exportDiv" style="margin-bottom: 35px;">
+
+
+
+
+                        <p >RAM BAĞIMSIZ DENETİM VE DANIŞMANLIK A.Ş.</p>
+
+
+
+
+                    </div>
+
+
+
+
+
+                    <div class="column-type1 vtable alignTextToLeft overflow-all-auto" style="width: 100%;">
+                        <div class="type-normal vcell exportTitle"> Şirketin Sektörü </div>
+
+                        <div class="w-clearfix tooltip-box on">
+                            <a class="w-inline-block tooltip-button" href="#"></a>
+
+
+                            <a class="w-inline-block wtooltip-subinfo _03 wtooltip" wdata-tooltip="Tüm şirketlerin bu maddeye ilişkin bilgilerini raporlamak için tıklayınız." href="/tr/tumKalemler/kpy41_acc2_sektor"></a>
+
+                        </div>
+
+                    </div>
+
+                    <div class="column-type3 exportDiv" style="margin-bottom: 35px;">
+
+
+
+
+                        <p >MALİ KURULUŞLAR / GAYRİMENKUL YATIRIM ORTAKLIKLARI</p>
+
+
+
+
+                    </div>
+
+
+
+
+
+
+
+
+
+                </div>
+
+
+                <div class="column-type4 alignTextToLeft vtable overflow-all-auto button-collapse-acc">
+                    <a class="w-inline-block button-collapse close" href="javascript:void(0);"></a>
+                    <div class="vcell">PAZAR, ENDEKS VE SERMAYE PİYASASI ARAÇLARI BİLGİLERİ</div>
+                </div>
+                <div class="sub-collapseblock" style="display : none ; margin-top : -75 px ;">
+
+
+                    <div class="column-type1 vtable alignTextToLeft overflow-all-auto" style="width: 100%;">
+                        <div class="type-normal vcell exportTitle"> Sermaye Piyasası Aracının İşlem Gördüğü Pazar </div>
+
+                        <div class="w-clearfix tooltip-box on">
+                            <a class="w-inline-block tooltip-button" href="#"></a>
+
+
+                            <a class="w-inline-block wtooltip-subinfo _03 wtooltip" wdata-tooltip="Tüm şirketlerin bu maddeye ilişkin bilgilerini raporlamak için tıklayınız." href="/tr/tumKalemler/kpy41_acc3_sermaye_arac_pazar"></a>
+
+                        </div>
+
+                    </div>
+
+                    <div class="column-type3 exportDiv" style="margin-bottom: 35px;">
+
+
+
+
+                        <p >YILDIZ PAZAR</p>
+
+
+
+
+                    </div>
+
+
+
+
+
+                    <div class="column-type1 vtable alignTextToLeft overflow-all-auto" style="width: 100%;">
+                        <div class="type-normal vcell exportTitle"> Şirketin Dahil Olduğu Endeksler </div>
+
+                        <div class="w-clearfix tooltip-box on">
+                            <a class="w-inline-block tooltip-button" href="#"></a>
+
+
+                            <a class="w-inline-block wtooltip-subinfo _03 wtooltip" wdata-tooltip="Tüm şirketlerin bu maddeye ilişkin bilgilerini raporlamak için tıklayınız." href="/tr/tumKalemler/kpy41_acc3_endeksler"></a>
+
+                        </div>
+
+                    </div>
+
+                    <div class="column-type3 exportDiv" style="margin-bottom: 35px;">
+
+
+
+
+                        <p >BIST GAYRİMENKUL YAT. ORT. / BIST MALİ / BIST HALKA ARZ / BIST KATILIM TUM / BIST TÜM / BIST YILDIZ / BIST TÜM-100 / BIST 500</p>
+
+
+
+
+                    </div>
+
+
+
+                    <!--
+
+            <div class="column-type1 vtable alignTextToLeft overflow-all-auto" style="width: 100%;">
+                <div class="type-normal vcell exportTitle"> ABCD Grubu </div>
+
+                    <div class="w-clearfix tooltip-box on">
+                        <a class="w-inline-block tooltip-button" href="#"></a>
+
+
+                            <a class="w-inline-block wtooltip-subinfo _03 wtooltip" wdata-tooltip="Tüm şirketlerin bu maddeye ilişkin bilgilerini raporlamak için tıklayınız." href="/tr/tumKalemler/kpy41_acc3_abcd"></a>
+
+                    </div>
+
+            </div>
+
+                <div class="column-type3 exportDiv" style="margin-bottom: 35px;">
+
+
+
+
+                <p >-</p>
+
+
+
+
+                </div>
+
+
+                    -->
+
+
+                    <div class="column-type1 vtable alignTextToLeft overflow-all-auto" style="width: 100%;">
+                        <div class="type-normal vcell exportTitle">Son Durum İtibariyle Ortaklık Sermaye Piyasası Araçlarının Kote <br/>Edildiği Diğer Borsalar veya İşlem Gördüğü Teşkilatlanmış Piyasalar</div>
+                        <div class="w-clearfix tooltip-box on">
+                            <a class="w-inline-block tooltip-button" href="#"></a>
+
+
+                            <a class="w-inline-block wtooltip-subinfo _01" href="#"></a>
+
+                            <a class="w-inline-block wtooltip-subinfo _02 wtooltip" wdata-tooltip="Bu maddeye ait önceki bildirimler için (10.06.2016 tarihinden sonra gönderilmiş) tıklayınız." ng-click="openHistoryModal('tr','kpy41_acc3_son_durum_borsa_piyasalar','8acae2c59145e00a01915a44a01d1179')" href="#"></a>
+
+                            <a class="w-inline-block wtooltip-subinfo _02 wtooltip" wdata-tooltip="Bu maddeye ait önceki bildirimler için (11.06.2016 tarihinden önce gönderilmiş) tıklayınız." ng-click="openOldHistoryModal('tr','kpy41_acc3_son_durum_borsa_piyasalar','8acae2c59145e00a01915a44a01d1179',true)" href="#"></a>
+
+
+
+                            <a class="w-inline-block wtooltip-subinfo _03 wtooltip" wdata-tooltip="Tüm şirketlerin bu maddeye ilişkin bilgilerini raporlamak için tıklayınız." href="/tr/tumKalemler/kpy41_acc3_son_durum_borsa_piyasalar"></a>
+
+                        </div>
+                    </div>
+
+
+                    <div class="column-type3 exportDiv" style="display: block;margin-bottom: 35px;">
+                        <p>Bilgi Mevcut Değil</p>
+                    </div>
+
+
+
+
+                    <div class="column-type1 vtable alignTextToLeft overflow-all-auto" style="width: 100%;">
+                        <div class="type-normal vcell exportTitle">Ortaklık Hakkı Vermeyen Sermaye Piyasası Araçlarına İlişkin Bilgi</div>
+                        <div class="w-clearfix tooltip-box on">
+                            <a class="w-inline-block tooltip-button" href="#"></a>
+
+
+                            <a class="w-inline-block wtooltip-subinfo _01" href="#"></a>
+
+                            <a class="w-inline-block wtooltip-subinfo _02 wtooltip" wdata-tooltip="Bu maddeye ait önceki bildirimler için (10.06.2016 tarihinden sonra gönderilmiş) tıklayınız." ng-click="openHistoryModal('tr','kpy41_acc3_ortaklik_hakki_vermeyen','8acae2c59145e00a01915a44a01d1179')" href="#"></a>
+
+                            <a class="w-inline-block wtooltip-subinfo _02 wtooltip" wdata-tooltip="Bu maddeye ait önceki bildirimler için (11.06.2016 tarihinden önce gönderilmiş) tıklayınız." ng-click="openOldHistoryModal('tr','kpy41_acc3_ortaklik_hakki_vermeyen','8acae2c59145e00a01915a44a01d1179',true)" href="#"></a>
+
+
+
+                            <a class="w-inline-block wtooltip-subinfo _03 wtooltip" wdata-tooltip="Tüm şirketlerin bu maddeye ilişkin bilgilerini raporlamak için tıklayınız." href="/tr/tumKalemler/kpy41_acc3_ortaklik_hakki_vermeyen"></a>
+
+                        </div>
+                    </div>
+
+
+                    <div class="column-type3 exportDiv" style="display: block;margin-bottom: 35px;">
+                        <p>Bilgi Mevcut Değil</p>
+                    </div>
+
+
+                </div>
+
+
+                <div class="column-type4 alignTextToLeft vtable overflow-all-auto button-collapse-acc">
+                    <a class="w-inline-block button-collapse close" href="javascript:void(0);"></a>
+                    <div class="vcell">TESCİL VE VERGİ BİLGİLERİ</div>
+                </div>
+                <div class="sub-collapseblock" style="display : none ; margin-top : -75 px ;">
+
+
+                    <div class="column-type1 vtable alignTextToLeft overflow-all-auto" style="width: 100%;">
+                        <div class="type-normal vcell exportTitle"> Ticaret Sicil Memurluğu </div>
+
+                        <div class="w-clearfix tooltip-box on">
+                            <a class="w-inline-block tooltip-button" href="#"></a>
+
+
+                            <a class="w-inline-block wtooltip-subinfo _03 wtooltip" wdata-tooltip="Tüm şirketlerin bu maddeye ilişkin bilgilerini raporlamak için tıklayınız." href="/tr/tumKalemler/kpy41_acc4_ticaret_sicil_memurlugu"></a>
+
+                        </div>
+
+                    </div>
+
+                    <div class="column-type3 exportDiv" style="margin-bottom: 35px;">
+
+
+
+
+                        <p >İSTANBUL</p>
+
+
+
+
+                    </div>
+
+
+
+
+
+                    <div class="column-type1 vtable alignTextToLeft overflow-all-auto" style="width: 100%;">
+                        <div class="type-normal vcell exportTitle"> Tescil Tarihi </div>
+
+                        <div class="w-clearfix tooltip-box on">
+                            <a class="w-inline-block tooltip-button" href="#"></a>
+
+
+                            <a class="w-inline-block wtooltip-subinfo _03 wtooltip" wdata-tooltip="Tüm şirketlerin bu maddeye ilişkin bilgilerini raporlamak için tıklayınız." href="/tr/tumKalemler/kpy41_acc4_tescil_tarihi"></a>
+
+                        </div>
+
+                    </div>
+
+                    <div class="column-type3 exportDiv" style="margin-bottom: 35px;">
+
+
+
+                        <p >03/01/2012</p>
+
+
+
+                    </div>
+
+
+
+
+
+                    <div class="column-type1 vtable alignTextToLeft overflow-all-auto" style="width: 100%;">
+                        <div class="type-normal vcell exportTitle"> Ticaret Sicil Numarası </div>
+
+                        <div class="w-clearfix tooltip-box on">
+                            <a class="w-inline-block tooltip-button" href="#"></a>
+
+
+                            <a class="w-inline-block wtooltip-subinfo _03 wtooltip" wdata-tooltip="Tüm şirketlerin bu maddeye ilişkin bilgilerini raporlamak için tıklayınız." href="/tr/tumKalemler/kpy41_acc4_ticaret_sicil_numarasi"></a>
+
+                        </div>
+
+                    </div>
+
+                    <div class="column-type3 exportDiv" style="margin-bottom: 35px;">
+
+
+
+
+                        <p >802399-0</p>
+
+
+
+
+                    </div>
+
+
+
+
+
+                    <div class="column-type1 vtable alignTextToLeft overflow-all-auto" style="width: 100%;">
+                        <div class="type-normal vcell exportTitle"> Vergi No </div>
+
+                        <div class="w-clearfix tooltip-box on">
+                            <a class="w-inline-block tooltip-button" href="#"></a>
+
+
+                            <a class="w-inline-block wtooltip-subinfo _03 wtooltip" wdata-tooltip="Tüm şirketlerin bu maddeye ilişkin bilgilerini raporlamak için tıklayınız." href="/tr/tumKalemler/kpy41_acc4_vergi_no"></a>
+
+                        </div>
+
+                    </div>
+
+                    <div class="column-type3 exportDiv" style="margin-bottom: 35px;">
+
+
+
+
+                        <p >7850291779</p>
+
+
+
+
+                    </div>
+
+
+
+
+
+                    <div class="column-type1 vtable alignTextToLeft overflow-all-auto" style="width: 100%;">
+                        <div class="type-normal vcell exportTitle"> Vergi Dairesi </div>
+
+                        <div class="w-clearfix tooltip-box on">
+                            <a class="w-inline-block tooltip-button" href="#"></a>
+
+
+                            <a class="w-inline-block wtooltip-subinfo _03 wtooltip" wdata-tooltip="Tüm şirketlerin bu maddeye ilişkin bilgilerini raporlamak için tıklayınız." href="/tr/tumKalemler/kpy41_acc4_vergi_dairesi"></a>
+
+                        </div>
+
+                    </div>
+
+                    <div class="column-type3 exportDiv" style="margin-bottom: 35px;">
+
+
+
+
+                        <p >İSTANBUL - Ümraniye Vergi Dairesi Müdürlüğü</p>
+
+
+
+
+                    </div>
+
+
+
+                </div>
+
+
+                <div class="column-type4 alignTextToLeft vtable overflow-all-auto button-collapse-acc">
+                    <a class="w-inline-block button-collapse close" href="javascript:void(0);"></a>
+                    <div class="vcell">YÖNETİME İLİŞKİN BİLGİLER</div>
+                </div>
+                <div class="sub-collapseblock" style="display : none ; margin-top : -75 px ;">
+
+
+                    <div class="column-type1 vtable alignTextToLeft overflow-all-auto" style="width: 100%;">
+                        <div class="type-normal vcell exportTitle">Yönetim Kurulu Üyeleri</div>
+                        <div class="w-clearfix tooltip-box on">
+                            <a class="w-inline-block tooltip-button" href="#"></a>
+
+
+                            <a class="w-inline-block wtooltip-subinfo _01 wtooltip" wdata-tooltip="04/09/2024 12:21:42" href="#"></a>
+
+                            <a class="w-inline-block wtooltip-subinfo _02 wtooltip" wdata-tooltip="Bu maddeye ait önceki bildirimler için (10.06.2016 tarihinden sonra gönderilmiş) tıklayınız." ng-click="openHistoryModal('tr','kpy41_acc6_yonetim_kurulu_uyeleri','8acae2c59145e00a01915a44a01d1179')" href="#"></a>
+
+                            <a class="w-inline-block wtooltip-subinfo _02 wtooltip" wdata-tooltip="Bu maddeye ait önceki bildirimler için (11.06.2016 tarihinden önce gönderilmiş) tıklayınız." ng-click="openOldHistoryModal('tr','kpy41_acc6_yonetim_kurulu_uyeleri','8acae2c59145e00a01915a44a01d1179',true)" href="#"></a>
+
+
+
+                            <a class="w-inline-block wtooltip-subinfo _03 wtooltip" wdata-tooltip="Tüm şirketlerin bu maddeye ilişkin bilgilerini raporlamak için tıklayınız." href="/tr/tumKalemler/kpy41_acc6_yonetim_kurulu_uyeleri"></a>
+
+                        </div>
+                    </div>
+
+
+                    <div class="exportDiv" style="width: 100%;overflow: auto;margin-bottom: 35px;">
+                        <div class="exportClass" style="width: 1100px;">
+                            <div class="w-clearfix w-inline-block a-table-row infoRow" style="font-weight: 600;font-size:12px;">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 1100px;">
+                                    Adı-Soyadı
+                                </div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 9%;">
+                                    Tüzel Kişi Üye Adına Hareket Eden Kişi
+                                </div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">
+                                    Cinsiyeti
+                                </div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">
+                                    Görevi
+                                </div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 8%;">
+                                    Mesleği
+                                </div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 8%;">
+                                    Yönetim Kuruluna İlk Seçilme Tarihi
+                                </div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 8%;">
+                                    İcrada Görevli Olup Olmadığı
+                                </div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">
+                                    Son 5 Yılda Ortaklıkta Üstlendiği Görevler
+                                </div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">
+                                    Son Durum itibariyle Ortaklık Dışında Aldığı Görevler
+                                </div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 6%;">
+                                    Denetim, Muhasebe ve/veya Finans Alanında En Az 5 Yıllık Deneyime Sahip Olup Olmadığı
+                                </div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">
+                                    Sermayedeki Payı (%)
+                                </div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">
+                                    Temsil Ettiği Pay Grubu
+                                </div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">
+                                    Bağımsız Yönetim Kurulu Üyesi Olup Olmadığı
+                                </div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">
+                                    Bağımsızlık Beyanının Yer Aldığı KAP Duyurusunun Bağlantısı
+                                </div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">
+                                    Bağımsız Üyenin Aday Gösterme Komitesi Tarafından Değerlendirilip Değerlendirilmediği
+                                </div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">
+                                    Bağımsızlığını Kaybeden Üye Olup Olmadığı
+                                </div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">
+                                    Yer Aldığı Komiteler ve Görevi
+                                </div>
+
+
+
+                            </div>
+
+                            <div class="w-clearfix w-inline-block a-table-row infoRow">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 1100px;">SÜLEYMAN EKŞİ</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 9%;"></div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">Erkek</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">Yönetim Kurulu Başkanı </div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 8%;">Müteahhit</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 8%;">03/01/2012</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 8%;">İcrada Görevli</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">Genel Müdür</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">Ekşioğlu Yönetim Org. İnş. San. Ve Tic. Ltd. Şti. - Ortak</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 6%;">Evet</div>
+                                <div class="comp-cell-row-div vtable infoColumn numberField" style="width: 5%;">33.46</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">A ve B</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">Bağımsız Üye Değil</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">-</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">Değerlendirilmedi</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">Hayır</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">-</div>
+
+
+
+
+
+                            </div>
+
+                            <div class="w-clearfix w-inline-block a-table-row infoRow">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 1100px;">MÜCAHİD HAMZA EKŞİ</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 9%;"></div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">Erkek</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">Yönetim Kurulu Üyesi</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 8%;">İnşaat Mühendisi</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 8%;">16/10/2017</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 8%;">İcrada Görevli</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">Yönetim Kurulu Üyesi</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">AHES İnşaat Tic. Ve San. A.Ş. - Yönetim Kurulu Başkan Vekili / SHEM Yapı Ve İnş. San. Tic. Ltd. Şti. - Yönetim Kurulu Başkanı / Misal Demir Tic. Ve San. A.Ş.	- Yönetim Kurulu Başkan Vekili / SHEM Yapı Ve İnş. San. Tic. Ltd. Şti. - Yönetim Kurulu Başkanı / Sour Madencilik Sağlık ve Ticaret Sanayi A.Ş. - Yönetim Kurulu Başkan Vekili / SHEM Yapı Ve İnş. San. Tic. Ltd. Şti. - Yönetim Kurulu Başkanı</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 6%;">Evet</div>
+                                <div class="comp-cell-row-div vtable infoColumn numberField" style="width: 5%;">18.58</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">A ve B</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">Bağımsız Üye Değil</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">-</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">Değerlendirilmedi</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">Hayır</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">-</div>
+
+
+
+
+
+                            </div>
+
+                            <div class="w-clearfix w-inline-block a-table-row infoRow">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 1100px;">EBUBEKİR EKŞİ</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 9%;"></div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">Erkek</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">Yönetim Kurulu Üyesi</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 8%;">İnşaat Mühendisi</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 8%;">05/01/2017</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 8%;">İcrada Görevli</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">Yönetim Kurulu Üyesi</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">AHES İnşaat Tic. Ve San. A.Ş.	- Yönetim Kurulu Başkanı / SE Taahhüt İnşaat Tic. Ltd. Şti. - Yönetim Kurulu Başkanı / Ekşizade Turizm A.Ş. - Yönetim Kurulu Başkanı </div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 6%;">Evet</div>
+                                <div class="comp-cell-row-div vtable infoColumn numberField" style="width: 5%;">17.1</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">A ve B</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">Bağımsız Üye Değil</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">-</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">Değerlendirilmedi</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">Hayır</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">-</div>
+
+
+
+
+
+                            </div>
+
+                            <div class="w-clearfix w-inline-block a-table-row infoRow">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 1100px;">İSMAİL GÜLDALI</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 9%;"></div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">Erkek</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">Yönetim Kurulu Üyesi</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 8%;">İnşaat Mühendisi</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 8%;">04/03/2024</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 8%;">İcrada Görevli Değil</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">Bağımsız Yönetim Kurulu Üyesi</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">-</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 6%;">Evet</div>
+                                <div class="comp-cell-row-div vtable infoColumn numberField" style="width: 5%;">0</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">-</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">Bağımsız Üye</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">-</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">Değerlendirilmedi</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">Hayır</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">-</div>
+
+
+
+
+
+                            </div>
+
+                            <div class="w-clearfix w-inline-block a-table-row infoRow">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 1100px;">MEHMET LEVENT HACIİSLAMOĞLU</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 9%;"></div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">Erkek</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">Yönetim Kurulu Üyesi</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 8%;">Ekonomist</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 8%;">22/12/2023</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 8%;">İcrada Görevli Değil</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">Bağımsız Yönetim Kurulu Üyesi</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">-</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 6%;">Evet</div>
+                                <div class="comp-cell-row-div vtable infoColumn numberField" style="width: 5%;">0</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">-</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">Bağımsız Üye</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">-</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">Değerlendirilmedi</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">Hayır</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 5%;">-</div>
+
+
+
+
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+
+
+                    <div class="column-type1 vtable alignTextToLeft overflow-all-auto" style="width: 100%;">
+                        <div class="type-normal vcell exportTitle">Yönetimde Söz Sahibi Olan Personel</div>
+                        <div class="w-clearfix tooltip-box on">
+                            <a class="w-inline-block tooltip-button" href="#"></a>
+
+
+                            <a class="w-inline-block wtooltip-subinfo _01" href="#"></a>
+
+                            <a class="w-inline-block wtooltip-subinfo _02 wtooltip" wdata-tooltip="Bu maddeye ait önceki bildirimler için (10.06.2016 tarihinden sonra gönderilmiş) tıklayınız." ng-click="openHistoryModal('tr','kpy41_acc6_yonetimde_soz_sahibi','8acae2c59145e00a01915a44a01d1179')" href="#"></a>
+
+                            <a class="w-inline-block wtooltip-subinfo _02 wtooltip" wdata-tooltip="Bu maddeye ait önceki bildirimler için (11.06.2016 tarihinden önce gönderilmiş) tıklayınız." ng-click="openOldHistoryModal('tr','kpy41_acc6_yonetimde_soz_sahibi','8acae2c59145e00a01915a44a01d1179',true)" href="#"></a>
+
+
+
+                            <a class="w-inline-block wtooltip-subinfo _03 wtooltip" wdata-tooltip="Tüm şirketlerin bu maddeye ilişkin bilgilerini raporlamak için tıklayınız." href="/tr/tumKalemler/kpy41_acc6_yonetimde_soz_sahibi"></a>
+
+                        </div>
+                    </div>
+
+
+                    <div class="column-type3 exportDiv" style="display: block;margin-bottom: 35px;">
+                        <p>Bilgi Mevcut Değil</p>
+                    </div>
+
+
+
+
+
+
+
+                </div>
+
+
+                <div class="column-type4 alignTextToLeft vtable overflow-all-auto button-collapse-acc">
+                    <a class="w-inline-block button-collapse close" href="javascript:void(0);"></a>
+                    <div class="vcell">SERMAYE VE ORTAKLIK YAPISI BİLGİLERİ</div>
+                </div>
+                <div class="sub-collapseblock" style="display : none ; margin-top : -75 px ;">
+
+
+                    <div class="column-type1 vtable alignTextToLeft overflow-all-auto" style="width: 100%;">
+                        <div class="type-normal vcell exportTitle"> Ödenmiş/Çıkarılmış Sermaye </div>
+
+                    </div>
+
+                    <div class="column-type3 exportDiv" style="margin-bottom: 35px;">
+
+
+
+
+                        <p class="numberField">195000000.00</p>
+
+
+
+
+                    </div>
+
+
+
+
+
+
+
+                    <div class="column-type1 vtable alignTextToLeft overflow-all-auto" style="width: 100%;">
+                        <div class="type-normal vcell exportTitle"> Kayıtlı Sermaye Tavanı </div>
+
+                    </div>
+
+                    <div class="column-type3 exportDiv" style="margin-bottom: 35px;">
+
+
+
+
+                        <p class="numberField">725000000</p>
+
+
+
+
+                    </div>
+
+
+
+
+
+                    <div class="column-type1 vtable alignTextToLeft overflow-all-auto" style="width: 100%;">
+                        <div class="type-normal vcell exportTitle">Sermayede Doğrudan %5 veya Daha Fazla Paya veya Oy Hakkına Sahip Gerçek ve Tüzel Kişiler</div>
+                        <div class="w-clearfix tooltip-box on">
+                            <a class="w-inline-block tooltip-button" href="#"></a>
+
+
+                            <a class="w-inline-block wtooltip-subinfo _01 wtooltip" wdata-tooltip="27/11/2024" href="#"></a>
+
+                            <a class="w-inline-block wtooltip-subinfo _02 wtooltip" wdata-tooltip="Bu maddeye ait önceki bildirimler için (10.06.2016 tarihinden sonra gönderilmiş) tıklayınız." ng-click="openHistoryModal('tr','kpy41_acc5_sermayede_dogrudan','8acae2c59145e00a01915a44a01d1179')" href="#"></a>
+
+                            <a class="w-inline-block wtooltip-subinfo _02 wtooltip" wdata-tooltip="Bu maddeye ait önceki bildirimler için (11.06.2016 tarihinden önce gönderilmiş) tıklayınız." ng-click="openOldHistoryModal('tr','kpy41_acc5_sermayede_dogrudan','8acae2c59145e00a01915a44a01d1179',true)" href="#"></a>
+
+
+
+                        </div>
+                    </div>
+
+
+                    <div class="exportDiv" style="width: 100%;overflow: auto;">
+                        <div class="exportClass">
+                            <div class="w-clearfix w-inline-block a-table-row infoRow" style="font-weight: 600;font-size:12px;">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 1100px;">
+                                    Ortağın Adı-Soyadı/Ticaret Ünvanı
+                                </div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 25%;">
+                                    Sermayedeki Payı(TL)
+                                </div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 25%;">
+                                    Sermayedeki Payı(%)
+                                </div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 25%;">
+                                    Oy Hakkı Oranı(%)
+                                </div>
+
+
+
+                            </div>
+
+                            <div class="w-clearfix w-inline-block a-table-row infoRow">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 1100px;">SÜLEYMAN EKŞİ</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 25%;">65.250.000</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 25%;">33,46</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 25%;">32,31</div>
+
+
+
+
+
+                            </div>
+
+                            <div class="w-clearfix w-inline-block a-table-row infoRow">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 1100px;">MÜCAHİD HAMZA EKŞİ</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 25%;">36.250.000</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 25%;">18,59</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 25%;">17,95</div>
+
+
+
+
+
+                            </div>
+
+                            <div class="w-clearfix w-inline-block a-table-row infoRow">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 1100px;">EBUBEKİR EKŞİ</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 25%;">33.350.000</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 25%;">17,1</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 25%;">16,51</div>
+
+
+
+
+
+                            </div>
+
+                            <div class="w-clearfix w-inline-block a-table-row infoRow">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 1100px;">HEDEF PORTFÖY MAVİ HİSSE SENEDİ SERBEST (TL) FON (HİSSE SENEDİ YOĞUN FON)</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 25%;">18.005.000</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 25%;">9,23</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 25%;">10,16</div>
+
+
+
+
+
+                            </div>
+
+                            <div class="w-clearfix w-inline-block a-table-row infoRow">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 1100px;">AHES İNŞAAT TİCARET VE SANAYİ ANONİM ŞİRKETİ</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 25%;">10.150.000</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 25%;">5,21</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 25%;">5,03</div>
+
+
+
+
+
+                            </div>
+
+                            <div class="w-clearfix w-inline-block a-table-row infoRow">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 1100px;">DİĞER</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 25%;">31.995.000</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 25%;">16,41</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 25%;">18,04</div>
+
+
+
+
+
+                            </div>
+
+                            <div class="w-clearfix w-inline-block a-table-row infoRow">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 1100px;">TOPLAM</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 25%;">195.000.000</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 25%;">100</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 25%;">100</div>
+
+
+
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 35px;">
+                        <p><strong>*Çekince Bildirimi: Açıklanan bu oranlar, Merkezi Kayıt Kuruluşu üyeleri tarafından Merkezi Kaydi Sisteme kaydedilmiş pay sahipliği bilgileri çerçevesinde hesaplanmaktadır. Merkezi Kayıt Kuruluşu’nun bu bilgilerin doğruluğu ve tamlığı hususlarına açık veya zımni şekilde kefil veya garantör olduğu yolunda hiçbir taahhüdü bulunmamaktadır.</strong></p>
+                        <p><strong>**Oranların hesaplanmasında henüz takası gerçekleşmemiş alım ve satımlar dikkate alınmamaktadır.</strong></p>
+                        <p><strong>***Sermaye artırımı süreçlerinde toplam sermaye ve ortaklık payları, rüçhan haklarının kullanım tutarına veya bedelsiz sermaye artırımına ilişkin yatırımcı hesaplarına yapılan aktarımlara göre güncellenmektedir. Bu nedenle sermaye artırımı sürecinde tablo her gün değişebilmektedir.</strong></p>
+                    </div>
+
+
+
+
+                    <div class="column-type1 vtable alignTextToLeft overflow-all-auto" style="width: 100%;">
+                        <div class="type-normal vcell exportTitle">Son Durum İtibariyle Sermayeye Dolaylı Yoldan Sahip Olan Gerçek ve Tüzel Kişiler</div>
+                        <div class="w-clearfix tooltip-box on">
+                            <a class="w-inline-block tooltip-button" href="#"></a>
+
+
+                            <a class="w-inline-block wtooltip-subinfo _01" href="#"></a>
+
+                            <a class="w-inline-block wtooltip-subinfo _02 wtooltip" wdata-tooltip="Bu maddeye ait önceki bildirimler için (10.06.2016 tarihinden sonra gönderilmiş) tıklayınız." ng-click="openHistoryModal('tr','kpy41_acc5_son_durum_sermayeye','8acae2c59145e00a01915a44a01d1179')" href="#"></a>
+
+                            <a class="w-inline-block wtooltip-subinfo _02 wtooltip" wdata-tooltip="Bu maddeye ait önceki bildirimler için (11.06.2016 tarihinden önce gönderilmiş) tıklayınız." ng-click="openOldHistoryModal('tr','kpy41_acc5_son_durum_sermayeye','8acae2c59145e00a01915a44a01d1179',true)" href="#"></a>
+
+
+
+                            <a class="w-inline-block wtooltip-subinfo _03 wtooltip" wdata-tooltip="Tüm şirketlerin bu maddeye ilişkin bilgilerini raporlamak için tıklayınız." href="/tr/tumKalemler/kpy41_acc5_son_durum_sermayeye"></a>
+
+                        </div>
+                    </div>
+
+
+                    <div class="column-type3 exportDiv" style="display: block;margin-bottom: 35px;">
+                        <p>Bilgi Mevcut Değil</p>
+                    </div>
+
+
+
+
+                    <div class="column-type1 vtable alignTextToLeft overflow-all-auto" style="width: 100%;">
+                        <div class="type-normal vcell exportTitle">Fiili Dolaşımdaki Paylar</div>
+                        <div class="w-clearfix tooltip-box on">
+                            <a class="w-inline-block tooltip-button" href="#"></a>
+
+
+                            <a class="w-inline-block wtooltip-subinfo _01" href="#"></a>
+
+                            <a class="w-inline-block wtooltip-subinfo _02 wtooltip" wdata-tooltip="Bu maddeye ait önceki bildirimler için (10.06.2016 tarihinden sonra gönderilmiş) tıklayınız." ng-click="openHistoryModal('tr','kpy41_acc5_fiili_dolasimdaki_pay','8acae2c59145e00a01915a44a01d1179')" href="#"></a>
+
+
+
+                            <a class="w-inline-block wtooltip-subinfo _03 wtooltip" wdata-tooltip="Tüm şirketlerin bu maddeye ilişkin bilgilerini raporlamak için tıklayınız." href="/tr/tumKalemler/kpy41_acc5_fiili_dolasimdaki_pay"></a>
+
+                        </div>
+                    </div>
+
+
+                    <div class="column-type3 exportDiv" style="display: block;margin-bottom: 35px;">
+                        <p>Bilgi Mevcut Değil</p>
+                    </div>
+
+
+
+
+
+                    <div class="column-type1 vtable alignTextToLeft overflow-all-auto" style="width: 100%;">
+                        <div class="type-normal vcell exportTitle">Sermayeyi Temsil Eden Paylara İlişkin Bilgi</div>
+                        <div class="w-clearfix tooltip-box on">
+                            <a class="w-inline-block tooltip-button" href="#"></a>
+
+
+                            <a class="w-inline-block wtooltip-subinfo _01 wtooltip" wdata-tooltip="04/09/2024 12:21:42" href="#"></a>
+
+                            <a class="w-inline-block wtooltip-subinfo _02 wtooltip" wdata-tooltip="Bu maddeye ait önceki bildirimler için (10.06.2016 tarihinden sonra gönderilmiş) tıklayınız." ng-click="openHistoryModal('tr','kpy41_acc5_sermayeyi_temsil_eden','8acae2c59145e00a01915a44a01d1179')" href="#"></a>
+
+                            <a class="w-inline-block wtooltip-subinfo _02 wtooltip" wdata-tooltip="Bu maddeye ait önceki bildirimler için (11.06.2016 tarihinden önce gönderilmiş) tıklayınız." ng-click="openOldHistoryModal('tr','kpy41_acc5_sermayeyi_temsil_eden','8acae2c59145e00a01915a44a01d1179',true)" href="#"></a>
+
+
+
+                        </div>
+                    </div>
+
+
+                    <div class="exportDiv" style="width: 100%;overflow: auto;margin-bottom: 35px;">
+                        <div class="exportClass" style="width: 1100px;">
+                            <div class="w-clearfix w-inline-block a-table-row infoRow" style="font-weight: 600;font-size:12px;">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 1100px;">
+                                    Pay Grubu
+                                </div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 11%;">
+                                    Nama / Hamiline
+                                </div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 11%;">
+                                    Beher Payın Nominal Değeri (TL)
+                                </div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 11%;">
+                                    Para Birimi
+                                </div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 11%;">
+                                    Payların Nominal Değeri
+                                </div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 11%;">
+                                    Para Birimi
+                                </div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 11%;">
+                                    Sermayeye Oranı
+                                </div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 11%;">
+                                    İmtiyaz Türü
+                                </div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 12%;">
+                                    Borsada İşlem Görüp Görmediği
+                                </div>
+
+
+
+                            </div>
+
+                            <div class="w-clearfix w-inline-block a-table-row infoRow">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 1100px;">A</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 11%;">Hamiline</div>
+                                <div class="comp-cell-row-div vtable infoColumn numberField" style="width: 11%;">1</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 11%;">TRY</div>
+                                <div class="comp-cell-row-div vtable infoColumn numberField" style="width: 11%;">20000000</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 11%;">TRY</div>
+                                <div class="comp-cell-row-div vtable infoColumn numberField" style="width: 11%">10,25</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 11%"> Nama yazılı payların devri kısıtlanamaz.</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 12%;">İşlem Görmüyor</div>
+
+
+
+
+
+                            </div>
+
+                            <div class="w-clearfix w-inline-block a-table-row infoRow">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 1100px;">B</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 11%;">Nama</div>
+                                <div class="comp-cell-row-div vtable infoColumn numberField" style="width: 11%;">1</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 11%;">TRY</div>
+                                <div class="comp-cell-row-div vtable infoColumn numberField" style="width: 11%;">175000000</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 11%;">TRY</div>
+                                <div class="comp-cell-row-div vtable infoColumn numberField" style="width: 11%">89,74</div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 11%"></div>
+                                <div class="comp-cell-row-div vtable infoColumn" style="width: 12%;">İşlem Görüyor</div>
+
+
+
+
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+
+                <div class="column-type4 alignTextToLeft vtable overflow-all-auto button-collapse-acc">
+                    <a class="w-inline-block button-collapse close" href="javascript:void(0);"></a>
+                    <div class="vcell">BAĞLI ORTAKLIKLAR, FİNANSAL DURAN VARLIKLAR İLE FİNANSAL YATIRIMLARA İLİŞKİN BİLGİLER</div>
+                </div>
+                <div class="sub-collapseblock" style="display : none ; margin-top : -75 px ;">
+
+                    <div class="column-type1 vtable alignTextToLeft overflow-all-auto" style="width: 100%;">
+                        <div class="type-normal vcell exportTitle">Bağlı Ortaklıklar, Finansal Duran Varlıklar ile Finansal Yatırımlar</div>
+                        <div class="w-clearfix tooltip-box on">
+                            <a class="w-inline-block tooltip-button" href="#"></a>
+
+
+                            <a class="w-inline-block wtooltip-subinfo _01" href="#"></a>
+
+                            <a class="w-inline-block wtooltip-subinfo _02 wtooltip" wdata-tooltip="Bu maddeye ait önceki bildirimler için (10.06.2016 tarihinden sonra gönderilmiş) tıklayınız." ng-click="openHistoryModal('tr','kpy41_acc7_bagli_ortakliklar','8acae2c59145e00a01915a44a01d1179')" href="#"></a>
+
+                            <a class="w-inline-block wtooltip-subinfo _02 wtooltip" wdata-tooltip="Bu maddeye ait önceki bildirimler için (11.06.2016 tarihinden önce gönderilmiş) tıklayınız." ng-click="openOldHistoryModal('tr','kpy41_acc7_bagli_ortakliklar','8acae2c59145e00a01915a44a01d1179',true)" href="#"></a>
+
+
+
+                            <a class="w-inline-block wtooltip-subinfo _03 wtooltip" wdata-tooltip="Tüm şirketlerin bu maddeye ilişkin bilgilerini raporlamak için tıklayınız." href="/tr/tumKalemler/kpy41_acc7_bagli_ortakliklar"></a>
+
+                        </div>
+                    </div>
+
+
+                    <div class="column-type3 exportDiv" style="display: block;margin-bottom: 35px;">
+                        <p>Bilgi Mevcut Değil</p>
+                    </div>
+
+                </div>
+
+
+
+
+                <div class="column-type4 alignTextToLeft vtable overflow-all-auto button-collapse-acc">
+                    <a class="w-inline-block button-collapse close" href="javascript:void(0);"></a>
+                    <div class="vcell">DİĞER HUSUSLAR</div>
+                </div>
+                <div class="sub-collapseblock" style="display : none ; margin-top : -75 px ;">
+
+
+                    <div class="column-type1 vtable alignTextToLeft overflow-all-auto" style="width: 100%;">
+                        <div class="type-normal vcell exportTitle"> DİĞER HUSUSLAR </div>
+
+                        <div class="w-clearfix tooltip-box on">
+                            <a class="w-inline-block tooltip-button" href="#"></a>
+
+
+                            <a class="w-inline-block wtooltip-subinfo _01" href="#"></a>
+
+                            <a class="w-inline-block wtooltip-subinfo _02 wtooltip" wdata-tooltip="Bu maddeye ait önceki bildirimler için (10.06.2016 tarihinden sonra gönderilmiş) tıklayınız." ng-click="openHistoryModal('tr','kpy41_acc10_diger_hususlar','8acae2c59145e00a01915a44a01d1179')" href="#"></a>
+
+                            <a class="w-inline-block wtooltip-subinfo _02 wtooltip" wdata-tooltip="Bu maddeye ait önceki bildirimler için (11.06.2016 tarihinden önce gönderilmiş) tıklayınız." ng-click="openOldHistoryModal('tr','kpy41_acc10_diger_hususlar','8acae2c59145e00a01915a44a01d1179',true)" href="#"></a>
+
+
+
+                            <a class="w-inline-block wtooltip-subinfo _03 wtooltip" wdata-tooltip="Tüm şirketlerin bu maddeye ilişkin bilgilerini raporlamak için tıklayınız." href="/tr/tumKalemler/kpy41_acc10_diger_hususlar"></a>
+
+                        </div>
+
+                    </div>
+
+                    <div class="column-type3 exportDiv" style="margin-bottom: 35px;">
+                        <p>Bilgi Mevcut Değil</p>
+                    </div>
+
+
+
+                </div>
+
+            </div>
+            <div style="margin-top: 25px;margin-bottom: 25px;">
+                <a class="modal-button _2 type-small" href="/tr/api/exportSgbfAndYfbf/sgbf/doc/8acae2c59145e00a01915a44a01d1179">Word Olarak İndir</a>
+                <a class="modal-button _3 type-small" href="/tr/api/exportSgbfAndYfbf/sgbf/xls/8acae2c59145e00a01915a44a01d1179">Excel Olarak İndir</a>
+                <a class="modal-button _4 type-small" href="javascript:PrintGeneral('companyOrFund');" style="float:none;">Yazdır</a>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<div class="w-section footer-section">
+
+    <div class="footer-buttons">
+        <div class="w-container">
+            <a class="w-inline-block footer-button first" target="_blank" href="https://www.vap.org.tr/">
+                <div class="type-small bi-sky-black">Veri Analiz Platformu </div>
+            </a>
+            <a class="w-inline-block footer-button forth" target="_blank" href="https://eyatirimci.mkk.com.tr/auth/login">
+                <div class="type-small bi-sky-black">Yatırımcı Bilgi Merkezi</div>
+            </a>
+            <a class="w-inline-block footer-button second" target="_blank" href="https://www.borsaistanbul.com/tr/sayfa/477/gunluk-bulten">
+                <div class="type-small bi-sky-black">Borsa Günlük Bülteni</div>
+            </a>
+            <a class="w-inline-block footer-button third" target="_blank" href="http://www.spk.gov.tr/Bulten">
+                <div class="type-small bi-sky-black">SPK Bülteni</div>
+            </a>
+            <a class="w-inline-block footer-button fifth" target="_blank" href="https://gms.kap.org.tr">
+                <div class="type-small bi-sky-black">Gayrimenkul Sertifikaları</div>
+            </a>
+        </div>
+    </div>
+
+    <div class="footer-links">
+        <div class="w-container">
+            <div class="w-row padding bottom kapstyle3">
+
+
+                <div class="w-col w-col-3">
+                    <div class="bi-lightgray type-medium">Bildirim Sorguları</div>
+                </div>
+
+                <div class="w-col w-col-3">
+                    <div class="bi-lightgray type-medium">Şirketler</div>
+                </div>
+
+                <div class="w-col w-col-3">
+                    <div class="bi-lightgray type-medium">Fonlar</div>
+                </div>
+
+                <div class="w-col w-col-3">
+                    <div class="bi-lightgray type-medium">KAP Hakkında</div>
+                </div>
+
+
+            </div>
+            <div class="w-row type-xsmall kapstyle4">
+
+
+                <div class="w-col w-col-3">
+
+
+
+
+                    <a class="type-expand bi-white padding bottom small" href="/tr/today">Bugün Gelen Bildirimler</a>
+
+
+
+
+
+                    <a class="type-expand bi-white padding bottom small" href="/tr/beklenen-bildirim-sorgu">Beklenen Bildirimler</a>
+
+
+
+
+
+                    <a class="type-expand bi-white padding bottom small" href="/tr/bildirim-sorgu">Detaylı Sorgulama</a>
+
+
+
+
+
+                    <a class="type-expand bi-white padding bottom small" href="/tr/kalem-karsilastirma">Finansal Tablo Kalem Sorgulama</a>
+
+
+
+
+                </div>
+
+
+
+                <div class="w-col w-col-3">
+
+
+
+
+                    <a class="type-expand bi-white padding bottom small" href="/tr/bist-sirketler">BIST Şirketleri</a>
+
+
+
+
+
+                    <a class="type-expand bi-white padding bottom small" href="/tr/sirketler/YK">Yatırım Kuruluşları</a>
+
+
+
+
+
+                    <a class="type-expand bi-white padding bottom small" href="/tr/sirketler/PYS">Portföy Yönetim Şirketleri</a>
+
+
+
+
+
+                    <a class="type-expand bi-white padding bottom small" href="/tr/sirketler/BDK">Bağımsız Denetim Kuruluşları</a>
+
+
+
+
+
+                    <a class="type-expand bi-white padding bottom small" href="/tr/sirketler/DCS">Derecelendirme Şirketleri</a>
+
+
+
+
+
+                    <a class="type-expand bi-white padding bottom small" href="/tr/sirketler/DS">Değerleme Şirketleri</a>
+
+
+
+
+
+                    <a class="type-expand bi-white padding bottom small" href="/tr/sirketler/DK">Diğer KAP Üyeleri ve İşlem Görmeyen Şirketler</a>
+
+
+
+
+
+                    <a class="type-expand bi-white padding bottom small" href="/tr/sirketler/KSE">KAP Üyeliği Sona Eren Şirketler</a>
+
+
+
+
+                </div>
+
+
+
+                <div class="w-col w-col-3">
+
+
+
+
+                    <a class="type-expand bi-white padding bottom small" href="/tr/YatirimFonlari/BYF">Borsa Yatırım Fonları</a>
+
+
+
+
+
+                    <a class="type-expand bi-white padding bottom small" href="/tr/YatirimFonlari/YF">Yatırım Fonları</a>
+
+
+
+
+
+                    <a class="type-expand bi-white padding bottom small" href="/tr/YatirimFonlari/EYF">Emeklilik Yatırım Fonları</a>
+
+
+
+
+
+                    <a class="type-expand bi-white padding bottom small" href="/tr/YatirimFonlari/OKS">OKS Emeklilik Yatırım Fonları</a>
+
+
+
+
+
+                    <a class="type-expand bi-white padding bottom small" href="/tr/YatirimFonlari/YYF">Yabancı Yatırım Fonları</a>
+
+
+
+
+
+                    <a class="type-expand bi-white padding bottom small" href="/tr/YatirimFonlari/VFF">Varlık Finansman Fonları</a>
+
+
+
+
+
+                    <a class="type-expand bi-white padding bottom small" href="/tr/YatirimFonlari/KFF">Konut Finansman Fonları</a>
+
+
+
+
+
+                    <a class="type-expand bi-white padding bottom small" href="/tr/YatirimFonlari/GMF">Gayrimenkul Yatırım Fonları</a>
+
+
+
+
+
+                    <a class="type-expand bi-white padding bottom small" href="/tr/YatirimFonlari/GSF">Girişim Sermayesi Yatırım Fonları</a>
+
+
+
+
+
+                    <a class="type-expand bi-white padding bottom small" href="/tr/YatirimFonlari/PFF">Proje Finansman Fonları</a>
+
+
+
+
+
+                    <a class="type-expand bi-white padding bottom small" href="/tr/YatirimFonlari/TEYF">Tasfiye Olmuş Fonlar</a>
+
+
+
+
+                </div>
+
+
+
+                <div class="w-col w-col-3">
+
+
+
+
+                    <a class="type-expand bi-white padding bottom small" href="/tr/menu-icerik/KAP-Hakkinda/Mevzuat-Duyurular-ve-Kilavuzlar">Mevzuat, Duyurular ve Kılavuzlar</a>
+
+
+
+
+
+                    <a class="type-expand bi-white padding bottom small" href="/tr/menu-icerik/KAP-Hakkinda/Sertifika-Islemleri">Sertifika İşlemleri</a>
+
+
+
+
+
+                    <a class="type-expand bi-white padding bottom small" href="/tr/menu-icerik/KAP-Hakkinda/Genel-Bilgi">Genel Bilgi</a>
+
+
+
+
+
+                    <a class="type-expand bi-white padding bottom small" href="/tr/menu-icerik/KAP-Hakkinda/Ilgili-Linkler">İlgili Linkler</a>
+
+
+
+
+
+                    <a class="type-expand bi-white padding bottom small" href="https://eyatirimci.mkk.com.tr/auth/login">Sermaye Piyasası Aracı Alım Satım Bildirimi</a>
+
+
+
+
+
+                    <a class="type-expand bi-white padding bottom small" href="/tr/menu-icerik/KAP-Hakkinda/KVKK-Kapsaminda-Duzeltilmis-Bildirimler">KVKK Kapsamında Düzeltilmiş Bildirimler</a>
+
+
+
+
+                </div>
+
+
+
+            </div>
+            <div class="padding bottom top">
+                <div class="bi-lightgray type-medium kapstyle3">İlgili Bağlantılar</div>
+            </div>
+
+            <div class="bi-white type-xsmall"  >
+                <span class="padding right medium"><a class="footermenu-item" target="_blank" href="http://egk.mkk.com.tr" id="footerMenu1">e-Genel Kurul</a> </span>
+                <span class="padding right medium"><a class="footermenu-item" target="_blank" href="https://eyatirimci.mkk.com.tr/auth/login" id="footerMenu2">e-Yatırımcı</a></span>
+                <span class="padding right medium"><a class="footermenu-item" target="_blank" href="http://e-sirket.mkk.com.tr" id="footerMenu3">e-Şirket</a></span>
+                <span class="padding right medium"><a class="footermenu-item" target="_blank" href='https://www.mkk.com.tr/tr-tr/Veri-Depolama-Hizmetleri/e-VERi/Sayfalar/Yillik-Istatistiki-Veriler.aspx' id="footerMenu4">e-Veri</a></span>
+                <span class="padding right medium"><a class="footermenu-item" target="_blank" href="http://www.borsaistanbul.com" id="footerMenu6">Borsa İstanbul A.Ş.</a> </span>
+                <span class="padding right medium"><a class="footermenu-item" target="_blank" href="https://www.vap.org.tr/Sayfalar/home.aspx" id="footerMenu7">VAP</a> </span>
+            </div>
+        </div>
+    </div>
+    <a href="javascript:void(0);" class="back-to-top">Yukarı</a>
+    <div class="footer-bottom">
+        <div class="w-container">
+            <img class="footer-logo" src='/assets/images/Footer_Logo.png' />
+            <div class="footer-middle-elems">
+                <a class="bi-white footer-bottomlinks type-small" href='/tr/icerik/Diger/Site-Haritasi'>
+                    Site Haritası
+                </a>
+                <a class="bi-white footer-bottomlinks type-small" href='/tr/icerik/Diger/Iletisim'>
+                    İletişim
+                </a>
+                <a class="bi-white footer-bottomlinks type-small" href='/tr/icerik/Diger/Yardim'>
+                    Yardım
+                </a>
+                <a class="bi-white footer-bottomlinks type-small" href='/tr/icerik/Diger/Kisisel-Verilerin-Korunmasi'>
+                    Kişisel Verilerin Korunması
+                </a>
+                <a class="bi-white footer-bottomlinks type-small" href='/tr/icerik/Diger/Telif-Hakki-ve-Cekince-Bildirimi'>
+                    Telif Hakkı ve Çekince İhbarı
+                </a>
+            </div>
+            <img class="mkk-footer-logo" src='/assets/images/mkk-footer.png' />
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src='/assets/javascripts/angular_bundle.min.js?b=2068'></script>
+<script type="text/javascript" src='/assets/javascripts/thirdparty_extended.min.js?b=2068'></script>
+
+
+
+<script type="text/javascript" src='/assets/javascripts/bundle.min.js?b=2068'></script>
+
+<!--[if lte IE 9]><script type="text/javascript" src='/assets/javascripts/placeholders.min.js?b=2068'></script><![endif]-->
+
+<script type="text/javascript" src='/assets/javascripts/custom2.min.js?b=2068'></script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MBNFVK7SX4"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-MBNFVK7SX4',
+        {
+            //'page_title' : 'Sayfa Başlığı', // opsiyonel
+            'page_location': window.location.href, // opsiyonel
+            'page_path': location.pathname
+        });
+    gtag('event', 'screen_view', {
+        'app_name': 'KAP'
+    });
+</script>
+
+</body>
+</html>
