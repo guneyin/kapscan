@@ -1,4 +1,4 @@
-package scanner
+package company
 
 import (
 	"github.com/PuerkitoBio/goquery"
@@ -30,10 +30,10 @@ func TestDocumentSelector(t *testing.T) {
 	})
 }
 
-func TestService_FetchSymbolList(t *testing.T) {
-	svc := NewScannerService()
+func TestService_FetchCompanyList(t *testing.T) {
+	svc := NewService()
 
-	symbolList, err := svc.FetchSymbolList()
+	symbolList, err := svc.GetCompanyList().Do()
 	assert.NoError(t, err)
 	assert.NotEmpty(t, symbolList)
 

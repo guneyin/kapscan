@@ -4,31 +4,23 @@ import (
 	"context"
 	"github.com/guneyin/kapscan/internal/dto"
 	"github.com/guneyin/kapscan/internal/entity"
-	"github.com/guneyin/kapscan/internal/repo"
+	"github.com/guneyin/kapscan/internal/repo/scanner"
 )
 
 type Service struct {
-	repo *repo.Repo
+	repo *scanner.Repo
 }
 
-func NewScannerService() *Service {
+func NewService() *Service {
 	return &Service{
-		repo: repo.New(),
+		repo: scanner.NewRepo(),
 	}
 }
 
-func (s *Service) FetchSymbolList() (entity.Symbols, error) {
-	return s.repo.FetchSymbolList()
+func (s *Service) GetCompanyList() (entity.CompanyList, error) {
+	return s.repo.GetCompanyList()
 }
 
-func (s *Service) GetSymbolList(offset, limit int) (entity.Symbols, error) {
-	return s.repo.GetSymbolList(offset, limit)
-}
-
-func (s *Service) Scan(ctx context.Context, symbol string) ([]dto.ShareHolder, error) {
-	return s.repo.ScanSymbol(ctx, symbol)
-}
-
-func (s *Service) SaveSymbol(symbol *entity.Symbol) error {
-	return s.repo.SaveSymbol(symbol)
+func (s *Service) GetCompany(ctx context.Context, symbol string) ([]dto.ShareHolder, error) {
+	return s.repo.GetCompany(ctx, symbol)
 }

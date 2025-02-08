@@ -1,4 +1,4 @@
-package repo
+package scanner
 
 import (
 	"context"
@@ -9,7 +9,6 @@ import (
 	"github.com/guneyin/kapscan/internal/dto"
 	"github.com/guneyin/kapscan/internal/entity"
 	"github.com/guneyin/kapscan/internal/scraper"
-	"github.com/guneyin/kapscan/internal/store"
 	"net/http"
 	"strings"
 )
@@ -18,20 +17,20 @@ type Repo struct {
 	scraper *scraper.Scraper
 }
 
-func New() *Repo {
+func NewRepo() *Repo {
 	return &Repo{scraper: scraper.New()}
 }
 
-func (r *Repo) FetchSymbolList() (entity.Symbols, error) {
+func (r *Repo) GetCompanyList() (entity.CompanyList, error) {
 	bist := gobist.New()
 	list, err := bist.GetSymbolList()
 	if err != nil {
 		return nil, err
 	}
 
-	symbolList := make(entity.Symbols, list.Count)
+	symbolList := make(entity.CompanyList, list.Count)
 	for i, symbol := range list.Items {
-		symbolList[i] = entity.Symbol{
+		symbolList[i] = entity.Company{
 			Code: symbol.Code,
 			Name: symbol.Name,
 			Icon: symbol.Icon,
@@ -41,20 +40,8 @@ func (r *Repo) FetchSymbolList() (entity.Symbols, error) {
 	return symbolList, nil
 }
 
-func (r *Repo) GetSymbolList(offset, limit int) (entity.Symbols, error) {
-	db := store.Get()
-
-	var symbols []entity.Symbol
-	tx := db.Offset(offset).Limit(limit).Find(&symbols)
-	if tx.Error != nil {
-		return nil, tx.Error
-	}
-
-	return symbols, nil
-}
-
-func (r *Repo) ScanSymbol(ctx context.Context, symbolCode string) ([]dto.ShareHolder, error) {
-	fs, err := r.fetchSymbol(ctx, symbolCode)
+func (r *Repo) GetCompany(ctx context.Context, symbolCode string) ([]dto.ShareHolder, error) {
+	fs, err := r.fetchCompany(ctx, symbolCode)
 	if err != nil {
 		return nil, err
 	}
@@ -91,7 +78,7 @@ func (r *Repo) ScanSymbol(ctx context.Context, symbolCode string) ([]dto.ShareHo
 	return res, nil
 }
 
-func (r *Repo) fetchSymbol(ctx context.Context, symbol string) (*dto.SymbolResultItem, error) {
+func (r *Repo) fetchCompany(ctx context.Context, symbol string) (*dto.SymbolResultItem, error) {
 	req := dto.SymbolRequest{
 		Keyword:   symbol,
 		DiscClass: "ALL",
@@ -126,10 +113,4 @@ loop:
 	}
 
 	return &sri, nil
-}
-
-func (r *Repo) SaveSymbol(symbol *entity.Symbol) error {
-	db := store.Get()
-
-	return db.Save(symbol).Error
 }
