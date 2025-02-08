@@ -6,10 +6,10 @@ import (
 	"github.com/gofiber/fiber/v2/log"
 	"github.com/guneyin/kapscan/internal/config"
 	"github.com/guneyin/kapscan/internal/controller"
+	"github.com/guneyin/kapscan/internal/scheduler"
 	"github.com/guneyin/kapscan/internal/server"
 	"github.com/guneyin/kapscan/internal/store"
 	"github.com/guneyin/kapscan/util"
-	"gorm.io/gorm"
 	"log/slog"
 	"os"
 	"time"
@@ -21,16 +21,14 @@ type Application struct {
 	Name       string
 	Version    string
 	Config     *config.Config
-	Database   *gorm.DB
 	Server     *fiber.App
 	Controller *controller.Controller
 }
 
-func NewApplication(name string, cfg *config.Config, db *gorm.DB, srv *fiber.App, cnt *controller.Controller) *Application {
+func NewApplication(name string, cfg *config.Config, srv *fiber.App, cnt *controller.Controller) *Application {
 	return &Application{
 		Name:       name,
 		Config:     cfg,
-		Database:   db,
 		Server:     srv,
 		Controller: cnt,
 	}
@@ -43,16 +41,20 @@ func main() {
 	cfg, err := config.NewConfig()
 	checkError(err)
 
-	db, err := store.NewDB(cfg)
+	err = store.InitDB(store.DBProd)
 	checkError(err)
 
 	srv := server.NewServer(appName)
 	checkError(err)
 
 	api := srv.Group("/api")
-	cnt := controller.NewController(db, api)
+	cnt := controller.NewController(api)
 
-	app := NewApplication(appName, cfg, db, srv, cnt)
+	app := NewApplication(appName, cfg, srv, cnt)
+
+	cron, stop := scheduler.New()
+	defer stop()
+	cron.Start()
 
 	log.Fatal(app.Server.Listen(fmt.Sprintf(":%d", app.Config.HttpPort)))
 }

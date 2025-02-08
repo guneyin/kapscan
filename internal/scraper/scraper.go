@@ -1,4 +1,4 @@
-package scanner
+package scraper
 
 import (
 	"context"
@@ -15,12 +15,12 @@ type Scraper struct {
 	client *req.Client
 }
 
-type SR struct {
-	error error
-	body  io.Reader
+type Result struct {
+	Error error
+	Body  io.Reader
 }
 
-func NewScraper() *Scraper {
+func New() *Scraper {
 	client := req.NewClient().
 		//DevMode().
 		SetBaseURL(baseUrl).
@@ -30,14 +30,14 @@ func NewScraper() *Scraper {
 	}
 }
 
-func NewSR(error error, body io.Reader) *SR {
-	return &SR{
-		error: error,
-		body:  body,
+func newResult(error error, body io.Reader) *Result {
+	return &Result{
+		Error: error,
+		Body:  body,
 	}
 }
 
-func (s *Scraper) Fetch(ctx context.Context, method, url string, reqBody, resBody any) *SR {
+func (s *Scraper) Fetch(ctx context.Context, method, url string, reqBody, resBody any) *Result {
 	res, err := s.client.R().
 		SetContext(ctx).
 		SetContentType("application/json").
@@ -45,11 +45,11 @@ func (s *Scraper) Fetch(ctx context.Context, method, url string, reqBody, resBod
 		SetSuccessResult(resBody).
 		Send(method, url)
 	if err != nil {
-		return NewSR(err, nil)
+		return newResult(err, nil)
 	}
 	if res.StatusCode != 200 {
-		return NewSR(errors.New(res.Status), nil)
+		return newResult(errors.New(res.Status), nil)
 	}
 
-	return NewSR(nil, res.Body)
+	return newResult(nil, res.Body)
 }

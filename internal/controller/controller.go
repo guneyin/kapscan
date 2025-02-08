@@ -2,7 +2,6 @@ package controller
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"gorm.io/gorm"
 )
 
 type IController interface {
@@ -11,14 +10,12 @@ type IController interface {
 }
 
 type Controller struct {
-	db          *gorm.DB
 	router      fiber.Router
 	controllers map[string]IController
 }
 
-func NewController(db *gorm.DB, router fiber.Router) *Controller {
+func NewController(router fiber.Router) *Controller {
 	c := &Controller{
-		db:          db,
 		router:      router,
 		controllers: make(map[string]IController),
 	}
@@ -32,7 +29,7 @@ func (c Controller) registerControllers() {
 	c.register(newScannerController)
 }
 
-func (c Controller) register(f func(db *gorm.DB) IController) {
-	hnd := f(c.db).setRoutes(c.router)
+func (c Controller) register(f func() IController) {
+	hnd := f().setRoutes(c.router)
 	c.controllers[hnd.name()] = hnd
 }

@@ -1,4 +1,4 @@
-package scanner
+package dto
 
 type ShareHolder struct {
 	Name            string `json:"name"`

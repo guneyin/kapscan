@@ -29,3 +29,15 @@ func TestDocumentSelector(t *testing.T) {
 		})
 	})
 }
+
+func TestService_FetchSymbolList(t *testing.T) {
+	svc := NewScannerService()
+
+	symbolList, err := svc.FetchSymbolList()
+	assert.NoError(t, err)
+	assert.NotEmpty(t, symbolList)
+
+	for _, symbol := range symbolList {
+		t.Logf("%s\n", symbol.Code)
+	}
+}

@@ -4,7 +4,6 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/guneyin/kapscan/internal/mw"
 	"github.com/guneyin/kapscan/internal/service/general"
-	"gorm.io/gorm"
 )
 
 const generalControllerName = "general"
@@ -13,7 +12,7 @@ type General struct {
 	svc *general.Service
 }
 
-func newGeneralController(_ *gorm.DB) IController {
+func newGeneralController() IController {
 	return &General{general.NewGeneralService()}
 }
 

@@ -1,30 +1,88 @@
 package store
 
 import (
-	"github.com/guneyin/kapscan/internal/config"
+	"errors"
+	"github.com/guneyin/kapscan/internal/entity"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
 	"os"
 	"path"
+	"sync"
 )
+
+type DBEnvironment string
+
+var (
+	DBProd DBEnvironment = "prod"
+	DBTest DBEnvironment = "test"
+)
+
+var (
+	once sync.Once
+	db   *gorm.DB
+
+	ErrUnableToConnectToDatabase = errors.New("unable to connect to database")
+	ErrDatabaseMigrationFailed   = errors.New("database migration failed")
+	ErrDatabaseNil               = errors.New("database is nil")
+	ErrInvalidDatabaseProvider   = errors.New("invalid database provider")
+)
+
+func InitDB(env DBEnvironment) error {
+	var err error
+	once.Do(func() {
+		switch env {
+		case DBProd:
+			db, err = newProdDB()
+		case DBTest:
+			db, err = newTestDB()
+		default:
+			err = ErrInvalidDatabaseProvider
+		}
+	})
+
+	return err
+}
+
+func Get() *gorm.DB {
+	if db == nil {
+		panic(ErrDatabaseNil)
+	}
+
+	return db
+}
 
 var gormConfig = &gorm.Config{Logger: logger.Default.LogMode(logger.Error)}
 
-func NewDB(_ *config.Config) (*gorm.DB, error) {
+func newProdDB() (*gorm.DB, error) {
 	const dataDir = "data/data.db"
-
 	if _, err := os.Stat(dataDir); err != nil {
-
 		err = os.MkdirAll(path.Dir(dataDir), 0777)
 		if err != nil {
 			return nil, err
 		}
 	}
 
-	return gorm.Open(sqlite.Open(dataDir), gormConfig)
+	gdb, err := gorm.Open(sqlite.Open(dataDir), gormConfig)
+	if err != nil {
+		return nil, err
+	}
+
+	return migrate(gdb)
 }
 
-func NewTestDB() (*gorm.DB, error) {
-	return gorm.Open(sqlite.Open("file::memory:?cache=shared"), gormConfig)
+func newTestDB() (*gorm.DB, error) {
+	gdb, err := gorm.Open(sqlite.Open("file::memory:?cache=shared"), gormConfig)
+	if err != nil {
+		return nil, errors.Join(ErrUnableToConnectToDatabase, err)
+	}
+
+	return migrate(gdb)
+}
+
+func migrate(gdb *gorm.DB) (*gorm.DB, error) {
+	if err := gdb.AutoMigrate(&entity.Symbol{}); err != nil {
+		return nil, errors.Join(ErrDatabaseMigrationFailed, err)
+	}
+	return gdb, nil
 }

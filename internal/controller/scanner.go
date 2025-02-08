@@ -4,7 +4,6 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/guneyin/kapscan/internal/mw"
 	"github.com/guneyin/kapscan/internal/service/scanner"
-	"gorm.io/gorm"
 )
 
 const scannerControllerName = "scanner"
@@ -13,8 +12,8 @@ type Scanner struct {
 	svc *scanner.Service
 }
 
-func newScannerController(db *gorm.DB) IController {
-	svc := scanner.NewScannerService(db)
+func newScannerController() IController {
+	svc := scanner.NewScannerService()
 
 	return &Scanner{svc}
 }

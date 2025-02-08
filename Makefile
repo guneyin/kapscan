@@ -11,16 +11,13 @@ LDFLAG_VERSION='${PACKAGE}/util.Version=${VERSION}'
 LDFLAG_COMMIT_HASH='${PACKAGE}/util.CommitHash=${COMMIT_HASH}'
 LDFLAG_BUILD_TIMESTAMP='${PACKAGE}/util.BuildTime=${BUILD_TIMESTAMP}'
 
-init: clean tidy vet doc build
+init: clean tidy vet build
 
 tidy:
 	go mod tidy
 
 vet:
 	go vet ./...
-
-doc:
-	swag init
 
 run:
 	go run .
