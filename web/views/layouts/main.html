@@ -5,16 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="light dark">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
-    <link rel="stylesheet" href="https://raw.githubusercontent.com/sachingvit/Gravatar/master/css/gravatar.css">
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
-    <script src="https://raw.githubusercontent.com/sachingvit/Gravatar/master/js/gravatar.min.js"></script>
     <script src="https://unpkg.com/htmx.org@2.0.4"></script>
 
-
-    <script>
-        var $j = jQuery.noConflict();
-    </script>
     <title>KAP Scan</title>
+
+    <style>
+        .avatar {
+            border-radius: 50%;
+            -moz-border-radius: 50%;
+            -webkit-border-radius: 50%;
+            object-fit: cover;
+            border: solid 2px silver;
+            height: 48px;
+            width: 48px;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+    </style>
 </head>
 <body>
 <main class="container">

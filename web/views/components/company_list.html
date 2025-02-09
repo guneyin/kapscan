@@ -1,21 +1,5 @@
-<style>
-  .avatar {
-    border-radius: 50%;
-    -moz-border-radius: 50%;
-    -webkit-border-radius: 50%;
-    object-fit: cover;
-    border: solid 2px silver;
-    height: 48px;
-    width: 48px;
-  }
-
-  ul {
-    list-style-type: none;
-  }
-</style>
-
 <div id="company-list">
-  <table class="striped">
+  <table class="striped" id="list">
     <thead>
     <tr>
       <th scope="col">#</th>
@@ -26,13 +10,13 @@
     <tbody>
 
     {{ range .CompanyList }}
-    <tr>
-      <th scope="row">
-        <img src="{{.Icon}}" class="avatar">
-      </th>
-      <td>{{.Code}}</td>
-      <td>{{.Name}}</td>
-    </tr>
+      <tr data-id="{{.ID}}" style="cursor: pointer">
+        <th scope="row">
+          <img src="{{.Icon}}" class="avatar">
+        </th>
+        <td>{{.Code}}</td>
+        <td>{{.Name}}</td>
+      </tr>
     {{end}}
 
     </tbody>
@@ -46,3 +30,13 @@
   </div>
 
 </div>
+
+<script>
+  const tableRows = document.querySelectorAll("#list > tbody > tr");
+  console.log(tableRows);
+  for (const tableRow of tableRows) {
+    tableRow.addEventListener("click", function () {
+      window.location.href = "/company/" + this.dataset.id;
+    });
+  }
+</script>

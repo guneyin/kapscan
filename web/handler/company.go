@@ -35,6 +35,7 @@ func (cmp *Company) setRoutes(router fiber.Router) IHandler {
 
 	grp := router.Group(cmp.name())
 	grp.Get("/", cmp.GetCompanyList)
+	grp.Get("/:id", cmp.GetCompany)
 
 	return cmp
 }
@@ -62,6 +63,16 @@ func (cmp *Company) GetCompanyList(c *fiber.Ctx) error {
 	pageNavData := NewPageNavData(vw)
 
 	return c.Render("components/company_list", fiber.Map{"CompanyList": list, "PageNavData": pageNavData})
+}
+
+func (cmp *Company) GetCompany(c *fiber.Ctx) error {
+	id := c.Params("id")
+	data, err := cmp.svc.GetCompany(id)
+	if err != nil {
+		return err
+	}
+
+	return c.Render("company", fiber.Map{"Company": data}, layoutMain)
 }
 
 type PageNavData struct {

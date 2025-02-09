@@ -38,7 +38,7 @@ func (r *Repo) GetCompanyList(page, size int16) (entity.CompanyList, paginator.P
 func (r *Repo) SaveCompany(company *entity.Company) error {
 	db := store.Get()
 
-	tx := db.Debug().Clauses(clause.OnConflict{UpdateAll: true}).Save(company)
+	tx := db.Clauses(clause.OnConflict{UpdateAll: true}).Save(company)
 	return tx.Error
 }
 
