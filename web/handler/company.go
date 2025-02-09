@@ -101,10 +101,10 @@ func (pni PageNavItem) Label() string {
 	}
 }
 
-func (pni PageNavItem) Class() string {
+func (pni PageNavItem) Active() string {
 	switch pni.active {
 	case true:
-		return "contrast"
+		return "selected"
 	default:
 		return ""
 	}

@@ -3,6 +3,7 @@ package entity
 import (
 	"github.com/oklog/ulid/v2"
 	"slices"
+	"strings"
 )
 
 type Company struct {
@@ -18,6 +19,22 @@ type Company struct {
 	Market   string       `json:"market"`
 	Icon     string       `json:"icon"`
 	Shares   CompanyShare `json:"shares"`
+}
+
+func (c Company) AvatarText() string {
+	parts := strings.Split(c.Name, " ")
+
+	var at strings.Builder
+	for i, part := range parts {
+		if i > 1 {
+			break
+		}
+
+		letter := strings.ToUpper(string(part[0]))
+		at.WriteString(letter)
+	}
+
+	return at.String()
 }
 
 type CompanyList []Company

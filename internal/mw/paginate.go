@@ -6,13 +6,11 @@ import (
 
 func GetPaginate(c *fiber.Ctx) (int16, int16) {
 	page := c.QueryInt("page", 1)
-	size := c.QueryInt("size", 20)
+	size := c.QueryInt("size", 15)
 
-	if size > 20 {
-		size = 20
+	if size > 15 {
+		size = 15
 	}
-
-	//offset := (page - 1) * pageSize
 
 	return int16(page), int16(size)
 }
