@@ -9,6 +9,7 @@ import (
 	"github.com/guneyin/kapscan/internal/dto"
 	"github.com/guneyin/kapscan/internal/entity"
 	"github.com/guneyin/kapscan/internal/scraper"
+	"github.com/guneyin/kapscan/util"
 	"net/http"
 	"strings"
 )
@@ -23,30 +24,67 @@ func NewRepo() *Repo {
 
 func (r *Repo) GetCompanyList() (entity.CompanyList, error) {
 	bist := gobist.New()
-	list, err := bist.GetSymbolList()
+	symbolList, err := bist.GetSymbolList()
 	if err != nil {
 		return nil, err
 	}
 
-	symbolList := make(entity.CompanyList, list.Count)
-	for i, symbol := range list.Items {
-		symbolList[i] = entity.Company{
+	cl := make(entity.CompanyList, symbolList.Count)
+	for i, symbol := range symbolList.Items {
+		cl[i] = entity.Company{
 			Code: symbol.Code,
 			Name: symbol.Name,
 			Icon: symbol.Icon,
 		}
 	}
 
-	return symbolList, nil
+	return cl, nil
 }
 
-func (r *Repo) GetCompany(ctx context.Context, symbolCode string) ([]dto.ShareHolder, error) {
-	fs, err := r.fetchCompany(ctx, symbolCode)
+func (r *Repo) SyncCompany(ctx context.Context, cmp *entity.Company) error {
+	fs, err := r.fetchCompany(ctx, cmp.Code)
 	if err != nil {
-		return nil, err
+		return err
+	}
+	cmp.MemberID = fs.MemberOrFundOid
+
+	url := fmt.Sprintf("/tr/sirket-bilgileri/ozet/%s", fs.MemberOrFundOid)
+
+	sr := r.scraper.Fetch(ctx, http.MethodGet, url, nil, nil)
+	if sr.Error != nil {
+		return sr.Error
 	}
 
-	url := fmt.Sprintf("/tr/sirket-bilgileri/genel/%s", fs.MemberOrFundOid)
+	doc, err := goquery.NewDocumentFromReader(sr.Body)
+	if err != nil {
+		return err
+	}
+
+	selector := ".w-clearfix.w-inline-block.a-table-row.infoRow"
+	list := doc.Find(selector)
+	list.Each(func(i int, s *goquery.Selection) {
+		val := strings.TrimSpace(s.Find("div:nth-child(2)").Text())
+		switch i {
+		case 0:
+			cmp.Address = val
+		case 1:
+			cmp.Email = val
+		case 2:
+			cmp.Website = val
+		case 5:
+			cmp.Index = val
+		case 6:
+			cmp.Sector = val
+		case 7:
+			cmp.Market = val
+		}
+	})
+
+	return nil
+}
+
+func (r *Repo) GetCompanyShare(ctx context.Context, cmp entity.Company) ([]entity.CompanyShare, error) {
+	url := fmt.Sprintf("/tr/sirket-bilgileri/genel/%s", cmp.MemberID)
 
 	sr := r.scraper.Fetch(ctx, http.MethodGet, url, nil, nil)
 	if sr.Error != nil {
@@ -61,16 +99,18 @@ func (r *Repo) GetCompany(ctx context.Context, symbolCode string) ([]dto.ShareHo
 	selector := ".exportClass > div:contains('Ortağın Adı')"
 	list := doc.Find(selector).Parent()
 
-	res := make([]dto.ShareHolder, 0)
+	res := make([]entity.CompanyShare, 0)
 	list.Each(func(i int, s *goquery.Selection) {
 		s.Find(".w-clearfix.w-inline-block.a-table-row.infoRow").Each(func(i int, s *goquery.Selection) {
 			if i == 0 {
 				return
 			}
-			res = append(res, dto.ShareHolder{
-				Name:            strings.TrimSpace(s.Find("div:nth-child(1)").Text()),
-				CapitalByAmount: strings.TrimSpace(s.Find("div:nth-child(2)").Text()),
-				CapitalByVolume: strings.TrimSpace(s.Find("div:nth-child(3)").Text()),
+			res = append(res, entity.CompanyShare{
+				CompanyID:       cmp.ID,
+				Title:           strings.TrimSpace(s.Find("div:nth-child(1)").Text()),
+				CapitalByAmount: util.NewMoney(s.Find("div:nth-child(2)").Text()).Float64(),
+				CapitalByVolume: util.NewMoney(s.Find("div:nth-child(3)").Text()).Float64(),
+				VoteRight:       util.NewMoney(s.Find("div:nth-child(4)").Text()).Float64(),
 			})
 		})
 	})
@@ -78,9 +118,9 @@ func (r *Repo) GetCompany(ctx context.Context, symbolCode string) ([]dto.ShareHo
 	return res, nil
 }
 
-func (r *Repo) fetchCompany(ctx context.Context, symbol string) (*dto.SymbolResultItem, error) {
+func (r *Repo) fetchCompany(ctx context.Context, code string) (*dto.SymbolResultItem, error) {
 	req := dto.SymbolRequest{
-		Keyword:   symbol,
+		Keyword:   code,
 		DiscClass: "ALL",
 		Lang:      "tr",
 		Channel:   "WEB",
@@ -100,16 +140,19 @@ loop:
 
 		for _, cr := range res {
 			for _, result := range cr.Results {
-				if strings.ToUpper(result.CmpOrFundCode) == strings.ToUpper(symbol) {
-					sri = result
-					break loop
+				sliced := strings.Split(result.CmpOrFundCode, ",")
+				for _, symbol := range sliced {
+					if strings.ToUpper(symbol) == strings.ToUpper(code) {
+						sri = result
+						break loop
+					}
 				}
 			}
 		}
 	}
 
 	if sri.MemberOrFundOid == "" {
-		return nil, errors.New("symbol not found")
+		return nil, errors.New("company not found")
 	}
 
 	return &sri, nil

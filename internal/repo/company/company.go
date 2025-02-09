@@ -7,6 +7,7 @@ import (
 	"github.com/oklog/ulid/v2"
 	"github.com/vcraescu/go-paginator/v2"
 	"github.com/vcraescu/go-paginator/v2/adapter"
+	"gorm.io/gorm/clause"
 )
 
 type Repo struct {
@@ -37,7 +38,8 @@ func (r *Repo) GetCompanyList(page, size int16) (entity.CompanyList, paginator.P
 func (r *Repo) SaveCompany(company *entity.Company) error {
 	db := store.Get()
 
-	return db.Save(company).Error
+	tx := db.Debug().Clauses(clause.OnConflict{UpdateAll: true}).Save(company)
+	return tx.Error
 }
 
 func (r *Repo) GetCompany(id string) (*entity.Company, error) {

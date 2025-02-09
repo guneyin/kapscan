@@ -1,11 +1,5 @@
 package dto
 
-type ShareHolder struct {
-	Name            string `json:"name"`
-	CapitalByAmount string `json:"capitalByAmount"`
-	CapitalByVolume string `json:"capitalByVolume"`
-}
-
 type SymbolRequest struct {
 	Keyword   string `json:"keyword"`
 	DiscClass string `json:"discClass"`

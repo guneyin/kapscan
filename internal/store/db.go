@@ -81,7 +81,8 @@ func newTestDB() (*gorm.DB, error) {
 }
 
 func migrate(gdb *gorm.DB) (*gorm.DB, error) {
-	if err := gdb.AutoMigrate(&entity.Company{}); err != nil {
+	err := gdb.AutoMigrate(&entity.Company{})
+	if err != nil {
 		return nil, errors.Join(ErrDatabaseMigrationFailed, err)
 	}
 	return gdb, nil

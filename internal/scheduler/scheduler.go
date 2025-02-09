@@ -1,6 +1,7 @@
 package scheduler
 
 import (
+	"context"
 	"github.com/guneyin/kapscan/internal/service/company"
 	"github.com/guneyin/kapscan/internal/service/scanner"
 	"github.com/robfig/cron"
@@ -17,36 +18,58 @@ func New() (*Cron, func()) {
 }
 
 func (c *Cron) Start() {
-	_ = c.addJob("@every 00h30m00s", syncCompanyList)
+	_ = c.AddJob("@every 00h30m00s", syncCompanyList)
 	go c.cron.Start()
 }
 
-func (c *Cron) addJob(spec string, cmd func()) error {
+func (c *Cron) AddJob(spec string, cmd func()) error {
 	return c.cron.AddFunc(spec, cmd)
 }
 
 func syncCompanyList() {
-	log.Printf("sync symbol list started")
+	log.Printf("sync company list started")
 
 	scannerSvc := scanner.NewService()
 	companySvc := company.NewService()
 
-	fetched, err := scannerSvc.GetCompanyList()
+	companyList, err := scannerSvc.GetCompanyList()
 	if err != nil {
 		return
 	}
 
-	list, _, err := companySvc.GetCompanyList().Do()
+	dbCompanyList, _, err := companySvc.GetCompanyList().Do()
 	if err != nil {
 		return
 	}
 
-	for _, symbol := range fetched {
-		if !list.Exist(symbol.Code) {
-			err = companySvc.SaveCompany(&symbol)
+	for _, comp := range companyList {
+		if !dbCompanyList.Exist(comp.Code) {
+			_ = scannerSvc.SyncCompany(context.Background(), &comp)
+
+			err = companySvc.SaveCompany(&comp)
 			if err != nil {
 				return
 			}
+		}
+	}
+}
+
+func syncCompanyInfo() {
+	log.Printf("sync company info started")
+
+	scannerSvc := scanner.NewService()
+	companySvc := company.NewService()
+
+	companyList, _, err := companySvc.GetCompanyList().Do()
+	if err != nil {
+		return
+	}
+
+	for _, comp := range companyList {
+		_ = scannerSvc.SyncCompany(context.Background(), &comp)
+		err = companySvc.SaveCompany(&comp)
+		if err != nil {
+			return
 		}
 	}
 }

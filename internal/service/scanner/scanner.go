@@ -2,7 +2,6 @@ package scanner
 
 import (
 	"context"
-	"github.com/guneyin/kapscan/internal/dto"
 	"github.com/guneyin/kapscan/internal/entity"
 	"github.com/guneyin/kapscan/internal/repo/scanner"
 )
@@ -21,6 +20,6 @@ func (s *Service) GetCompanyList() (entity.CompanyList, error) {
 	return s.repo.GetCompanyList()
 }
 
-func (s *Service) GetCompany(ctx context.Context, symbol string) ([]dto.ShareHolder, error) {
-	return s.repo.GetCompany(ctx, symbol)
+func (s *Service) SyncCompany(ctx context.Context, cmp *entity.Company) error {
+	return s.repo.SyncCompany(ctx, cmp)
 }
