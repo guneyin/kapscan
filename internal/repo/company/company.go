@@ -5,6 +5,8 @@ import (
 	"github.com/guneyin/kapscan/internal/scraper"
 	"github.com/guneyin/kapscan/internal/store"
 	"github.com/oklog/ulid/v2"
+	"github.com/vcraescu/go-paginator/v2"
+	"github.com/vcraescu/go-paginator/v2/adapter"
 )
 
 type Repo struct {
@@ -15,16 +17,21 @@ func NewRepo() *Repo {
 	return &Repo{scraper: scraper.New()}
 }
 
-func (r *Repo) GetCompanyList(offset, limit int) (entity.CompanyList, error) {
+func (r *Repo) GetCompanyList(page, size int16) (entity.CompanyList, paginator.Paginator, error) {
 	db := store.Get()
 
 	var companyList entity.CompanyList
-	tx := db.Offset(offset).Limit(limit).Find(&companyList)
-	if tx.Error != nil {
-		return nil, tx.Error
+	stmt := db.Model(&entity.Company{})
+
+	p := paginator.New(adapter.NewGORMAdapter(stmt), int(size))
+
+	p.SetPage(int(page))
+	err := p.Results(&companyList)
+	if err != nil {
+		return nil, nil, err
 	}
 
-	return companyList, nil
+	return companyList, p, nil
 }
 
 func (r *Repo) SaveCompany(company *entity.Company) error {

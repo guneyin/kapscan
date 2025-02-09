@@ -5,6 +5,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/recover"
+	"github.com/gofiber/template/html/v2"
 	"github.com/guneyin/kapscan/internal/mw"
 	"time"
 )
@@ -15,6 +16,8 @@ const (
 )
 
 func NewServer(appName string) *fiber.App {
+	engine := html.New("./web/views", ".html")
+
 	app := fiber.New(fiber.Config{
 		ServerHeader:      fmt.Sprintf("%s HTTP Server", appName),
 		BodyLimit:         16 * 1024 * 1024,
@@ -22,13 +25,17 @@ func NewServer(appName string) *fiber.App {
 		EnablePrintRoutes: true,
 		ReadTimeout:       defaultReadTimeout,
 		WriteTimeout:      defaultWriteTimeout,
-		ErrorHandler: func(ctx *fiber.Ctx, err error) error {
-			return mw.Error(ctx, err)
-		},
+		ErrorHandler:      errorHandler,
+		Views:             engine,
+		//ViewsLayout:       "layouts/main",
 	})
 
 	app.Use(cors.New())
 	app.Use(recover.New())
 
 	return app
+}
+
+func errorHandler(ctx *fiber.Ctx, err error) error {
+	return mw.Error(ctx, err)
 }

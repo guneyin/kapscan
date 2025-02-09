@@ -1,0 +1,48 @@
+<style>
+  .avatar {
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    object-fit: cover;
+    border: solid 2px silver;
+    height: 48px;
+    width: 48px;
+  }
+
+  ul {
+    list-style-type: none;
+  }
+</style>
+
+<div id="company-list">
+  <table class="striped">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Sembol</th>
+      <th scope="col">Ünvan</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    {{ range .CompanyList }}
+    <tr>
+      <th scope="row">
+        <img src="{{.Icon}}" class="avatar">
+      </th>
+      <td>{{.Code}}</td>
+      <td>{{.Name}}</td>
+    </tr>
+    {{end}}
+
+    </tbody>
+
+  </table>
+
+  <div role="group">
+    {{ range .PageNavData.Items }}
+    <button hx-get="{{.URL}}" hx-target="#company-list" {{.Disabled}} class="{{.Class}}">{{.Label}}</button>
+    {{end}}
+  </div>
+
+</div>

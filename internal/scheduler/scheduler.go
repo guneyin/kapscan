@@ -36,7 +36,7 @@ func syncCompanyList() {
 		return
 	}
 
-	list, err := companySvc.GetCompanyList().Do()
+	list, _, err := companySvc.GetCompanyList().Do()
 	if err != nil {
 		return
 	}

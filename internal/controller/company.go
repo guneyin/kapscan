@@ -34,7 +34,7 @@ func (cmp *Company) setRoutes(router fiber.Router) IController {
 func (cmp *Company) GetList(c *fiber.Ctx) error {
 	offset, limit := mw.GetPaginate(c)
 
-	res, err := cmp.svc.GetCompanyList().Offset(offset).Limit(limit).Do()
+	res, _, err := cmp.svc.GetCompanyList().Offset(offset).Limit(limit).Do()
 	if err != nil {
 		return err
 	}

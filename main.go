@@ -10,6 +10,7 @@ import (
 	"github.com/guneyin/kapscan/internal/server"
 	"github.com/guneyin/kapscan/internal/store"
 	"github.com/guneyin/kapscan/util"
+	"github.com/guneyin/kapscan/web/handler"
 	"log/slog"
 	"os"
 	"time"
@@ -23,14 +24,21 @@ type Application struct {
 	Config     *config.Config
 	Server     *fiber.App
 	Controller *controller.Controller
+	WebHandler *handler.Handler
 }
 
-func NewApplication(name string, cfg *config.Config, srv *fiber.App, cnt *controller.Controller) *Application {
+func NewApplication(
+	name string,
+	cfg *config.Config,
+	srv *fiber.App,
+	cnt *controller.Controller,
+	webHnd *handler.Handler) *Application {
 	return &Application{
 		Name:       name,
 		Config:     cfg,
 		Server:     srv,
 		Controller: cnt,
+		WebHandler: webHnd,
 	}
 }
 
@@ -48,9 +56,11 @@ func main() {
 	checkError(err)
 
 	api := srv.Group("/api")
-	cnt := controller.NewController(api)
+	apiCnt := controller.NewController(api)
 
-	app := NewApplication(appName, cfg, srv, cnt)
+	webHnd := handler.NewWebHandler(srv)
+
+	app := NewApplication(appName, cfg, srv, apiCnt, webHnd)
 
 	cron, stop := scheduler.New()
 	defer stop()

@@ -4,15 +4,15 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-func GetPaginate(c *fiber.Ctx) (int, int) {
+func GetPaginate(c *fiber.Ctx) (int16, int16) {
 	page := c.QueryInt("page", 1)
-	pageSize := c.QueryInt("page_size", 20)
+	size := c.QueryInt("size", 20)
 
-	if pageSize > 20 {
-		pageSize = 20
+	if size > 20 {
+		size = 20
 	}
 
-	offset := (page - 1) * pageSize
+	//offset := (page - 1) * pageSize
 
-	return offset, pageSize
+	return int16(page), int16(size)
 }

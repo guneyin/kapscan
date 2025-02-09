@@ -33,7 +33,7 @@ func TestDocumentSelector(t *testing.T) {
 func TestService_FetchCompanyList(t *testing.T) {
 	svc := NewService()
 
-	symbolList, err := svc.GetCompanyList().Do()
+	symbolList, _, err := svc.GetCompanyList().Do()
 	assert.NoError(t, err)
 	assert.NotEmpty(t, symbolList)
 
