@@ -7,8 +7,6 @@ RUN go mod download
 
 COPY . ./
 
-RUN go install github.com/swaggo/swag/cmd/swag@latest
-RUN swag init
 RUN go build -v -o server .
 
 FROM debian:bookworm-slim
@@ -17,7 +15,7 @@ RUN set -x && apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -
     rm -rf /var/lib/apt/lists/*
 
 COPY --from=builder /app/server /app/server
-COPY --from=builder /app/docs/ /app/docs/
+COPY --from=builder /app/web/ /app/web
 
 WORKDIR /app
 
