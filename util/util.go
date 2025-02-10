@@ -1,6 +1,8 @@
 package util
 
 import (
+	"bytes"
+	"encoding/gob"
 	"strconv"
 	"strings"
 	"time"
@@ -49,4 +51,25 @@ func NewMoney(amount string) *Money {
 func (m *Money) Float64() float64 {
 	dec, _ := strconv.ParseFloat(m.amount, 64)
 	return dec
+}
+
+func deepCopy(src, dest any) (any, error) {
+	buf := bytes.Buffer{}
+	err := gob.NewEncoder(&buf).Encode(src)
+	if err != nil {
+		return nil, err
+	}
+	err = gob.NewDecoder(&buf).Decode(dest)
+	if err != nil {
+		return nil, err
+	}
+	return dest, nil
+}
+
+func Convert[T any](from any, to T) (T, error) {
+	res, err := deepCopy(from, to)
+	if err != nil {
+		return res.(T), err
+	}
+	return res.(T), nil
 }

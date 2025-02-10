@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"github.com/PuerkitoBio/goquery"
 	"github.com/guneyin/gobist"
-	"github.com/guneyin/kapscan/internal/dto"
 	"github.com/guneyin/kapscan/internal/entity"
 	"github.com/guneyin/kapscan/internal/scraper"
 	"github.com/guneyin/kapscan/util"
@@ -118,16 +117,16 @@ func (r *Repo) GetCompanyShare(ctx context.Context, cmp entity.Company) ([]entit
 	return res, nil
 }
 
-func (r *Repo) fetchCompany(ctx context.Context, code string) (*dto.SymbolResultItem, error) {
-	req := dto.SymbolRequest{
+func (r *Repo) fetchCompany(ctx context.Context, code string) (*SymbolResultItem, error) {
+	req := SymbolRequest{
 		Keyword:   code,
 		DiscClass: "ALL",
 		Lang:      "tr",
 		Channel:   "WEB",
 	}
-	res := make([]dto.SymbolResponse, 0)
+	res := make([]SymbolResponse, 0)
 
-	sri := dto.SymbolResultItem{}
+	sri := SymbolResultItem{}
 
 	keys := []string{"combined", "smart"}
 loop:

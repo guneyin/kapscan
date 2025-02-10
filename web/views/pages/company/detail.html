@@ -1,0 +1,61 @@
+<div class="card w-100">
+    <div class="card-body">
+
+        <div class="row row-cols-auto">
+            <div class="col">
+
+                {{if .Icon}}
+                    <img class="avatar rounded-2 avatar-xl" src="{{.Company.Icon}}"  alt="{{.Company.Name}}"/>
+                {{- else}}
+                    <span class="avatar rounded-2 avatar-xl text-bg-primary">{{.Company.AvatarText}}</span>
+                {{- end}}
+
+            </div>
+            <div class="col">
+                <h5 class="card-title">{{.Company.Code}}</h5>
+                <p class="card-text">{{.Company.Name}}</p>
+            </div>
+        </div>
+
+        <div class="my-6">
+            <hr>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <ol class="list-group">
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <span>Adres:</span>
+                        <span>{{.Company.Address}}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <span>Website:</span>
+                        <a href="http://{{.Company.Website}}" target="_blank">{{.Company.Website}}</a>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <span>E-posta:</span>
+                        <a href="mailto://{{.Company.Email}}">{{.Company.Email}}</a>
+                    </li>
+                </ol>
+            </div>
+
+            <div class="col">
+                <ol class="list-group">
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <span>Pazar:</span>
+                        <span>{{.Company.Market}}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <span>Sector:</span>
+                        <span>{{.Company.Sector}}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <span>Endeks:</span>
+                        <span>{{.Company.Index}}</span>
+                    </li>
+                </ol>
+            </div>
+
+        </div>
+    </div>
+</div>
