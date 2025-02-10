@@ -34,8 +34,8 @@ func (cmp *Company) setRoutes(router fiber.Router) IHandler {
 	router.Get("/", cmp.Index)
 
 	grp := router.Group(cmp.name())
-	grp.Get("/", cmp.GetCompanyList)
-	grp.Get("/:id", cmp.GetCompany)
+	grp.Get("/", cmp.CompanySearch)
+	grp.Get("/:id", cmp.CompanyDetail)
 
 	return cmp
 }
@@ -44,10 +44,15 @@ func (cmp *Company) Index(c *fiber.Ctx) error {
 	return c.Render("index", fiber.Map{}, layoutMain)
 }
 
-func (cmp *Company) GetCompanyList(c *fiber.Ctx) error {
+func (cmp *Company) CompanySearch(c *fiber.Ctx) error {
+	search := c.Query("search")
 	page, size := mw.GetPaginate(c)
 
-	_, pageData, err := cmp.svc.GetCompanyList().Offset(page).Limit(size).Do()
+	_, pageData, err := cmp.svc.GetCompanyList().
+		Search(search).
+		Offset(page).
+		Limit(size).
+		Do()
 	if err != nil {
 		return err
 	}
@@ -62,17 +67,17 @@ func (cmp *Company) GetCompanyList(c *fiber.Ctx) error {
 
 	pageNavData := NewPageNavData(vw)
 
-	return c.Render("components/company_list", fiber.Map{"CompanyList": list, "PageNavData": pageNavData})
+	return c.Render("components/company_search", fiber.Map{"CompanyList": list, "PageNavData": pageNavData})
 }
 
-func (cmp *Company) GetCompany(c *fiber.Ctx) error {
+func (cmp *Company) CompanyDetail(c *fiber.Ctx) error {
 	id := c.Params("id")
 	data, err := cmp.svc.GetCompany(id)
 	if err != nil {
 		return err
 	}
 
-	return c.Render("company", fiber.Map{"Company": data}, layoutMain)
+	return c.Render("pages/company/detail", fiber.Map{"Company": data}, layoutMain)
 }
 
 type PageNavData struct {

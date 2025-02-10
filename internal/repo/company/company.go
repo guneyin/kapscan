@@ -8,6 +8,7 @@ import (
 	"github.com/vcraescu/go-paginator/v2"
 	"github.com/vcraescu/go-paginator/v2/adapter"
 	"gorm.io/gorm/clause"
+	"strings"
 )
 
 type Repo struct {
@@ -18,11 +19,13 @@ func NewRepo() *Repo {
 	return &Repo{scraper: scraper.New()}
 }
 
-func (r *Repo) GetCompanyList(page, size int16) (entity.CompanyList, paginator.Paginator, error) {
+func (r *Repo) GetCompanyList(search string, page, size int16) (entity.CompanyList, paginator.Paginator, error) {
 	db := store.Get()
 
+	search = "%" + strings.ToUpper(search) + "%"
+
 	var companyList entity.CompanyList
-	stmt := db.Model(&entity.Company{})
+	stmt := db.Model(&entity.Company{}).Where("code like ? or name like ?", search, search)
 
 	p := paginator.New(adapter.NewGORMAdapter(stmt), int(size))
 

@@ -3,38 +3,21 @@ package entity
 import (
 	"github.com/oklog/ulid/v2"
 	"slices"
-	"strings"
 )
 
 type Company struct {
 	Model
-	Code     string       `gorm:"uniqueIndex" json:"code"`
-	MemberID string       `json:"memberID"`
-	Name     string       `json:"name"`
-	Address  string       `json:"address"`
-	Email    string       `json:"email"`
-	Website  string       `json:"website"`
-	Index    string       `json:"index"`
-	Sector   string       `json:"sector"`
-	Market   string       `json:"market"`
-	Icon     string       `json:"icon"`
-	Shares   CompanyShare `json:"shares"`
-}
-
-func (c Company) AvatarText() string {
-	parts := strings.Split(c.Name, " ")
-
-	var at strings.Builder
-	for i, part := range parts {
-		if i > 1 {
-			break
-		}
-
-		letter := strings.ToUpper(string(part[0]))
-		at.WriteString(letter)
-	}
-
-	return at.String()
+	Code     string `gorm:"uniqueIndex"`
+	MemberID string
+	Name     string
+	Address  string
+	Email    string
+	Website  string
+	Index    string
+	Sector   string
+	Market   string
+	Icon     string
+	Shares   CompanyShare
 }
 
 type CompanyList []Company

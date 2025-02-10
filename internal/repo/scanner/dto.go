@@ -1,4 +1,4 @@
-package dto
+package scanner
 
 type SymbolRequest struct {
 	Keyword   string `json:"keyword"`

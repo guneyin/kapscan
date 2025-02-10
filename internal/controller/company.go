@@ -6,7 +6,7 @@ import (
 	"github.com/guneyin/kapscan/internal/service/company"
 )
 
-const companyControllerName = "company"
+const controllerName = "company"
 
 type Company struct {
 	svc *company.Service
@@ -19,7 +19,7 @@ func newCompanyController() IController {
 }
 
 func (cmp *Company) name() string {
-	return companyControllerName
+	return controllerName
 }
 
 func (cmp *Company) setRoutes(router fiber.Router) IController {

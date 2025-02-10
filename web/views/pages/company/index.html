@@ -1,0 +1,22 @@
+<script>
+    function rowclick(row) {
+        window.location.href = "/company/" + row.dataset.id;
+    }
+</script>
+
+<div class="row">
+    <div class="col-2"></div>
+    <div class="col-8">
+        <input type="text" class="form-control" placeholder="Hisse arayın.."
+               name="search"
+               id="search"
+               hx-get="/company"
+               hx-trigger="input changed delay:500ms, keyup[key=='Enter'], load"
+               hx-target="#search-results">
+    </div>
+    <div class="col-2"></div>
+</div>
+
+<div id="search-results" class="table-responsive py-10">
+
+</div>
