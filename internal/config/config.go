@@ -1,8 +1,9 @@
 package config
 
 import (
-	"github.com/ilyakaznacheev/cleanenv"
 	"log/slog"
+
+	"github.com/ilyakaznacheev/cleanenv"
 )
 
 const (
@@ -10,12 +11,12 @@ const (
 )
 
 type Config struct {
-	HttpPort   int    `env:"KS_HTTP_PORT"`
-	DbHost     string `env:"KS_DB_HOST"`
-	DbPort     int    `env:"KS_DB_PORT"`
-	DbUser     string `env:"KS_DB_USER"`
-	DbPassword string `env:"KS_DB_PASSWORD"`
-	DbName     string `env:"KS_DB_NAME"`
+	HTTPPort   int    `env:"KS_HTTP_PORT"`
+	DBHost     string `env:"KS_DB_HOST"`
+	DBPort     int    `env:"KS_DB_PORT"`
+	DBUser     string `env:"KS_DB_USER"`
+	DBPassword string `env:"KS_DB_PASSWORD"`
+	DBName     string `env:"KS_DB_NAME"`
 }
 
 func NewConfig() (*Config, error) {
@@ -27,19 +28,13 @@ func NewConfig() (*Config, error) {
 		slog.Info(err.Error())
 	}
 
-	err = cfg.validate()
-	if err != nil {
-		return nil, err
-	}
+	cfg.validate()
 
 	return cfg, nil
 }
 
-func (c *Config) validate() error {
-	switch {
-	case c.HttpPort == 0:
-		c.HttpPort = defaultPort
+func (c *Config) validate() {
+	if c.HTTPPort == 0 {
+		c.HTTPPort = defaultPort
 	}
-
-	return nil
 }

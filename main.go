@@ -2,6 +2,10 @@ package main
 
 import (
 	"fmt"
+	"log/slog"
+	"os"
+	"time"
+
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/log"
 	"github.com/guneyin/kapscan/internal/config"
@@ -11,9 +15,6 @@ import (
 	"github.com/guneyin/kapscan/internal/store"
 	"github.com/guneyin/kapscan/util"
 	"github.com/guneyin/kapscan/web/handler"
-	"log/slog"
-	"os"
-	"time"
 )
 
 const appName = "KAPScan"
@@ -66,7 +67,7 @@ func main() {
 	defer stop()
 	cron.Start()
 
-	log.Fatal(app.Server.Listen(fmt.Sprintf(":%d", app.Config.HttpPort)))
+	log.Fatal(app.Server.Listen(fmt.Sprintf(":%d", app.Config.HTTPPort)))
 }
 
 func checkError(err error) {

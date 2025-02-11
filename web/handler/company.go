@@ -2,12 +2,13 @@ package handler
 
 import (
 	"fmt"
+	"strconv"
+
 	"github.com/gofiber/fiber/v2"
 	"github.com/guneyin/kapscan/internal/dto"
 	"github.com/guneyin/kapscan/internal/mw"
 	"github.com/guneyin/kapscan/internal/service/company"
 	"github.com/vcraescu/go-paginator/v2/view"
-	"strconv"
 )
 
 const (
@@ -85,7 +86,7 @@ type PageNavData struct {
 }
 
 type PageNavItem struct {
-	id       int16
+	id       int
 	label    string
 	active   bool
 	disabled bool
@@ -98,7 +99,7 @@ func (pni PageNavItem) URL() string {
 func (pni PageNavItem) Label() string {
 	switch pni.label {
 	case "":
-		return fmt.Sprintf("%d", pni.id)
+		return strconv.Itoa(pni.id)
 	default:
 		return pni.label
 	}
@@ -143,7 +144,7 @@ func NewPageNavData(vw view.Viewer) PageNavData {
 
 func (pnd *PageNavData) buildItems() {
 	pnd.Items = append(pnd.Items, PageNavItem{
-		id:       int16(pnd.prev),
+		id:       pnd.prev,
 		label:    "<<",
 		active:   false,
 		disabled: pnd.prev == 0,
@@ -154,7 +155,7 @@ func (pnd *PageNavData) buildItems() {
 			continue
 		}
 		pnd.Items = append(pnd.Items, PageNavItem{
-			id:       int16(v),
+			id:       v,
 			label:    strconv.Itoa(v),
 			active:   v == pnd.current,
 			disabled: false,
@@ -162,7 +163,7 @@ func (pnd *PageNavData) buildItems() {
 	}
 
 	pnd.Items = append(pnd.Items, PageNavItem{
-		id:       int16(pnd.next),
+		id:       pnd.next,
 		label:    ">>",
 		active:   false,
 		disabled: pnd.current == pnd.last,

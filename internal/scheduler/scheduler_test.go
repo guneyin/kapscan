@@ -1,11 +1,14 @@
-package scheduler
+package scheduler_test
 
 import (
-	"github.com/guneyin/kapscan/internal/store"
 	"os"
 	"path"
 	"runtime"
 	"testing"
+
+	"github.com/guneyin/kapscan/internal/scheduler"
+
+	"github.com/guneyin/kapscan/internal/store"
 )
 
 func changeWorkDir() {
@@ -17,10 +20,10 @@ func changeWorkDir() {
 	}
 }
 
-func Test_Cron(t *testing.T) {
+func Test_Cron(_ *testing.T) {
 	changeWorkDir()
 	_ = store.InitDB(store.DBTest)
 
-	syncCompanyList()
-	syncCompanyInfo()
+	scheduler.SyncCompanyList()
+	scheduler.SyncCompanyInfo()
 }

@@ -4,13 +4,14 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"net/http"
+	"strings"
+
 	"github.com/PuerkitoBio/goquery"
 	"github.com/guneyin/gobist"
 	"github.com/guneyin/kapscan/internal/entity"
 	"github.com/guneyin/kapscan/internal/scraper"
 	"github.com/guneyin/kapscan/util"
-	"net/http"
-	"strings"
 )
 
 type Repo struct {
@@ -99,7 +100,7 @@ func (r *Repo) GetCompanyShare(ctx context.Context, cmp entity.Company) ([]entit
 	list := doc.Find(selector).Parent()
 
 	res := make([]entity.CompanyShare, 0)
-	list.Each(func(i int, s *goquery.Selection) {
+	list.Each(func(_ int, s *goquery.Selection) {
 		s.Find(".w-clearfix.w-inline-block.a-table-row.infoRow").Each(func(i int, s *goquery.Selection) {
 			if i == 0 {
 				return
@@ -141,7 +142,7 @@ loop:
 			for _, result := range cr.Results {
 				sliced := strings.Split(result.CmpOrFundCode, ",")
 				for _, symbol := range sliced {
-					if strings.ToUpper(symbol) == strings.ToUpper(code) {
+					if strings.EqualFold(symbol, code) {
 						sri = result
 						break loop
 					}

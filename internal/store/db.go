@@ -2,13 +2,14 @@ package store
 
 import (
 	"errors"
+	"os"
+	"path"
+	"sync"
+
 	"github.com/guneyin/kapscan/internal/entity"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
-	"os"
-	"path"
-	"sync"
 )
 
 type DBEnvironment string

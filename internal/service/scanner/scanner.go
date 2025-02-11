@@ -2,6 +2,7 @@ package scanner
 
 import (
 	"context"
+
 	"github.com/guneyin/kapscan/internal/entity"
 	"github.com/guneyin/kapscan/internal/repo/scanner"
 	"github.com/guneyin/kapscan/internal/service/company"

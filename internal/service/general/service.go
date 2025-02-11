@@ -1,9 +1,10 @@
 package general
 
 import (
+	"time"
+
 	"github.com/guneyin/kapscan/internal/dto"
 	"github.com/guneyin/kapscan/util"
-	"time"
 )
 
 type Service struct{}
@@ -13,7 +14,7 @@ func NewGeneralService() *Service {
 }
 
 func (s *Service) Status() dto.GeneralStatusResponse {
-	uptime := time.Now().Sub(util.GetLastRun())
+	uptime := time.Since(util.GetLastRun())
 	version := util.GetVersion()
 
 	res := dto.GeneralStatusResponse{}

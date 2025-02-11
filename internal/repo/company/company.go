@@ -1,13 +1,14 @@
 package company
 
 import (
+	"strings"
+
 	"github.com/guneyin/kapscan/internal/entity"
 	"github.com/guneyin/kapscan/internal/scraper"
 	"github.com/guneyin/kapscan/internal/store"
 	"github.com/vcraescu/go-paginator/v2"
 	"github.com/vcraescu/go-paginator/v2/adapter"
 	"gorm.io/gorm/clause"
-	"strings"
 )
 
 type Repo struct {
@@ -18,14 +19,14 @@ func NewRepo() *Repo {
 	return &Repo{scraper: scraper.New()}
 }
 
-func (r *Repo) Search(search string, page, size int16) (paginator.Paginator, error) {
+func (r *Repo) Search(search string, page, size int) (paginator.Paginator, error) {
 	db := store.Get()
 
 	search = "%" + strings.ToUpper(search) + "%"
 	stmt := db.Model(&entity.Company{}).Where("code like ? or name like ?", search, search)
 
-	p := paginator.New(adapter.NewGORMAdapter(stmt), int(size))
-	p.SetPage(int(page))
+	p := paginator.New(adapter.NewGORMAdapter(stmt), size)
+	p.SetPage(page)
 
 	return p, nil
 }

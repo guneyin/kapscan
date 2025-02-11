@@ -3,6 +3,7 @@ package util
 import (
 	"bytes"
 	"encoding/gob"
+	"fmt"
 	"strconv"
 	"strings"
 	"time"
@@ -69,7 +70,12 @@ func deepCopy(src, dest any) (any, error) {
 func Convert[T any](from any, to T) (T, error) {
 	res, err := deepCopy(from, to)
 	if err != nil {
-		return res.(T), err
+		return to, err
 	}
-	return res.(T), nil
+
+	if rt, ok := res.(T); ok {
+		return rt, nil
+	}
+
+	return to, fmt.Errorf("cannot convert from %T to %T", from, to)
 }

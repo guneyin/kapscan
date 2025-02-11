@@ -2,6 +2,7 @@ package controller
 
 import (
 	"context"
+
 	"github.com/gofiber/fiber/v2"
 	"github.com/guneyin/kapscan/internal/service/scanner"
 )

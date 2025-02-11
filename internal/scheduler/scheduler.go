@@ -2,10 +2,11 @@ package scheduler
 
 import (
 	"context"
+	"log"
+
 	"github.com/guneyin/kapscan/internal/service/company"
 	"github.com/guneyin/kapscan/internal/service/scanner"
 	"github.com/robfig/cron"
-	"log"
 )
 
 type Cron struct {
@@ -18,7 +19,7 @@ func New() (*Cron, func()) {
 }
 
 func (c *Cron) Start() {
-	_ = c.AddJob("@every 00h30m00s", syncCompanyList)
+	_ = c.AddJob("@every 24h00m00s", SyncCompanyList)
 	go c.cron.Start()
 }
 
@@ -26,7 +27,7 @@ func (c *Cron) AddJob(spec string, cmd func()) error {
 	return c.cron.AddFunc(spec, cmd)
 }
 
-func syncCompanyList() {
+func SyncCompanyList() {
 	ctx := context.Background()
 
 	log.Printf("sync company list started")
@@ -38,7 +39,7 @@ func syncCompanyList() {
 	}
 }
 
-func syncCompanyInfo() {
+func SyncCompanyInfo() {
 	log.Printf("sync company info started")
 
 	scannerSvc := scanner.NewService()

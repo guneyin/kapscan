@@ -1,8 +1,9 @@
 package entity
 
 import (
-	"github.com/oklog/ulid/v2"
 	"slices"
+
+	"github.com/oklog/ulid/v2"
 )
 
 type Company struct {

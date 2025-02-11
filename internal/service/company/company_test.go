@@ -1,12 +1,16 @@
-package company
+package company_test
 
 import (
-	"github.com/PuerkitoBio/goquery"
-	"github.com/guneyin/kapscan/internal/dto"
-	"github.com/stretchr/testify/assert"
 	"os"
 	"strings"
 	"testing"
+
+	"github.com/guneyin/kapscan/internal/service/company"
+
+	"github.com/PuerkitoBio/goquery"
+	"github.com/guneyin/kapscan/internal/dto"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestDocumentSelector(t *testing.T) {
@@ -16,11 +20,11 @@ func TestDocumentSelector(t *testing.T) {
 	}
 
 	doc, err := goquery.NewDocumentFromReader(f)
-	assert.Nil(t, err)
+	require.NoError(t, err)
 
 	selector := ".exportClass > div:contains('Ortağın Adı')"
-	doc.Find(selector).Parent().Each(func(i int, s *goquery.Selection) {
-		s.Find(".w-clearfix.w-inline-block.a-table-row.infoRow").Each(func(i int, s *goquery.Selection) {
+	doc.Find(selector).Parent().Each(func(_ int, s *goquery.Selection) {
+		s.Find(".w-clearfix.w-inline-block.a-table-row.infoRow").Each(func(_ int, s *goquery.Selection) {
 			name := strings.TrimSpace(s.Find("div:nth-child(1)").Text())
 			shareByAmount := strings.TrimSpace(s.Find("div:nth-child(2)").Text())
 			shareByRatio := strings.TrimSpace(s.Find("div:nth-child(3)").Text())
@@ -32,15 +36,15 @@ func TestDocumentSelector(t *testing.T) {
 }
 
 func TestService_FetchCompanyList(t *testing.T) {
-	svc := NewService()
+	svc := company.NewService()
 
 	cl, err := svc.Search("").Do()
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	assert.NotNil(t, cl)
 
 	companyList := dto.CompanyList{}
 	err = cl.DataAs(&companyList)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	for _, cmp := range companyList {
 		t.Logf("%s\n", cmp.Code)

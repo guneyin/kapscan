@@ -3,12 +3,14 @@ package scraper
 import (
 	"context"
 	"errors"
-	"github.com/imroc/req/v3"
 	"io"
+	"net/http"
+
+	"github.com/imroc/req/v3"
 )
 
 const (
-	baseUrl = "https://www.kap.org.tr"
+	baseURL = "https://www.kap.org.tr"
 )
 
 type Scraper struct {
@@ -22,17 +24,17 @@ type Result struct {
 
 func New() *Scraper {
 	client := req.NewClient().
-		//DevMode().
-		SetBaseURL(baseUrl).
+		// DevMode().
+		SetBaseURL(baseURL).
 		EnableForceHTTP1()
 	return &Scraper{
 		client: client,
 	}
 }
 
-func newResult(error error, body io.Reader) *Result {
+func newResult(err error, body io.Reader) *Result {
 	return &Result{
-		Error: error,
+		Error: err,
 		Body:  body,
 	}
 }
@@ -47,7 +49,7 @@ func (s *Scraper) Fetch(ctx context.Context, method, url string, reqBody, resBod
 	if err != nil {
 		return newResult(err, nil)
 	}
-	if res.StatusCode != 200 {
+	if res.StatusCode != http.StatusOK {
 		return newResult(errors.New(res.Status), nil)
 	}
 

@@ -1,9 +1,10 @@
 package entity
 
 import (
+	"time"
+
 	"github.com/oklog/ulid/v2"
 	"gorm.io/gorm"
-	"time"
 )
 
 type Model struct {

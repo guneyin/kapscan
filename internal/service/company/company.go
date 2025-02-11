@@ -11,7 +11,6 @@ import (
 
 type Service struct {
 	repo *company.Repo
-	lg   *ListGetter
 }
 
 func NewService() *Service {
@@ -23,8 +22,8 @@ func NewService() *Service {
 type ListGetter struct {
 	repo   *company.Repo
 	search string
-	offset int16
-	limit  int16
+	offset int
+	limit  int
 	pg     paginator.Paginator
 }
 
@@ -61,12 +60,12 @@ func (s *Service) Save(company *entity.Company) error {
 	return s.repo.Save(company)
 }
 
-func (lg *ListGetter) Offset(offset int16) *ListGetter {
+func (lg *ListGetter) Offset(offset int) *ListGetter {
 	lg.offset = offset
 	return lg
 }
 
-func (lg *ListGetter) Limit(limit int16) *ListGetter {
+func (lg *ListGetter) Limit(limit int) *ListGetter {
 	lg.limit = limit
 	return lg
 }
