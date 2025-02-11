@@ -27,6 +27,7 @@ func NewController(router fiber.Router) *Controller {
 func (c Controller) registerControllers() {
 	c.register(newGeneralController)
 	c.register(newCompanyController)
+	c.register(newScannerController)
 }
 
 func (c Controller) register(f func() IController) {

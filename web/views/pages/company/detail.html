@@ -3,8 +3,7 @@
 
         <div class="row">
             <div class="col-1">
-
-                {{if .Icon}}
+                {{if .Company.Icon}}
                     <img class="avatar rounded-2 avatar-xl" src="{{.Company.Icon}}"  alt="{{.Company.Name}}"/>
                 {{- else}}
                     <span class="avatar rounded-2 avatar-xl text-bg-primary">{{.Company.AvatarText}}</span>

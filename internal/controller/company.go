@@ -7,7 +7,7 @@ import (
 	"github.com/guneyin/kapscan/internal/service/company"
 )
 
-const controllerName = "company"
+const companyControllerName = "company"
 
 type Company struct {
 	svc *company.Service
@@ -20,22 +20,23 @@ func newCompanyController() IController {
 }
 
 func (cmp *Company) name() string {
-	return controllerName
+	return companyControllerName
 }
 
 func (cmp *Company) setRoutes(router fiber.Router) IController {
 	grp := router.Group(cmp.name())
 
 	grp.Get("/", cmp.GetList)
-	grp.Get("/:id", cmp.GetByID)
+	grp.Get("/:code", cmp.GetByCode)
 
 	return cmp
 }
 
 func (cmp *Company) GetList(c *fiber.Ctx) error {
 	offset, limit := mw.GetPaginate(c)
+	s := c.Query("search")
 
-	cl, err := cmp.svc.GetCompanyList().
+	cl, err := cmp.svc.Search(s).
 		Offset(offset).
 		Limit(limit).
 		Do()
@@ -52,12 +53,12 @@ func (cmp *Company) GetList(c *fiber.Ctx) error {
 	return c.JSON(companyList)
 }
 
-func (cmp *Company) GetByID(c *fiber.Ctx) error {
-	id := c.Params("id")
-	res, err := cmp.svc.GetCompany(id)
+func (cmp *Company) GetByCode(c *fiber.Ctx) error {
+	code := c.Params("code")
+	data, err := cmp.svc.GetByCode(code)
 	if err != nil {
 		return mw.Error(c, err)
 	}
 
-	return mw.OK(c, "company fetched", res)
+	return mw.OK(c, "company fetched", data)
 }

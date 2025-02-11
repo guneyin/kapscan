@@ -35,7 +35,7 @@ func (cmp *Company) setRoutes(router fiber.Router) IHandler {
 
 	grp := router.Group(cmp.name())
 	grp.Get("/", cmp.CompanySearch)
-	grp.Get("/:id", cmp.CompanyDetail)
+	grp.Get("/:code", cmp.CompanyDetail)
 
 	return cmp
 }
@@ -48,8 +48,7 @@ func (cmp *Company) CompanySearch(c *fiber.Ctx) error {
 	search := c.Query("search")
 	page, size := mw.GetPaginate(c)
 
-	cl, err := cmp.svc.GetCompanyList().
-		Search(search).
+	cl, err := cmp.svc.Search(search).
 		Offset(page).
 		Limit(size).
 		Do()
@@ -70,8 +69,8 @@ func (cmp *Company) CompanySearch(c *fiber.Ctx) error {
 }
 
 func (cmp *Company) CompanyDetail(c *fiber.Ctx) error {
-	id := c.Params("id")
-	data, err := cmp.svc.GetCompany(id)
+	code := c.Params("code")
+	data, err := cmp.svc.GetByCode(code)
 	if err != nil {
 		return err
 	}

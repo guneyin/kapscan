@@ -34,7 +34,7 @@ func TestDocumentSelector(t *testing.T) {
 func TestService_FetchCompanyList(t *testing.T) {
 	svc := NewService()
 
-	cl, err := svc.GetCompanyList().Do()
+	cl, err := svc.Search("").Do()
 	assert.NoError(t, err)
 	assert.NotNil(t, cl)
 

@@ -13,7 +13,7 @@ func TestRepo_GetCompanyList(t *testing.T) {
 	repo := NewRepo()
 
 	companyList := dto.CompanyList{}
-	data, err := repo.GetCompanyList("", -1, -1)
+	data, err := repo.Search("", -1, -1)
 	assert.NoError(t, err)
 	assert.NotEmpty(t, data)
 

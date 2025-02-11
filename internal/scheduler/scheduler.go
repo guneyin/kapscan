@@ -2,7 +2,6 @@ package scheduler
 
 import (
 	"context"
-	"github.com/guneyin/kapscan/internal/entity"
 	"github.com/guneyin/kapscan/internal/service/company"
 	"github.com/guneyin/kapscan/internal/service/scanner"
 	"github.com/robfig/cron"
@@ -28,36 +27,14 @@ func (c *Cron) AddJob(spec string, cmd func()) error {
 }
 
 func syncCompanyList() {
+	ctx := context.Background()
+
 	log.Printf("sync company list started")
 
-	scannerSvc := scanner.NewService()
-	companySvc := company.NewService()
-
-	companyList, err := scannerSvc.GetCompanyList()
+	svc := scanner.NewService()
+	err := svc.SyncCompanyList(ctx)
 	if err != nil {
-		return
-	}
-
-	cl, err := companySvc.GetCompanyList().Do()
-	if err != nil {
-		return
-	}
-
-	dbCompanyList := entity.CompanyList{}
-	err = cl.DataAs(dbCompanyList)
-	if err != nil {
-		return
-	}
-
-	for _, comp := range companyList {
-		if !dbCompanyList.Exist(comp.Code) {
-			_ = scannerSvc.SyncCompany(context.Background(), &comp)
-
-			err = companySvc.SaveCompany(&comp)
-			if err != nil {
-				return
-			}
-		}
+		log.Println(err)
 	}
 }
 
@@ -67,19 +44,14 @@ func syncCompanyInfo() {
 	scannerSvc := scanner.NewService()
 	companySvc := company.NewService()
 
-	cl, err := companySvc.GetCompanyList().Do()
+	cl, err := companySvc.GetAll()
 	if err != nil {
 		return
 	}
 
-	companyList, err := cl.Data()
-	if err != nil {
-		return
-	}
-
-	for _, comp := range *companyList {
+	for _, comp := range cl {
 		_ = scannerSvc.SyncCompany(context.Background(), &comp)
-		err = companySvc.SaveCompany(&comp)
+		err = companySvc.Save(&comp)
 		if err != nil {
 			return
 		}

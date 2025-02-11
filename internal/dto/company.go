@@ -1,22 +1,20 @@
 package dto
 
 import (
-	"github.com/oklog/ulid/v2"
 	"strings"
 )
 
 type Company struct {
-	ID      ulid.ULID `json:"id"`
-	Code    string    `json:"code"`
-	Name    string    `json:"name"`
-	Address string    `json:"address"`
-	Email   string    `json:"email"`
-	Website string    `json:"website"`
-	Index   string    `json:"index"`
-	Sector  string    `json:"sector"`
-	Market  string    `json:"market"`
-	Icon    string    `json:"icon"`
-	Price   string    `json:"price"`
+	Code    string `json:"code"`
+	Name    string `json:"name"`
+	Address string `json:"address"`
+	Email   string `json:"email"`
+	Website string `json:"website"`
+	Index   string `json:"index"`
+	Sector  string `json:"sector"`
+	Market  string `json:"market"`
+	Icon    string `json:"icon"`
+	Price   string `json:"price"`
 }
 
 func (c Company) AvatarText() string {
