@@ -14,3 +14,4 @@ services:
       - KS_DB_USER=${KS_DB_USER}
       - KS_DB_PASSWORD=${KS_DB_PASSWORD}
       - KS_DB_NAME=${KS_DB_NAME}
+      - ./data:/data/
