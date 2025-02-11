@@ -19,7 +19,7 @@ func NewService() *Service {
 }
 
 func (s *Service) GetCompanyList() (entity.CompanyList, error) {
-	return s.repo.GetCompanyList()
+	return s.repo.FetchCompanyList()
 }
 
 func (s *Service) SyncCompanyList(ctx context.Context) error {
@@ -37,9 +37,12 @@ func (s *Service) SyncCompanyList(ctx context.Context) error {
 
 	for _, cmp := range companyList {
 		if !dbCompanyList.Exist(cmp.Code) {
-			_ = s.repo.SyncCompany(ctx, &cmp)
+			fetched, err := s.repo.FetchCompany(ctx, cmp.Code)
+			if err != nil {
+				return err
+			}
 
-			err = companySvc.Save(&cmp)
+			err = companySvc.Save(fetched)
 			if err != nil {
 				return err
 			}
@@ -50,5 +53,11 @@ func (s *Service) SyncCompanyList(ctx context.Context) error {
 }
 
 func (s *Service) SyncCompany(ctx context.Context, cmp *entity.Company) error {
-	return s.repo.SyncCompany(ctx, cmp)
+	fetched, err := s.repo.FetchCompany(ctx, cmp.Code)
+	if err != nil {
+		return err
+	}
+	cmp = fetched
+
+	return nil
 }

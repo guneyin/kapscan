@@ -2,6 +2,7 @@ package entity
 
 import (
 	"slices"
+	"time"
 
 	"github.com/oklog/ulid/v2"
 )
@@ -18,7 +19,11 @@ type Company struct {
 	Sector   string
 	Market   string
 	Icon     string
-	Shares   CompanyShare
+	Shares   CompanyShareList
+}
+
+func (c *Company) AddShare(cs CompanyShare) {
+	c.Shares = append(c.Shares, cs)
 }
 
 type CompanyList []Company
@@ -29,9 +34,12 @@ func (cl *CompanyList) Exist(code string) bool {
 	})
 }
 
+type CompanyShareList []CompanyShare
+
 type CompanyShare struct {
 	Model
 	CompanyID       ulid.ULID `json:"companyID"`
+	Date            time.Time `json:"date" gorm:"index"`
 	Title           string    `json:"title"`
 	CapitalByAmount float64   `json:"capitalByAmount"`
 	CapitalByVolume float64   `json:"capitalByVolume"`

@@ -6,12 +6,12 @@ import (
 	"fmt"
 	"net/http"
 	"strings"
+	"time"
 
 	"github.com/PuerkitoBio/goquery"
 	"github.com/guneyin/gobist"
 	"github.com/guneyin/kapscan/internal/entity"
 	"github.com/guneyin/kapscan/internal/scraper"
-	"github.com/guneyin/kapscan/util"
 )
 
 type Repo struct {
@@ -22,7 +22,7 @@ func NewRepo() *Repo {
 	return &Repo{scraper: scraper.New()}
 }
 
-func (r *Repo) GetCompanyList() (entity.CompanyList, error) {
+func (r *Repo) FetchCompanyList() (entity.CompanyList, error) {
 	bist := gobist.New()
 	symbolList, err := bist.GetSymbolList()
 	if err != nil {
@@ -41,14 +41,70 @@ func (r *Repo) GetCompanyList() (entity.CompanyList, error) {
 	return cl, nil
 }
 
-func (r *Repo) SyncCompany(ctx context.Context, cmp *entity.Company) error {
-	fs, err := r.fetchCompany(ctx, cmp.Code)
+func (r *Repo) FetchCompany(ctx context.Context, code string) (*entity.Company, error) {
+	cmp := &entity.Company{Code: code}
+	err := r.syncCompany(ctx, cmp)
 	if err != nil {
-		return err
+		return nil, err
 	}
-	cmp.MemberID = fs.MemberOrFundOid
 
-	url := fmt.Sprintf("/tr/sirket-bilgileri/ozet/%s", fs.MemberOrFundOid)
+	err = r.syncCompanyDetail(ctx, cmp)
+	if err != nil {
+		return nil, err
+	}
+
+	err = r.syncCompanyShares(ctx, cmp)
+	if err != nil {
+		return nil, err
+	}
+
+	return cmp, nil
+}
+
+func (r *Repo) syncCompany(ctx context.Context, cmp *entity.Company) error {
+	req := SymbolRequest{
+		Keyword:   cmp.Code,
+		DiscClass: "ALL",
+		Lang:      "tr",
+		Channel:   "WEB",
+	}
+	res := make([]SymbolResponse, 0)
+
+	sri := SymbolResultItem{}
+
+	keys := []string{"combined", "smart"}
+loop:
+	for _, key := range keys {
+		url := fmt.Sprintf("/kapsrc/%s", key)
+		sr := r.scraper.Fetch(ctx, http.MethodPost, url, req, &res)
+		if sr.Error != nil {
+			return sr.Error
+		}
+
+		for _, cr := range res {
+			for _, result := range cr.Results {
+				sliced := strings.Split(result.CmpOrFundCode, ",")
+				for _, symbol := range sliced {
+					if strings.EqualFold(symbol, cmp.Code) {
+						sri = result
+						break loop
+					}
+				}
+			}
+		}
+	}
+
+	if sri.MemberOrFundOid == "" {
+		return errors.New("company not found")
+	}
+
+	cmp.MemberID = sri.MemberOrFundOid
+
+	return nil
+}
+
+func (r *Repo) syncCompanyDetail(ctx context.Context, cmp *entity.Company) error {
+	url := fmt.Sprintf("/tr/sirket-bilgileri/ozet/%s", cmp.MemberID)
 
 	sr := r.scraper.Fetch(ctx, http.MethodGet, url, nil, nil)
 	if sr.Error != nil {
@@ -83,77 +139,39 @@ func (r *Repo) SyncCompany(ctx context.Context, cmp *entity.Company) error {
 	return nil
 }
 
-func (r *Repo) GetCompanyShare(ctx context.Context, cmp entity.Company) ([]entity.CompanyShare, error) {
-	url := fmt.Sprintf("/tr/sirket-bilgileri/genel/%s", cmp.MemberID)
+func (r *Repo) syncCompanyShares(ctx context.Context, cmp *entity.Company) error {
+	url := fmt.Sprintf("tr/infoHistory/kpy41_acc5_sermayede_dogrudan/%s", cmp.MemberID)
 
 	sr := r.scraper.Fetch(ctx, http.MethodGet, url, nil, nil)
 	if sr.Error != nil {
-		return nil, sr.Error
+		return sr.Error
 	}
 
 	doc, err := goquery.NewDocumentFromReader(sr.Body)
 	if err != nil {
-		return nil, err
+		return err
 	}
 
-	selector := ".exportClass > div:contains('Ortağın Adı')"
-	list := doc.Find(selector).Parent()
+	var shareDate time.Time
+	selector := ".modal-info.my-modal-info > div > a"
+	list := doc.Find(selector)
+	list.Each(func(i int, s *goquery.Selection) {
+		if i == 0 {
+			return
+		}
 
-	res := make([]entity.CompanyShare, 0)
-	list.Each(func(_ int, s *goquery.Selection) {
-		s.Find(".w-clearfix.w-inline-block.a-table-row.infoRow").Each(func(i int, s *goquery.Selection) {
-			if i == 0 {
-				return
-			}
-			res = append(res, entity.CompanyShare{
-				CompanyID:       cmp.ID,
-				Title:           strings.TrimSpace(s.Find("div:nth-child(1)").Text()),
-				CapitalByAmount: util.NewMoney(s.Find("div:nth-child(2)").Text()).Float64(),
-				CapitalByVolume: util.NewMoney(s.Find("div:nth-child(3)").Text()).Float64(),
-				VoteRight:       util.NewMoney(s.Find("div:nth-child(4)").Text()).Float64(),
-			})
-		})
+		if dt, ok := isDate(s); ok {
+			shareDate = *dt
+			return
+		}
+
+		if cs, ok := parseLineAsCompanyShare(s); ok {
+			cs.CompanyID = cmp.ID
+			cs.Date = shareDate
+
+			cmp.AddShare(*cs)
+		}
 	})
 
-	return res, nil
-}
-
-func (r *Repo) fetchCompany(ctx context.Context, code string) (*SymbolResultItem, error) {
-	req := SymbolRequest{
-		Keyword:   code,
-		DiscClass: "ALL",
-		Lang:      "tr",
-		Channel:   "WEB",
-	}
-	res := make([]SymbolResponse, 0)
-
-	sri := SymbolResultItem{}
-
-	keys := []string{"combined", "smart"}
-loop:
-	for _, key := range keys {
-		url := fmt.Sprintf("/kapsrc/%s", key)
-		sr := r.scraper.Fetch(ctx, http.MethodPost, url, req, &res)
-		if sr.Error != nil {
-			return nil, sr.Error
-		}
-
-		for _, cr := range res {
-			for _, result := range cr.Results {
-				sliced := strings.Split(result.CmpOrFundCode, ",")
-				for _, symbol := range sliced {
-					if strings.EqualFold(symbol, code) {
-						sri = result
-						break loop
-					}
-				}
-			}
-		}
-	}
-
-	if sri.MemberOrFundOid == "" {
-		return nil, errors.New("company not found")
-	}
-
-	return &sri, nil
+	return nil
 }
