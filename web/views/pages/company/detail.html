@@ -1,8 +1,8 @@
 <div class="card w-100">
     <div class="card-body">
 
-        <div class="row row-cols-auto">
-            <div class="col">
+        <div class="row">
+            <div class="col-1">
 
                 {{if .Icon}}
                     <img class="avatar rounded-2 avatar-xl" src="{{.Company.Icon}}"  alt="{{.Company.Name}}"/>
@@ -11,9 +11,14 @@
                 {{- end}}
 
             </div>
-            <div class="col">
+
+            <div class="col-10">
                 <h5 class="card-title">{{.Company.Code}}</h5>
                 <p class="card-text">{{.Company.Name}}</p>
+            </div>
+
+            <div class="col-1">
+                <p class="card-text text-warning fs-5">{{.Company.Price}}₺</p>
             </div>
         </div>
 
@@ -24,7 +29,7 @@
         <div class="row">
             <div class="col">
                 <ol class="list-group">
-                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <li class="list-group-item d-flex justify-content-between align-items-start gap-2">
                         <span>Adres:</span>
                         <span>{{.Company.Address}}</span>
                     </li>
@@ -41,15 +46,15 @@
 
             <div class="col">
                 <ol class="list-group">
-                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <li class="list-group-item d-flex justify-content-between align-items-start gap-2">
                         <span>Pazar:</span>
                         <span>{{.Company.Market}}</span>
                     </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-start">
-                        <span>Sector:</span>
+                    <li class="list-group-item d-flex justify-content-between align-items-start gap-2">
+                        <span>Sektör:</span>
                         <span>{{.Company.Sector}}</span>
                     </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <li class="list-group-item d-flex justify-content-between align-items-start gap-2">
                         <span>Endeks:</span>
                         <span>{{.Company.Index}}</span>
                     </li>

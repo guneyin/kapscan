@@ -1,20 +1,22 @@
 package dto
 
 import (
+	"github.com/oklog/ulid/v2"
 	"strings"
 )
 
 type Company struct {
-	Code    string `json:"code"`
-	Name    string `json:"name"`
-	Address string `json:"address"`
-	Email   string `json:"email"`
-	Website string `json:"website"`
-	Index   string `json:"index"`
-	Sector  string `json:"sector"`
-	Market  string `json:"market"`
-	Icon    string `json:"icon"`
-	Price   string `json:"price"`
+	ID      ulid.ULID `json:"id"`
+	Code    string    `json:"code"`
+	Name    string    `json:"name"`
+	Address string    `json:"address"`
+	Email   string    `json:"email"`
+	Website string    `json:"website"`
+	Index   string    `json:"index"`
+	Sector  string    `json:"sector"`
+	Market  string    `json:"market"`
+	Icon    string    `json:"icon"`
+	Price   string    `json:"price"`
 }
 
 func (c Company) AvatarText() string {
@@ -32,3 +34,5 @@ func (c Company) AvatarText() string {
 
 	return at.String()
 }
+
+type CompanyList []Company

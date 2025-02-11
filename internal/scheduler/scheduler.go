@@ -2,6 +2,7 @@ package scheduler
 
 import (
 	"context"
+	"github.com/guneyin/kapscan/internal/entity"
 	"github.com/guneyin/kapscan/internal/service/company"
 	"github.com/guneyin/kapscan/internal/service/scanner"
 	"github.com/robfig/cron"
@@ -37,7 +38,13 @@ func syncCompanyList() {
 		return
 	}
 
-	dbCompanyList, _, err := companySvc.GetCompanyList().Do()
+	cl, err := companySvc.GetCompanyList().Do()
+	if err != nil {
+		return
+	}
+
+	dbCompanyList := entity.CompanyList{}
+	err = cl.DataAs(dbCompanyList)
 	if err != nil {
 		return
 	}
@@ -60,12 +67,17 @@ func syncCompanyInfo() {
 	scannerSvc := scanner.NewService()
 	companySvc := company.NewService()
 
-	companyList, _, err := companySvc.GetCompanyList().Do()
+	cl, err := companySvc.GetCompanyList().Do()
 	if err != nil {
 		return
 	}
 
-	for _, comp := range companyList {
+	companyList, err := cl.Data()
+	if err != nil {
+		return
+	}
+
+	for _, comp := range *companyList {
 		_ = scannerSvc.SyncCompany(context.Background(), &comp)
 		err = companySvc.SaveCompany(&comp)
 		if err != nil {

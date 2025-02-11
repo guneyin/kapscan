@@ -1,6 +1,7 @@
 package company
 
 import (
+	"github.com/guneyin/gobist"
 	"github.com/guneyin/kapscan/internal/dto"
 	"github.com/guneyin/kapscan/internal/entity"
 	"github.com/guneyin/kapscan/internal/repo/company"
@@ -24,6 +25,7 @@ type ListGetter struct {
 	search string
 	offset int16
 	limit  int16
+	pg     paginator.Paginator
 }
 
 func (s *Service) GetCompanyList() *ListGetter {
@@ -41,7 +43,14 @@ func (s *Service) GetCompany(id string) (*dto.Company, error) {
 		return nil, err
 	}
 
-	return util.Convert(c, &dto.Company{})
+	price := ""
+	bist := gobist.New()
+	q, _ := bist.GetQuote([]string{c.Code})
+	if q != nil {
+		price = q.Items[0].Price
+	}
+
+	return util.Convert(c, &dto.Company{Price: price})
 }
 
 func (s *Service) SaveCompany(company *entity.Company) error {
@@ -63,6 +72,39 @@ func (lg *ListGetter) Limit(limit int16) *ListGetter {
 	return lg
 }
 
-func (lg *ListGetter) Do() (entity.CompanyList, paginator.Paginator, error) {
-	return lg.repo.GetCompanyList(lg.search, lg.offset, lg.limit)
+func (lg *ListGetter) Do() (*ListGetter, error) {
+	pg, err := lg.repo.GetCompanyList(lg.search, lg.offset, lg.limit)
+	if err != nil {
+		return nil, err
+	}
+	lg.pg = pg
+
+	return lg, nil
+}
+
+func (lg *ListGetter) PageData() paginator.Paginator {
+	return lg.pg
+}
+
+func (lg *ListGetter) Data() (*entity.CompanyList, error) {
+	data := &entity.CompanyList{}
+	err := lg.pg.Results(data)
+	if err != nil {
+		return nil, err
+	}
+
+	return data, nil
+}
+
+func (lg *ListGetter) DataAs(m any) error {
+	data, err := lg.Data()
+	if err != nil {
+		return err
+	}
+
+	_, err = util.Convert(data, m)
+	if err != nil {
+		return err
+	}
+	return nil
 }

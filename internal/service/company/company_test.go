@@ -2,6 +2,7 @@ package company
 
 import (
 	"github.com/PuerkitoBio/goquery"
+	"github.com/guneyin/kapscan/internal/dto"
 	"github.com/stretchr/testify/assert"
 	"os"
 	"strings"
@@ -33,11 +34,15 @@ func TestDocumentSelector(t *testing.T) {
 func TestService_FetchCompanyList(t *testing.T) {
 	svc := NewService()
 
-	symbolList, _, err := svc.GetCompanyList().Do()
+	cl, err := svc.GetCompanyList().Do()
 	assert.NoError(t, err)
-	assert.NotEmpty(t, symbolList)
+	assert.NotNil(t, cl)
 
-	for _, symbol := range symbolList {
-		t.Logf("%s\n", symbol.Code)
+	companyList := dto.CompanyList{}
+	err = cl.DataAs(&companyList)
+	assert.NoError(t, err)
+
+	for _, cmp := range companyList {
+		t.Logf("%s\n", cmp.Code)
 	}
 }

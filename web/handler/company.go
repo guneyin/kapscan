@@ -3,7 +3,7 @@ package handler
 import (
 	"fmt"
 	"github.com/gofiber/fiber/v2"
-	"github.com/guneyin/kapscan/internal/entity"
+	"github.com/guneyin/kapscan/internal/dto"
 	"github.com/guneyin/kapscan/internal/mw"
 	"github.com/guneyin/kapscan/internal/service/company"
 	"github.com/vcraescu/go-paginator/v2/view"
@@ -48,7 +48,7 @@ func (cmp *Company) CompanySearch(c *fiber.Ctx) error {
 	search := c.Query("search")
 	page, size := mw.GetPaginate(c)
 
-	_, pageData, err := cmp.svc.GetCompanyList().
+	cl, err := cmp.svc.GetCompanyList().
 		Search(search).
 		Offset(page).
 		Limit(size).
@@ -57,17 +57,16 @@ func (cmp *Company) CompanySearch(c *fiber.Ctx) error {
 		return err
 	}
 
-	vw := view.New(pageData)
-
-	list := &entity.CompanyList{}
-	err = pageData.Results(list)
+	companyList := &dto.CompanyList{}
+	err = cl.DataAs(companyList)
 	if err != nil {
 		return err
 	}
 
+	vw := view.New(cl.PageData())
 	pageNavData := NewPageNavData(vw)
 
-	return c.Render("components/company_search", fiber.Map{"CompanyList": list, "PageNavData": pageNavData})
+	return c.Render("components/company_search", fiber.Map{"CompanyList": companyList, "PageNavData": pageNavData})
 }
 
 func (cmp *Company) CompanyDetail(c *fiber.Ctx) error {

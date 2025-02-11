@@ -19,23 +19,16 @@ func NewRepo() *Repo {
 	return &Repo{scraper: scraper.New()}
 }
 
-func (r *Repo) GetCompanyList(search string, page, size int16) (entity.CompanyList, paginator.Paginator, error) {
+func (r *Repo) GetCompanyList(search string, page, size int16) (paginator.Paginator, error) {
 	db := store.Get()
 
 	search = "%" + strings.ToUpper(search) + "%"
-
-	var companyList entity.CompanyList
 	stmt := db.Model(&entity.Company{}).Where("code like ? or name like ?", search, search)
 
 	p := paginator.New(adapter.NewGORMAdapter(stmt), int(size))
-
 	p.SetPage(int(page))
-	err := p.Results(&companyList)
-	if err != nil {
-		return nil, nil, err
-	}
 
-	return companyList, p, nil
+	return p, nil
 }
 
 func (r *Repo) SaveCompany(company *entity.Company) error {

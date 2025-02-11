@@ -2,6 +2,7 @@ package controller
 
 import (
 	"github.com/gofiber/fiber/v2"
+	"github.com/guneyin/kapscan/internal/entity"
 	"github.com/guneyin/kapscan/internal/mw"
 	"github.com/guneyin/kapscan/internal/service/company"
 )
@@ -34,12 +35,21 @@ func (cmp *Company) setRoutes(router fiber.Router) IController {
 func (cmp *Company) GetList(c *fiber.Ctx) error {
 	offset, limit := mw.GetPaginate(c)
 
-	res, _, err := cmp.svc.GetCompanyList().Offset(offset).Limit(limit).Do()
+	cl, err := cmp.svc.GetCompanyList().
+		Offset(offset).
+		Limit(limit).
+		Do()
 	if err != nil {
 		return err
 	}
 
-	return c.JSON(res)
+	companyList := entity.CompanyList{}
+	err = cl.DataAs(companyList)
+	if err != nil {
+		return err
+	}
+
+	return c.JSON(companyList)
 }
 
 func (cmp *Company) GetByID(c *fiber.Ctx) error {
