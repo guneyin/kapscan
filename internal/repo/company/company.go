@@ -58,7 +58,10 @@ func (r *Repo) GetByCode(code string) (*entity.Company, error) {
 	db := store.Get()
 
 	company := &entity.Company{}
-	tx := db.Where("code = ?", code).Preload("Shares").First(&company)
+	tx := db.Where("code = ?", code).
+		Preload("Shares").
+		Preload("Shares.ShareHolders").
+		First(&company)
 	if tx.Error != nil {
 		return nil, tx.Error
 	}

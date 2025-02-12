@@ -61,5 +61,40 @@
             </div>
 
         </div>
+
+        <div class="my-6">
+            <hr>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                {{ range .Company.Shares }}
+                    <p>{{.Date.Format "02-01-2006"}}</p>
+
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th scope="col">Ortağın Adı-Soyadı/Ticaret Ünvanı</th>
+                                <th scope="col">Sermayedeki Payı(TL)</th>
+                                <th scope="col">Sermayedeki Payı(%)</th>
+                                <th scope="col">Oy Hakkı Oranı(%)</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {{ range .ShareHolders }}
+                            <tr>
+                                <td>{{.Title}}</td>
+                                <td>{{printf "%.0f" .CapitalByAmount}}₺</td>
+                                <td>%{{.CapitalByVolume}}</td>
+                                <td>%{{.VoteRight}}</td>
+                            </tr>
+                            {{end}}
+                            </tbody>
+                        </table>
+
+                {{end}}
+
+            </div>
+        </div>
     </div>
 </div>

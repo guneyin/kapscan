@@ -6,17 +6,29 @@ import (
 )
 
 type Company struct {
-	Code    string           `json:"code"`
-	Name    string           `json:"name"`
-	Address string           `json:"address"`
-	Email   string           `json:"email"`
-	Website string           `json:"website"`
-	Index   string           `json:"index"`
-	Sector  string           `json:"sector"`
-	Market  string           `json:"market"`
-	Icon    string           `json:"icon"`
-	Price   string           `json:"price"`
-	Shares  CompanyShareList `json:"shares"`
+	Code    string         `json:"code"`
+	Name    string         `json:"name"`
+	Address string         `json:"address"`
+	Email   string         `json:"email"`
+	Website string         `json:"website"`
+	Index   string         `json:"index"`
+	Sector  string         `json:"sector"`
+	Market  string         `json:"market"`
+	Icon    string         `json:"icon"`
+	Price   string         `json:"price"`
+	Shares  []CompanyShare `json:"shares"`
+}
+
+type CompanyShare struct {
+	Date         time.Time            `json:"date"`
+	ShareHolders []CompanyShareHolder `json:"shareholders"`
+}
+
+type CompanyShareHolder struct {
+	Title           string  `json:"title"`
+	CapitalByAmount float64 `json:"capitalByAmount"`
+	CapitalByVolume float64 `json:"capitalByVolume"`
+	VoteRight       float64 `json:"voteRight"`
 }
 
 type CompanyList []Company
@@ -35,14 +47,4 @@ func (c Company) AvatarText() string {
 	}
 
 	return at.String()
-}
-
-type CompanyShareList []CompanyShare
-
-type CompanyShare struct {
-	Date            time.Time `json:"date"`
-	Title           string    `json:"title"`
-	CapitalByAmount float64   `json:"capitalByAmount"`
-	CapitalByVolume float64   `json:"capitalByVolume"`
-	VoteRight       float64   `json:"voteRight"`
 }
