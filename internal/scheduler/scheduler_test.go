@@ -1,9 +1,7 @@
 package scheduler_test
 
 import (
-	"os"
-	"path"
-	"runtime"
+	"github.com/guneyin/kapscan/util"
 	"testing"
 
 	"github.com/guneyin/kapscan/internal/scheduler"
@@ -11,17 +9,8 @@ import (
 	"github.com/guneyin/kapscan/internal/store"
 )
 
-func changeWorkDir() {
-	_, filename, _, _ := runtime.Caller(0)
-	dir := path.Join(path.Dir(filename), "../../")
-	err := os.Chdir(dir)
-	if err != nil {
-		panic(err)
-	}
-}
-
 func Test_Cron(_ *testing.T) {
-	changeWorkDir()
+	util.ChangeWorkDir()
 	_ = store.InitDB(store.DBTest)
 
 	scheduler.SyncCompanyList()

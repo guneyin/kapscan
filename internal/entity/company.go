@@ -1,14 +1,13 @@
 package entity
 
 import (
+	"gorm.io/gorm"
 	"slices"
 	"time"
-
-	"github.com/oklog/ulid/v2"
 )
 
 type Company struct {
-	Model
+	gorm.Model
 	Code     string `gorm:"uniqueIndex"`
 	MemberID string
 	Name     string
@@ -37,11 +36,14 @@ func (cl *CompanyList) Exist(code string) bool {
 type CompanyShareList []CompanyShare
 
 type CompanyShare struct {
-	Model
-	CompanyID       ulid.ULID `json:"companyID"`
-	Date            time.Time `json:"date" gorm:"index"`
-	Title           string    `json:"title"`
-	CapitalByAmount float64   `json:"capitalByAmount"`
-	CapitalByVolume float64   `json:"capitalByVolume"`
-	VoteRight       float64   `json:"voteRight"`
+	CompanyID       uint
+	Date            time.Time `gorm:"index"`
+	Title           string
+	CapitalByAmount float64
+	CapitalByVolume float64
+	VoteRight       float64
+}
+
+func (c *Company) BeforeSave(tx *gorm.DB) (err error) {
+	return tx.Where("company_id = ?", c.ID).Delete(&CompanyShare{}).Error
 }

@@ -32,10 +32,11 @@ func SyncCompanyList() {
 
 	log.Printf("sync company list started")
 
-	svc := scanner.NewService()
-	err := svc.SyncCompanyList(ctx)
+	scannerSvc := scanner.NewService()
+	err := scannerSvc.SyncCompanyList(ctx)
 	if err != nil {
 		log.Println(err)
+		return
 	}
 }
 
@@ -50,10 +51,16 @@ func SyncCompanyInfo() {
 		return
 	}
 
-	for _, comp := range cl {
-		_ = scannerSvc.SyncCompany(context.Background(), &comp)
-		err = companySvc.Save(&comp)
+	for _, cmp := range cl {
+		err = scannerSvc.SyncCompany(context.Background(), &cmp)
 		if err != nil {
+			log.Println(err)
+			return
+		}
+
+		err = companySvc.Save(&cmp)
+		if err != nil {
+			log.Println(err)
 			return
 		}
 	}

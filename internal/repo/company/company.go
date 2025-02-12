@@ -46,7 +46,11 @@ func (r *Repo) GetAll() (entity.CompanyList, error) {
 func (r *Repo) Save(company *entity.Company) error {
 	db := store.Get()
 
-	tx := db.Clauses(clause.OnConflict{UpdateAll: true}).Save(company)
+	tx := db.Clauses(clause.OnConflict{
+		Columns:   []clause.Column{{Name: "code"}},
+		UpdateAll: true}).
+		Save(company)
+
 	return tx.Error
 }
 
@@ -54,7 +58,7 @@ func (r *Repo) GetByCode(code string) (*entity.Company, error) {
 	db := store.Get()
 
 	company := &entity.Company{}
-	tx := db.Where("code = ?", code).First(&company)
+	tx := db.Where("code = ?", code).Preload("Shares").First(&company)
 	if tx.Error != nil {
 		return nil, tx.Error
 	}

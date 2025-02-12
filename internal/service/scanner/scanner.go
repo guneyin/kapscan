@@ -2,6 +2,7 @@ package scanner
 
 import (
 	"context"
+	"log"
 
 	"github.com/guneyin/kapscan/internal/entity"
 	"github.com/guneyin/kapscan/internal/repo/scanner"
@@ -37,14 +38,10 @@ func (s *Service) SyncCompanyList(ctx context.Context) error {
 
 	for _, cmp := range companyList {
 		if !dbCompanyList.Exist(cmp.Code) {
-			fetched, err := s.repo.FetchCompany(ctx, cmp.Code)
+			err = s.SyncCompany(ctx, &cmp)
 			if err != nil {
-				return err
-			}
-
-			err = companySvc.Save(fetched)
-			if err != nil {
-				return err
+				log.Printf("sync company %s error: %v", cmp.Code, err)
+				continue
 			}
 		}
 	}
@@ -53,11 +50,12 @@ func (s *Service) SyncCompanyList(ctx context.Context) error {
 }
 
 func (s *Service) SyncCompany(ctx context.Context, cmp *entity.Company) error {
-	fetched, err := s.repo.FetchCompany(ctx, cmp.Code)
+	companySvc := company.NewService()
+
+	cmp, err := s.repo.SyncCompany(ctx, cmp)
 	if err != nil {
 		return err
 	}
-	cmp = fetched
 
-	return nil
+	return companySvc.Save(cmp)
 }

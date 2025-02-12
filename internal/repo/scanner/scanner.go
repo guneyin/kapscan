@@ -41,8 +41,7 @@ func (r *Repo) FetchCompanyList() (entity.CompanyList, error) {
 	return cl, nil
 }
 
-func (r *Repo) FetchCompany(ctx context.Context, code string) (*entity.Company, error) {
-	cmp := &entity.Company{Code: code}
+func (r *Repo) SyncCompany(ctx context.Context, cmp *entity.Company) (*entity.Company, error) {
 	err := r.syncCompany(ctx, cmp)
 	if err != nil {
 		return nil, err
@@ -162,6 +161,11 @@ func (r *Repo) syncCompanyShares(ctx context.Context, cmp *entity.Company) error
 
 		if dt, ok := isDate(s); ok {
 			shareDate = *dt
+			return
+		}
+
+		diff := time.Now().Year() - shareDate.Year()
+		if diff > 2 {
 			return
 		}
 
