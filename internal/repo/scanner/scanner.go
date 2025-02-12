@@ -169,11 +169,8 @@ func (r *Repo) syncCompanyShares(ctx context.Context, cmp *entity.Company) error
 			return
 		}
 
-		if cs, ok := parseLineAsCompanyShare(s); ok {
-			cs.CompanyID = cmp.ID
-			cs.Date = shareDate
-
-			cmp.AddShare(*cs)
+		if cs, ok := parseLineAsCompanyShareHolder(s); ok {
+			cmp.AddShareHolder(shareDate, *cs)
 		}
 	})
 

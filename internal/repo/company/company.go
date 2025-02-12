@@ -1,6 +1,7 @@
 package company
 
 import (
+	"gorm.io/gorm/clause"
 	"strings"
 
 	"github.com/guneyin/kapscan/internal/entity"
@@ -8,7 +9,6 @@ import (
 	"github.com/guneyin/kapscan/internal/store"
 	"github.com/vcraescu/go-paginator/v2"
 	"github.com/vcraescu/go-paginator/v2/adapter"
-	"gorm.io/gorm/clause"
 )
 
 type Repo struct {

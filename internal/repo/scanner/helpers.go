@@ -19,8 +19,8 @@ func isDate(sel *goquery.Selection) (*time.Time, bool) {
 	return &dt, true
 }
 
-func parseLineAsCompanyShare(sel *goquery.Selection) (*entity.CompanyShare, bool) {
-	cs := &entity.CompanyShare{}
+func parseLineAsCompanyShareHolder(sel *goquery.Selection) (*entity.CompanyShareHolder, bool) {
+	cs := &entity.CompanyShareHolder{}
 	cs.Title = asString(sel.Find("div:nth-child(1)"))
 	cs.CapitalByAmount = asFloat(sel.Find("div:nth-child(2)"))
 	cs.CapitalByVolume = asFloat(sel.Find("div:nth-child(3)"))

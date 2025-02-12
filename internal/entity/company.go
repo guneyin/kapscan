@@ -21,8 +21,18 @@ type Company struct {
 	Shares   CompanyShareList
 }
 
-func (c *Company) AddShare(cs CompanyShare) {
-	c.Shares = append(c.Shares, cs)
+func (c *Company) AddShareHolder(dt time.Time, csh CompanyShareHolder) {
+	for i, share := range c.Shares {
+		if share.Date == dt || share.Date.IsZero() {
+			c.Shares[i].ShareHolders = append(c.Shares[i].ShareHolders, csh)
+			//share.ShareHolders = append(share.ShareHolders, csh)
+			return
+		}
+	}
+	c.Shares = append(c.Shares, CompanyShare{
+		Date:         dt,
+		ShareHolders: make(CompanyShareHolderList, 0),
+	})
 }
 
 type CompanyList []Company
@@ -36,8 +46,16 @@ func (cl *CompanyList) Exist(code string) bool {
 type CompanyShareList []CompanyShare
 
 type CompanyShare struct {
-	CompanyID       uint
-	Date            time.Time `gorm:"index"`
+	gorm.Model
+	CompanyID    uint
+	Date         time.Time              `gorm:"index"`
+	ShareHolders CompanyShareHolderList `gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
+}
+
+type CompanyShareHolderList []CompanyShareHolder
+
+type CompanyShareHolder struct {
+	CompanyShareID  uint
 	Title           string
 	CapitalByAmount float64
 	CapitalByVolume float64
