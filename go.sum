@@ -30,8 +30,8 @@ github.com/google/pprof v0.0.0-20241210010833-40e02aabc2ad h1:a6HEuzUHeKH6hwfN/Z
 github.com/google/pprof v0.0.0-20241210010833-40e02aabc2ad/go.mod h1:vavhavw2zAxS5dIdcRluK6cSGGPlZynqzFM8NdvU144=
 github.com/google/uuid v1.6.0 h1:NIvaJDMOsjHA8n1jAhLSgzrAzy1Hgr+hNrb57e+94F0=
 github.com/google/uuid v1.6.0/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
-github.com/guneyin/gobist v1.0.3 h1:NTPywaIbBUoX6MYa2uo/MhQjTKNLZL/kuJFhfS0TpYk=
-github.com/guneyin/gobist v1.0.3/go.mod h1:fSdTsqwjIvyz2nmU7wbOd91yv4EYA0CZ5MHwogM5G/0=
+github.com/guneyin/gobist v1.0.4 h1:4cqwyT8abX2z48Vf7YuHGTcwrNw+0Chgv8bLwNhsp9k=
+github.com/guneyin/gobist v1.0.4/go.mod h1:m0Jw8Je5gQ+bF08vKII97X5oxTFfQgcZKM2z4eskwa0=
 github.com/hashicorp/errwrap v1.0.0/go.mod h1:YH+1FKiLXxHSkmPseP+kNlulaMuP3n2brvKWEqk/Jc4=
 github.com/hashicorp/errwrap v1.1.0 h1:OxrOeh75EUXMY8TBjag2fzXGZ40LB6IKw45YeGUDY2I=
 github.com/hashicorp/errwrap v1.1.0/go.mod h1:YH+1FKiLXxHSkmPseP+kNlulaMuP3n2brvKWEqk/Jc4=

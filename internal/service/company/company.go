@@ -39,9 +39,9 @@ func (s *Service) GetByCode(code string) (*dto.Company, error) {
 
 	price := ""
 	bist := gobist.New()
-	q, _ := bist.GetQuote([]string{code})
+	q, _ := bist.GetQuote(code)
 	if q != nil {
-		price = q.Items[0].Price
+		price = q.Price
 	}
 
 	return util.Convert(cmp, &dto.Company{Price: price})

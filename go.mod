@@ -6,7 +6,7 @@ require (
 	github.com/PuerkitoBio/goquery v1.10.1
 	github.com/gofiber/fiber/v2 v2.52.6
 	github.com/gofiber/template/html/v2 v2.1.3
-	github.com/guneyin/gobist v1.0.3
+	github.com/guneyin/gobist v1.0.4
 	github.com/ilyakaznacheev/cleanenv v1.5.0
 	github.com/imroc/req/v3 v3.49.1
 	github.com/oklog/ulid/v2 v2.1.0
