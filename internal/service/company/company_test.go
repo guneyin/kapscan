@@ -1,6 +1,7 @@
 package company_test
 
 import (
+	"context"
 	"os"
 	"strings"
 	"testing"
@@ -36,9 +37,10 @@ func TestDocumentSelector(t *testing.T) {
 }
 
 func TestService_FetchCompanyList(t *testing.T) {
+	ctx := context.Background()
 	svc := company.NewService()
 
-	cl, err := svc.Search("").Do()
+	cl, err := svc.Search("").Do(ctx)
 	require.NoError(t, err)
 	assert.NotNil(t, cl)
 

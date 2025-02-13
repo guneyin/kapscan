@@ -2,12 +2,9 @@ package main
 
 import (
 	"fmt"
-	"log/slog"
-	"os"
 	"time"
 
 	"github.com/gofiber/fiber/v2"
-	"github.com/gofiber/fiber/v2/log"
 	"github.com/guneyin/kapscan/internal/config"
 	"github.com/guneyin/kapscan/internal/controller"
 	"github.com/guneyin/kapscan/internal/scheduler"
@@ -45,7 +42,6 @@ func NewApplication(
 
 func main() {
 	util.SetLastRun(time.Now())
-	slog.SetDefault(slog.New(slog.NewJSONHandler(os.Stdout, nil)))
 
 	cfg, err := config.NewConfig()
 	checkError(err)
@@ -67,7 +63,8 @@ func main() {
 	defer stop()
 	cron.Start()
 
-	log.Fatal(app.Server.Listen(fmt.Sprintf(":%d", app.Config.HTTPPort)))
+	err = app.Server.Listen(fmt.Sprintf(":%d", app.Config.HTTPPort))
+	checkError(err)
 }
 
 func checkError(err error) {

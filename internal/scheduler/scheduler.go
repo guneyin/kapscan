@@ -2,7 +2,9 @@ package scheduler
 
 import (
 	"context"
-	"log"
+	"time"
+
+	"github.com/guneyin/kapscan/internal/logger"
 
 	"github.com/guneyin/kapscan/internal/service/company"
 	"github.com/guneyin/kapscan/internal/service/scanner"
@@ -28,39 +30,43 @@ func (c *Cron) AddJob(spec string, cmd func()) error {
 }
 
 func SyncCompanyList() {
-	ctx := context.Background()
+	ctx, closer := context.WithTimeout(context.Background(), 10*time.Minute)
+	defer closer()
 
-	log.Printf("sync company list started")
+	logger.Log().InfoContext(ctx, "sync company list started")
 
 	scannerSvc := scanner.NewService()
 	err := scannerSvc.SyncCompanyList(ctx)
 	if err != nil {
-		log.Println(err)
+		logger.Log().ErrorContext(ctx, err.Error())
 		return
 	}
 }
 
 func SyncCompanyInfo() {
-	log.Printf("sync company info started")
+	ctx, closer := context.WithTimeout(context.Background(), 10*time.Minute)
+	defer closer()
+
+	logger.Log().InfoContext(ctx, "sync company info started")
 
 	scannerSvc := scanner.NewService()
 	companySvc := company.NewService()
 
-	cl, err := companySvc.GetAll()
+	cl, err := companySvc.GetAll(ctx)
 	if err != nil {
 		return
 	}
 
 	for _, cmp := range cl {
-		err = scannerSvc.SyncCompany(context.Background(), &cmp)
+		err = scannerSvc.SyncCompanyWithShares(context.Background(), &cmp)
 		if err != nil {
-			log.Println(err)
+			logger.Log().ErrorContext(ctx, err.Error())
 			return
 		}
 
-		err = companySvc.Save(&cmp)
+		err = companySvc.Save(ctx, &cmp)
 		if err != nil {
-			log.Println(err)
+			logger.Log().ErrorContext(ctx, err.Error())
 			return
 		}
 	}

@@ -1,6 +1,8 @@
 package company
 
 import (
+	"context"
+
 	"github.com/guneyin/kapscan/internal/entity"
 	"github.com/guneyin/kapscan/internal/repo/company"
 	"github.com/guneyin/kapscan/util"
@@ -25,8 +27,8 @@ func (lg *Pager) Limit(limit int) *Pager {
 	return lg
 }
 
-func (lg *Pager) Do() (*Pager, error) {
-	pg, err := lg.repo.Search(lg.search, lg.offset, lg.limit)
+func (lg *Pager) Do(ctx context.Context) (*Pager, error) {
+	pg, err := lg.repo.Search(ctx, lg.search, lg.offset, lg.limit)
 	if err != nil {
 		return nil, err
 	}

@@ -1,6 +1,8 @@
 package company
 
 import (
+	"context"
+
 	"github.com/guneyin/gobist"
 	"github.com/guneyin/kapscan/internal/dto"
 	"github.com/guneyin/kapscan/internal/entity"
@@ -27,19 +29,19 @@ func (s *Service) Search(term string) *Pager {
 	}
 }
 
-func (s *Service) GetAll() (entity.CompanyList, error) {
-	return s.repo.GetAll()
+func (s *Service) GetAll(ctx context.Context) (entity.CompanyList, error) {
+	return s.repo.GetAll(ctx)
 }
 
-func (s *Service) GetByCode(code string) (*dto.Company, error) {
-	cmp, err := s.repo.GetByCode(code)
+func (s *Service) GetByCode(ctx context.Context, code string) (*dto.Company, error) {
+	cmp, err := s.repo.GetByCode(ctx, code)
 	if err != nil {
 		return nil, err
 	}
 
 	price := ""
 	bist := gobist.New()
-	q, _ := bist.GetQuote(code)
+	q, _ := bist.GetQuote(ctx, code)
 	if q != nil {
 		price = q.Price
 	}
@@ -47,6 +49,6 @@ func (s *Service) GetByCode(code string) (*dto.Company, error) {
 	return util.Convert(cmp, &dto.Company{Price: price})
 }
 
-func (s *Service) Save(company *entity.Company) error {
-	return s.repo.Save(company)
+func (s *Service) Save(ctx context.Context, company *entity.Company) error {
+	return s.repo.Save(ctx, company)
 }

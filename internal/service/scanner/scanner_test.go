@@ -2,12 +2,13 @@ package scanner_test
 
 import (
 	"context"
+	"testing"
+
 	"github.com/guneyin/kapscan/internal/entity"
 	"github.com/guneyin/kapscan/internal/service/scanner"
 	"github.com/guneyin/kapscan/internal/store"
 	"github.com/guneyin/kapscan/util"
-	"github.com/stretchr/testify/assert"
-	"testing"
+	"github.com/stretchr/testify/require"
 )
 
 func TestService_SyncCompany(t *testing.T) {
@@ -16,6 +17,6 @@ func TestService_SyncCompany(t *testing.T) {
 
 	svc := scanner.NewService()
 
-	err := svc.SyncCompany(context.Background(), &entity.Company{Code: "TUPRS"})
-	assert.Nil(t, err)
+	err := svc.SyncCompanyWithShares(context.Background(), &entity.Company{Code: "TUPRS"})
+	require.NoError(t, err)
 }

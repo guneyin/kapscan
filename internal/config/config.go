@@ -1,8 +1,7 @@
 package config
 
 import (
-	"log/slog"
-
+	"github.com/guneyin/kapscan/internal/logger"
 	"github.com/ilyakaznacheev/cleanenv"
 )
 
@@ -25,7 +24,7 @@ func NewConfig() (*Config, error) {
 	err := cleanenv.ReadConfig(".env", cfg)
 	if err != nil {
 		_ = cleanenv.ReadEnv(cfg)
-		slog.Info(err.Error())
+		logger.Log().Info(err.Error())
 	}
 
 	cfg.validate()

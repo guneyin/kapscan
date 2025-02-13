@@ -1,6 +1,7 @@
 package company_test
 
 import (
+	"context"
 	"testing"
 
 	"github.com/guneyin/kapscan/internal/repo/company"
@@ -12,12 +13,13 @@ import (
 )
 
 func TestRepo_GetCompanyList(t *testing.T) {
+	ctx := context.Background()
 	_ = store.InitDB(store.DBTest)
 
 	repo := company.NewRepo()
 
 	companyList := dto.CompanyList{}
-	data, err := repo.Search("", -1, -1)
+	data, err := repo.Search(ctx, "", -1, -1)
 	require.NoError(t, err)
 	assert.NotEmpty(t, data)
 

@@ -1,26 +1,29 @@
 package company
 
 import (
-	"gorm.io/gorm/clause"
+	"context"
 	"strings"
 
+	"github.com/guneyin/gobist"
+
+	"gorm.io/gorm/clause"
+
 	"github.com/guneyin/kapscan/internal/entity"
-	"github.com/guneyin/kapscan/internal/scraper"
 	"github.com/guneyin/kapscan/internal/store"
 	"github.com/vcraescu/go-paginator/v2"
 	"github.com/vcraescu/go-paginator/v2/adapter"
 )
 
 type Repo struct {
-	scraper *scraper.Scraper
+	bist *gobist.Bist
 }
 
 func NewRepo() *Repo {
-	return &Repo{scraper: scraper.New()}
+	return &Repo{bist: gobist.New()}
 }
 
-func (r *Repo) Search(search string, page, size int) (paginator.Paginator, error) {
-	db := store.Get()
+func (r *Repo) Search(ctx context.Context, search string, page, size int) (paginator.Paginator, error) {
+	db := store.Get(ctx)
 
 	search = "%" + strings.ToUpper(search) + "%"
 	stmt := db.Model(&entity.Company{}).Where("code like ? or name like ?", search, search)
@@ -31,11 +34,12 @@ func (r *Repo) Search(search string, page, size int) (paginator.Paginator, error
 	return p, nil
 }
 
-func (r *Repo) GetAll() (entity.CompanyList, error) {
-	db := store.Get()
+func (r *Repo) GetAll(ctx context.Context) (entity.CompanyList, error) {
+	db := store.Get(ctx)
 
 	var companies entity.CompanyList
 	tx := db.Model(&entity.Company{}).Find(&companies)
+
 	if tx.Error != nil {
 		return nil, tx.Error
 	}
@@ -43,8 +47,8 @@ func (r *Repo) GetAll() (entity.CompanyList, error) {
 	return companies, nil
 }
 
-func (r *Repo) Save(company *entity.Company) error {
-	db := store.Get()
+func (r *Repo) Save(ctx context.Context, company *entity.Company) error {
+	db := store.Get(ctx)
 
 	tx := db.Clauses(clause.OnConflict{
 		Columns:   []clause.Column{{Name: "code"}},
@@ -54,8 +58,8 @@ func (r *Repo) Save(company *entity.Company) error {
 	return tx.Error
 }
 
-func (r *Repo) GetByCode(code string) (*entity.Company, error) {
-	db := store.Get()
+func (r *Repo) GetByCode(ctx context.Context, code string) (*entity.Company, error) {
+	db := store.Get(ctx)
 
 	company := &entity.Company{}
 	tx := db.Where("code = ?", code).

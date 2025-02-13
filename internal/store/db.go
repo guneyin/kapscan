@@ -1,6 +1,7 @@
 package store
 
 import (
+	"context"
 	"errors"
 	"os"
 	"path"
@@ -45,12 +46,12 @@ func InitDB(env DBEnvironment) error {
 	return err
 }
 
-func Get() *gorm.DB {
+func Get(ctx context.Context) *gorm.DB {
 	if db == nil {
 		panic(ErrDatabaseNil)
 	}
 
-	return db
+	return db.WithContext(ctx)
 }
 
 var gormConfig = &gorm.Config{Logger: logger.Default.LogMode(logger.Error)}

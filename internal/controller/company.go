@@ -39,7 +39,7 @@ func (cmp *Company) GetList(c *fiber.Ctx) error {
 	cl, err := cmp.svc.Search(s).
 		Offset(offset).
 		Limit(limit).
-		Do()
+		Do(c.Context())
 	if err != nil {
 		return err
 	}
@@ -55,7 +55,7 @@ func (cmp *Company) GetList(c *fiber.Ctx) error {
 
 func (cmp *Company) GetByCode(c *fiber.Ctx) error {
 	code := c.Params("code")
-	data, err := cmp.svc.GetByCode(code)
+	data, err := cmp.svc.GetByCode(c.Context(), code)
 	if err != nil {
 		return mw.Error(c, err)
 	}

@@ -1,9 +1,10 @@
 package entity
 
 import (
-	"gorm.io/gorm"
 	"slices"
 	"time"
+
+	"gorm.io/gorm"
 )
 
 type Company struct {
@@ -45,7 +46,6 @@ func (c *Company) AddShareHolder(dt time.Time, csh CompanyShareHolder) {
 	for i, share := range c.Shares {
 		if share.Date == dt || share.Date.IsZero() {
 			c.Shares[i].ShareHolders = append(c.Shares[i].ShareHolders, csh)
-			//share.ShareHolders = append(share.ShareHolders, csh)
 			return
 		}
 	}
@@ -61,6 +61,6 @@ func (cl *CompanyList) Exist(code string) bool {
 	})
 }
 
-func (c *Company) BeforeSave(tx *gorm.DB) (err error) {
+func (c *Company) BeforeSave(tx *gorm.DB) error {
 	return tx.Where("company_id = ?", c.ID).Delete(&CompanyShare{}).Error
 }

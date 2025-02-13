@@ -52,7 +52,7 @@ func (cmp *Company) CompanySearch(c *fiber.Ctx) error {
 	cl, err := cmp.svc.Search(search).
 		Offset(page).
 		Limit(size).
-		Do()
+		Do(c.Context())
 	if err != nil {
 		return err
 	}
@@ -71,7 +71,7 @@ func (cmp *Company) CompanySearch(c *fiber.Ctx) error {
 
 func (cmp *Company) CompanyDetail(c *fiber.Ctx) error {
 	code := c.Params("code")
-	data, err := cmp.svc.GetByCode(code)
+	data, err := cmp.svc.GetByCode(c.Context(), code)
 	if err != nil {
 		return err
 	}
