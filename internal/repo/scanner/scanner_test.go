@@ -14,7 +14,7 @@ func TestRepo_FetchCompany(t *testing.T) {
 	repo := scanner.NewRepo()
 
 	cmp := &entity.Company{Code: "AFYON"}
-	err := repo.SyncCompany(ctx, cmp)
+	err := repo.SyncCompanyWithShares(ctx, cmp)
 	require.NoError(t, err)
 	require.NotNil(t, cmp)
 }

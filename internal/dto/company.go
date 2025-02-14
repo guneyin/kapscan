@@ -1,6 +1,7 @@
 package dto
 
 import (
+	"slices"
 	"strings"
 	"time"
 )
@@ -47,4 +48,10 @@ func (c Company) AvatarText() string {
 	}
 
 	return at.String()
+}
+
+func (cl CompanyList) Exist(code string) bool {
+	return slices.ContainsFunc(cl, func(c Company) bool {
+		return c.Code == code
+	})
 }

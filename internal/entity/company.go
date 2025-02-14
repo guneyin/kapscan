@@ -1,7 +1,6 @@
 package entity
 
 import (
-	"slices"
 	"time"
 
 	"gorm.io/gorm"
@@ -52,12 +51,6 @@ func (c *Company) AddShareHolder(dt time.Time, csh CompanyShareHolder) {
 	c.Shares = append(c.Shares, CompanyShare{
 		Date:         dt,
 		ShareHolders: make([]CompanyShareHolder, 0),
-	})
-}
-
-func (cl *CompanyList) Exist(code string) bool {
-	return slices.ContainsFunc(*cl, func(c Company) bool {
-		return c.Code == code
 	})
 }
 

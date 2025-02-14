@@ -19,6 +19,12 @@ tidy:
 vet:
 	go vet ./...
 
+lint:
+	golangci-lint run
+
+fix:
+	golangci-lint run --fix
+
 run:
 	go run .
 

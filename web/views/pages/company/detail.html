@@ -1,4 +1,7 @@
-<div class="card w-100">
+<div class="card w-100"
+    hx-get="/company/{{.Company.Code}}"
+    hx-trigger="updated from:body"
+     hx-swap="outerHTML">
     <div class="card-body">
 
         <div class="row">
@@ -23,6 +26,12 @@
 
         <div class="my-6">
             <hr>
+        </div>
+
+        <div class="py-4">
+            <button type="button" class="btn btn-primary"
+                    hx-get="/api/scanner/sync-company?code={{.Company.Code}}"
+                    hx-swap="none">Yenile</button>
         </div>
 
         <div class="row">

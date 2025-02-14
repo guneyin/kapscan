@@ -5,9 +5,10 @@ import (
 
 	"github.com/guneyin/gobist"
 	"github.com/guneyin/kapscan/internal/dto"
+	"github.com/guneyin/kapscan/util"
+
 	"github.com/guneyin/kapscan/internal/entity"
 	"github.com/guneyin/kapscan/internal/repo/company"
-	"github.com/guneyin/kapscan/util"
 )
 
 type Service struct {
@@ -29,8 +30,13 @@ func (s *Service) Search(term string) *Pager {
 	}
 }
 
-func (s *Service) GetAll(ctx context.Context) (entity.CompanyList, error) {
-	return s.repo.GetAll(ctx)
+func (s *Service) GetAll(ctx context.Context) (dto.CompanyList, error) {
+	companyList, err := s.repo.GetAll(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	return util.Convert(companyList, dto.CompanyList{})
 }
 
 func (s *Service) GetByCode(ctx context.Context, code string) (*dto.Company, error) {

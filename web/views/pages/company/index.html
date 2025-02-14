@@ -5,10 +5,17 @@
                name="search"
                id="search"
                hx-get="/company"
-               hx-trigger="input changed delay:500ms, keyup[key=='Enter'], load"
-               hx-target="#search-results">
+               hx-trigger="input changed delay:500ms, keyup[key=='Enter'], load, updated from:body"
+               hx-target="#search-results"
+        >
     </div>
     <div class="col-2"></div>
+</div>
+
+<div class="py-4">
+    <button type="button" class="btn btn-primary"
+            hx-get="/api/scanner/sync-symbols?limit=10"
+            hx-swap="none">Yenile</button>
 </div>
 
 <div id="search-results" class="table-responsive py-10">

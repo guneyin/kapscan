@@ -16,7 +16,7 @@ func NewRepo() *Repo {
 	return &Repo{bist: gobist.New()}
 }
 
-func (r *Repo) FetchCompanyList(ctx context.Context) (entity.CompanyList, error) {
+func (r *Repo) GetSymbolList(ctx context.Context) (entity.CompanyList, error) {
 	symbolList, err := r.bist.GetSymbolList(ctx)
 	if err != nil {
 		return nil, err
@@ -32,20 +32,6 @@ func (r *Repo) FetchCompanyList(ctx context.Context) (entity.CompanyList, error)
 	}
 
 	return cl, nil
-}
-
-func (r *Repo) SyncCompany(ctx context.Context, cmp *entity.Company) error {
-	fetched, err := r.bist.GetCompany(ctx, cmp.Code)
-	if err != nil {
-		return err
-	}
-
-	_, err = util.Convert(fetched, cmp)
-	if err != nil {
-		return err
-	}
-
-	return nil
 }
 
 func (r *Repo) SyncCompanyWithShares(ctx context.Context, cmp *entity.Company) error {

@@ -14,6 +14,6 @@ func Test_Cron(_ *testing.T) {
 	util.ChangeWorkDir()
 	_ = store.InitDB(store.DBTest)
 
-	scheduler.SyncCompanyList()
-	scheduler.SyncCompanyInfo()
+	scheduler.SyncSymbolList()
+	scheduler.SyncCompany()
 }
