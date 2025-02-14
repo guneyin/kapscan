@@ -4,8 +4,6 @@ import (
 	"bytes"
 	"encoding/gob"
 	"fmt"
-	"strconv"
-	"strings"
 	"time"
 )
 
@@ -39,19 +37,17 @@ func GetLastRun() time.Time {
 	return lastRun
 }
 
-type Money struct {
-	amount string
-}
-
-func NewMoney(amount string) *Money {
-	return &Money{
-		amount: strings.TrimSpace(amount),
+func Convert[T any](from any, to T) (T, error) {
+	res, err := deepCopy(from, to)
+	if err != nil {
+		return to, err
 	}
-}
 
-func (m *Money) Float64() float64 {
-	dec, _ := strconv.ParseFloat(m.amount, 64)
-	return dec
+	if rt, ok := res.(T); ok {
+		return rt, nil
+	}
+
+	return to, fmt.Errorf("cannot convert from %T to %T", from, to)
 }
 
 func deepCopy(src, dest any) (any, error) {
@@ -65,17 +61,4 @@ func deepCopy(src, dest any) (any, error) {
 		return nil, err
 	}
 	return dest, nil
-}
-
-func Convert[T any](from any, to T) (T, error) {
-	res, err := deepCopy(from, to)
-	if err != nil {
-		return to, err
-	}
-
-	if rt, ok := res.(T); ok {
-		return rt, nil
-	}
-
-	return to, fmt.Errorf("cannot convert from %T to %T", from, to)
 }

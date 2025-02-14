@@ -4,7 +4,7 @@ import (
 	"time"
 
 	"github.com/guneyin/kapscan/internal/dto"
-	"github.com/guneyin/kapscan/util"
+	"github.com/guneyin/kapscan/internal/util"
 )
 
 type Service struct{}

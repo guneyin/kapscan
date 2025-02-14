@@ -6,7 +6,7 @@ import (
 	"github.com/guneyin/kapscan/internal/entity"
 	"github.com/guneyin/kapscan/internal/mw"
 	"github.com/guneyin/kapscan/internal/service/company"
-	"github.com/guneyin/kapscan/util"
+	"github.com/guneyin/kapscan/internal/util"
 )
 
 const companyControllerName = "company"

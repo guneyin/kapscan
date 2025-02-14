@@ -7,7 +7,7 @@ import (
 	"github.com/guneyin/kapscan/internal/entity"
 	"github.com/guneyin/kapscan/internal/service/scanner"
 	"github.com/guneyin/kapscan/internal/store"
-	"github.com/guneyin/kapscan/util"
+	"github.com/guneyin/kapscan/internal/util"
 	"github.com/stretchr/testify/require"
 )
 

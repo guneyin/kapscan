@@ -3,7 +3,7 @@ package scheduler_test
 import (
 	"testing"
 
-	"github.com/guneyin/kapscan/util"
+	"github.com/guneyin/kapscan/internal/util"
 
 	"github.com/guneyin/kapscan/internal/scheduler"
 

@@ -5,7 +5,7 @@ import (
 
 	"github.com/guneyin/gobist"
 	"github.com/guneyin/kapscan/internal/entity"
-	"github.com/guneyin/kapscan/util"
+	"github.com/guneyin/kapscan/internal/util"
 )
 
 type Repo struct {
