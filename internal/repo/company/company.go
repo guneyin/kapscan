@@ -51,7 +51,11 @@ func (r *Repo) Save(ctx context.Context, company *entity.Company) error {
 	db := store.Get(ctx)
 
 	tx := db.Clauses(clause.OnConflict{
-		Columns:   []clause.Column{{Name: "code"}},
+		Columns: []clause.Column{
+			{Table: "companies", Name: "code"},
+			{Table: "company_shares", Name: "company_id"},
+			{Table: "company_shares", Name: "date"},
+		},
 		UpdateAll: true}).
 		Save(company)
 

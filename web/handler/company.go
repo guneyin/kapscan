@@ -66,7 +66,7 @@ func (cmp *Company) CompanySearch(c *fiber.Ctx) error {
 	vw := view.New(cl.PageData())
 	pageNavData := NewPageNavData(vw)
 
-	return c.Render("components/company_search", fiber.Map{"CompanyList": companyList, "PageNavData": pageNavData})
+	return c.Render("components/company/search", fiber.Map{"CompanyList": companyList, "PageNavData": pageNavData})
 }
 
 func (cmp *Company) CompanyDetail(c *fiber.Ctx) error {
