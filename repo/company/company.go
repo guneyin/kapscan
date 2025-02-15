@@ -8,8 +8,8 @@ import (
 
 	"gorm.io/gorm/clause"
 
-	"github.com/guneyin/kapscan/internal/entity"
-	"github.com/guneyin/kapscan/internal/store"
+	"github.com/guneyin/kapscan/entity"
+	"github.com/guneyin/kapscan/store"
 	"github.com/vcraescu/go-paginator/v2"
 	"github.com/vcraescu/go-paginator/v2/adapter"
 )

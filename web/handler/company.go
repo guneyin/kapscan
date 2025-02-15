@@ -5,9 +5,9 @@ import (
 	"strconv"
 
 	"github.com/gofiber/fiber/v2"
-	"github.com/guneyin/kapscan/internal/dto"
-	"github.com/guneyin/kapscan/internal/mw"
-	"github.com/guneyin/kapscan/internal/service/company"
+	"github.com/guneyin/kapscan/dto"
+	"github.com/guneyin/kapscan/mw"
+	"github.com/guneyin/kapscan/service/company"
 	"github.com/vcraescu/go-paginator/v2/view"
 )
 

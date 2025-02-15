@@ -3,11 +3,11 @@ package scanner
 import (
 	"context"
 
-	"github.com/guneyin/kapscan/internal/logger"
+	"github.com/guneyin/kapscan/logger"
 
-	"github.com/guneyin/kapscan/internal/entity"
-	"github.com/guneyin/kapscan/internal/repo/scanner"
-	"github.com/guneyin/kapscan/internal/service/company"
+	"github.com/guneyin/kapscan/entity"
+	"github.com/guneyin/kapscan/repo/scanner"
+	"github.com/guneyin/kapscan/service/company"
 )
 
 type Service struct {

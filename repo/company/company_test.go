@@ -4,10 +4,10 @@ import (
 	"context"
 	"testing"
 
-	"github.com/guneyin/kapscan/internal/repo/company"
+	"github.com/guneyin/kapscan/repo/company"
 
-	"github.com/guneyin/kapscan/internal/dto"
-	"github.com/guneyin/kapscan/internal/store"
+	"github.com/guneyin/kapscan/dto"
+	"github.com/guneyin/kapscan/store"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

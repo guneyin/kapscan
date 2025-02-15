@@ -3,11 +3,11 @@ package scheduler_test
 import (
 	"testing"
 
-	"github.com/guneyin/kapscan/internal/util"
+	"github.com/guneyin/kapscan/util"
 
-	"github.com/guneyin/kapscan/internal/scheduler"
+	"github.com/guneyin/kapscan/scheduler"
 
-	"github.com/guneyin/kapscan/internal/store"
+	"github.com/guneyin/kapscan/store"
 )
 
 func Test_Cron(_ *testing.T) {

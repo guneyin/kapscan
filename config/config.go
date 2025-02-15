@@ -1,7 +1,7 @@
 package config
 
 import (
-	"github.com/guneyin/kapscan/internal/logger"
+	"github.com/guneyin/kapscan/logger"
 	"github.com/ilyakaznacheev/cleanenv"
 )
 

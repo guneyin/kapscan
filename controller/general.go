@@ -2,8 +2,8 @@ package controller
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"github.com/guneyin/kapscan/internal/mw"
-	"github.com/guneyin/kapscan/internal/service/general"
+	"github.com/guneyin/kapscan/mw"
+	"github.com/guneyin/kapscan/service/general"
 )
 
 const generalControllerName = "general"

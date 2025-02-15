@@ -6,10 +6,10 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/guneyin/kapscan/internal/service/company"
+	"github.com/guneyin/kapscan/service/company"
 
 	"github.com/PuerkitoBio/goquery"
-	"github.com/guneyin/kapscan/internal/dto"
+	"github.com/guneyin/kapscan/dto"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

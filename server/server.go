@@ -8,7 +8,7 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/recover"
 	"github.com/gofiber/template/html/v2"
-	"github.com/guneyin/kapscan/internal/mw"
+	"github.com/guneyin/kapscan/mw"
 )
 
 const (

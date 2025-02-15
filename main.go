@@ -5,12 +5,12 @@ import (
 	"time"
 
 	"github.com/gofiber/fiber/v2"
-	"github.com/guneyin/kapscan/internal/config"
-	"github.com/guneyin/kapscan/internal/controller"
-	"github.com/guneyin/kapscan/internal/scheduler"
-	"github.com/guneyin/kapscan/internal/server"
-	"github.com/guneyin/kapscan/internal/store"
-	"github.com/guneyin/kapscan/internal/util"
+	"github.com/guneyin/kapscan/config"
+	"github.com/guneyin/kapscan/controller"
+	"github.com/guneyin/kapscan/scheduler"
+	"github.com/guneyin/kapscan/server"
+	"github.com/guneyin/kapscan/store"
+	"github.com/guneyin/kapscan/util"
 	"github.com/guneyin/kapscan/web/handler"
 )
 

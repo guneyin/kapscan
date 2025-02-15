@@ -4,8 +4,8 @@ import (
 	"context"
 
 	"github.com/guneyin/gobist"
-	"github.com/guneyin/kapscan/internal/entity"
-	"github.com/guneyin/kapscan/internal/util"
+	"github.com/guneyin/kapscan/entity"
+	"github.com/guneyin/kapscan/util"
 )
 
 type Repo struct {

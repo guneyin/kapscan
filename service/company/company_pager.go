@@ -3,9 +3,9 @@ package company
 import (
 	"context"
 
-	"github.com/guneyin/kapscan/internal/entity"
-	"github.com/guneyin/kapscan/internal/repo/company"
-	"github.com/guneyin/kapscan/internal/util"
+	"github.com/guneyin/kapscan/entity"
+	"github.com/guneyin/kapscan/repo/company"
+	"github.com/guneyin/kapscan/util"
 	"github.com/vcraescu/go-paginator/v2"
 )
 

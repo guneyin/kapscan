@@ -4,8 +4,8 @@ import (
 	"context"
 	"testing"
 
-	"github.com/guneyin/kapscan/internal/entity"
-	"github.com/guneyin/kapscan/internal/repo/scanner"
+	"github.com/guneyin/kapscan/entity"
+	"github.com/guneyin/kapscan/repo/scanner"
 	"github.com/stretchr/testify/require"
 )
 

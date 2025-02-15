@@ -2,11 +2,11 @@ package controller
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"github.com/guneyin/kapscan/internal/dto"
-	"github.com/guneyin/kapscan/internal/entity"
-	"github.com/guneyin/kapscan/internal/mw"
-	"github.com/guneyin/kapscan/internal/service/company"
-	"github.com/guneyin/kapscan/internal/util"
+	"github.com/guneyin/kapscan/dto"
+	"github.com/guneyin/kapscan/entity"
+	"github.com/guneyin/kapscan/mw"
+	"github.com/guneyin/kapscan/service/company"
+	"github.com/guneyin/kapscan/util"
 )
 
 const companyControllerName = "company"

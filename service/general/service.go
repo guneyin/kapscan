@@ -3,8 +3,8 @@ package general
 import (
 	"time"
 
-	"github.com/guneyin/kapscan/internal/dto"
-	"github.com/guneyin/kapscan/internal/util"
+	"github.com/guneyin/kapscan/dto"
+	"github.com/guneyin/kapscan/util"
 )
 
 type Service struct{}

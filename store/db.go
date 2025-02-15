@@ -7,7 +7,7 @@ import (
 	"path"
 	"sync"
 
-	"github.com/guneyin/kapscan/internal/entity"
+	"github.com/guneyin/kapscan/entity"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"

@@ -4,9 +4,9 @@ import (
 	"context"
 
 	"github.com/gofiber/fiber/v2"
-	"github.com/guneyin/kapscan/internal/logger"
-	"github.com/guneyin/kapscan/internal/repo/company"
-	"github.com/guneyin/kapscan/internal/service/scanner"
+	"github.com/guneyin/kapscan/logger"
+	"github.com/guneyin/kapscan/repo/company"
+	"github.com/guneyin/kapscan/service/scanner"
 )
 
 const controllerName = "scanner"

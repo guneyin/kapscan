@@ -4,11 +4,11 @@ import (
 	"context"
 
 	"github.com/guneyin/gobist"
-	"github.com/guneyin/kapscan/internal/dto"
-	"github.com/guneyin/kapscan/internal/util"
+	"github.com/guneyin/kapscan/dto"
+	"github.com/guneyin/kapscan/util"
 
-	"github.com/guneyin/kapscan/internal/entity"
-	"github.com/guneyin/kapscan/internal/repo/company"
+	"github.com/guneyin/kapscan/entity"
+	"github.com/guneyin/kapscan/repo/company"
 )
 
 type Service struct {
