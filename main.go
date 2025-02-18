@@ -2,6 +2,11 @@ package main
 
 import (
 	"fmt"
+	"github.com/guneyin/kapscan/migration"
+	"github.com/uptrace/bun/migrate"
+	"github.com/urfave/cli/v2"
+	"log"
+	"os"
 	"time"
 
 	"github.com/gofiber/fiber/v2"
@@ -43,28 +48,51 @@ func NewApplication(
 func main() {
 	util.SetLastRun(time.Now())
 
-	cfg, err := config.NewConfig()
+	err := store.InitDB(store.DBProd)
 	checkError(err)
 
-	err = store.InitDB(store.DBProd)
+	err = migration.Init()
 	checkError(err)
 
-	srv := server.NewServer(appName)
-	checkError(err)
+	app := &cli.App{
+		Name: "kapscan",
+		Commands: []*cli.Command{
+			serveCmd(),
+			migrateCMD(migrate.NewMigrator(store.Get(), migration.Migrations)),
+		},
+	}
 
-	api := srv.Group("/api")
-	apiCnt := controller.NewController(api)
+	if err = app.Run(os.Args); err != nil {
+		log.Fatal(err)
+	}
+}
 
-	webHnd := handler.NewWebHandler(srv)
+func serveCmd() *cli.Command {
+	return &cli.Command{
+		Name:  "serve",
+		Usage: "start a kapscan server",
+		Action: func(c *cli.Context) error {
+			cfg, err := config.NewConfig()
+			if err != nil {
+				return err
+			}
 
-	app := NewApplication(appName, cfg, srv, apiCnt, webHnd)
+			srv := server.NewServer(appName)
 
-	cron, stop := scheduler.New()
-	defer stop()
-	cron.Start()
+			api := srv.Group("/api")
+			apiCnt := controller.NewController(api)
 
-	err = app.Server.Listen(fmt.Sprintf(":%d", app.Config.HTTPPort))
-	checkError(err)
+			webHnd := handler.NewWebHandler(srv)
+
+			app := NewApplication(appName, cfg, srv, apiCnt, webHnd)
+
+			cron, stop := scheduler.New()
+			defer stop()
+			cron.Start()
+
+			return app.Server.Listen(fmt.Sprintf(":%d", app.Config.HTTPPort))
+		},
+	}
 }
 
 func checkError(err error) {

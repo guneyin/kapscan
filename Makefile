@@ -26,10 +26,19 @@ fix:
 	golangci-lint run --fix
 
 run:
-	go run .
+	go run . serve
 
 build:
 	go build -o ${BINARY_NAME} -ldflags "-X ${LDFLAG_VERSION} -X ${LDFLAG_COMMIT_HASH} -X ${LDFLAG_BUILD_TIMESTAMP}" .
+
+db-init:
+	go run . db init
+
+db-create:
+	go run . db create_sql $(name)
+
+db-migrate:
+	go run . db migrate
 
 clean:
 	go clean
